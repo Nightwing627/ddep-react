@@ -84,7 +84,9 @@
     "wnumb": "1.2.0",
     "xlsx": "0.16.2",
     "yarn": "1.21.1",
-    "yup": "0.28.1"
+    "yup": "0.28.1",
+    "devextreme": "^21.2.4",
+    "devextreme-react": "^21.2.4"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -107,7 +109,8 @@
     "react-app-rewire-postcss": "^3.0.2",
     "react-app-rewire-sass-rule": "^2.1.1",
     "react-app-rewired": "^2.1.6",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "devextreme-themebuilder": "^21.2.4"
   },
   "browserslist": {
     "production": [
