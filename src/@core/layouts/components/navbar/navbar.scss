@@ -1,0 +1,17 @@
+.dropdwon-menu{
+    .btn-secondary{
+        background-color: #fff !important;
+        border: #fff;
+       
+    }
+    .country-name{
+        color: #000 !important;
+    }
+    .dropdown-menu{
+        top: 45px !important;
+        width: 143px !important
+    }
+    .dropdown-item:hover, [dir] .dropdown-item:focus {
+        background-color: #fff !important;
+    }
+}

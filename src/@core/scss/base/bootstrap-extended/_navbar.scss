@@ -285,10 +285,12 @@
             display: inline-block;
             margin-bottom: 0.435rem;
             margin-left: 0.2rem;
+            color: #fff;
           }
 
           .user-status {
             font-size: smaller;
+            color: #fff;
           }
 
           img {
@@ -413,7 +415,7 @@
 
 // Navbar colors
 .navbar-light {
-  background: $white;
+  background: linear-gradient(118deg, #8dc454, rgba(141, 196, 84, 0.7));
 
   &.navbar-horizontal {
     background: $white;
