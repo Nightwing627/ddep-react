@@ -5,6 +5,8 @@
   "dependencies": {
     "@casl/ability": "4.1.6",
     "@casl/react": "2.1.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
     "@fullcalendar/core": "5.3.0",
     "@fullcalendar/daygrid": "5.3.0",
     "@fullcalendar/interaction": "5.3.0",
@@ -12,6 +14,9 @@
     "@fullcalendar/react": "5.3.0",
     "@fullcalendar/timegrid": "5.3.0",
     "@fullcalendar/timeline": "5.3.0",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.4",
+    "@mui/styled-engine-sc": "^5.6.1",
     "@tinymce/tinymce-react": "3.8.3",
     "@uppy/react": "1.10.8",
     "animate.css": "4.1.1",
@@ -26,6 +31,8 @@
     "chroma-js": "2.1.0",
     "classnames": "2.2.6",
     "cleave.js": "1.6.0",
+    "devextreme": "^21.2.4",
+    "devextreme-react": "^21.2.4",
     "file-saver": "2.0.2",
     "flatpickr": "4.6.3",
     "formik": "2.1.3",
@@ -62,7 +69,7 @@
     "react-router-dom": "5.1.2",
     "react-scripts": "4.0.0",
     "react-scroll-up": "1.3.7",
-    "react-select": "3.1.0",
+    "react-select": "^3.1.0",
     "react-shepherd": "3.3.0",
     "react-slidedown": "2.4.5",
     "react-sortablejs": "6.0.0",
@@ -75,7 +82,7 @@
     "sass": "1.26.8",
     "screenfull": "5.0.2",
     "sortablejs": "1.12.0",
-    "styled-components": "5.1.1",
+    "styled-components": "^5.1.1",
     "sweetalert2": "9.15.1",
     "sweetalert2-react-content": "3.0.1",
     "swiper": "6.0.4",
@@ -84,9 +91,7 @@
     "wnumb": "1.2.0",
     "xlsx": "0.16.2",
     "yarn": "1.21.1",
-    "yup": "0.28.1",
-    "devextreme": "^21.2.4",
-    "devextreme-react": "^21.2.4"
+    "yup": "0.28.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -101,6 +106,7 @@
   },
   "devDependencies": {
     "@types/sortablejs": "^1.10.6",
+    "devextreme-themebuilder": "^21.2.4",
     "eslint": "^7.8.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.6",
@@ -109,8 +115,7 @@
     "react-app-rewire-postcss": "^3.0.2",
     "react-app-rewire-sass-rule": "^2.1.1",
     "react-app-rewired": "^2.1.6",
-    "sass-loader": "^8.0.2",
-    "devextreme-themebuilder": "^21.2.4"
+    "sass-loader": "^8.0.2"
   },
   "browserslist": {
     "production": [

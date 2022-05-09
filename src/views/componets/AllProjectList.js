@@ -35,7 +35,7 @@ const dataSourceOptions = {
   })
 }
 
-class ProjectList extends React.Component {
+class AllProjectList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -46,13 +46,7 @@ class ProjectList extends React.Component {
     
       
       render() {
-        function renderShow() {
-          return <div className="toolbar-label " style={{margin:"10px"}}>Show</div>
-        }
-
-        function renderEntries() {
-          return <div className="toolbar-label">entries</div>
-        }
+        
         return (
           
           <Fragment>
@@ -61,72 +55,7 @@ class ProjectList extends React.Component {
             <div className='float-right'>
               <div className='d-flex ' style={{columnGap: "1.5em", marginTop:"15px"}}>
              
-               <FormControl  style={{border: "1px solid"}} sx={{  minWidth: 120 }} size="medium">
-                  <InputLabel id="select-import"><Download size={20} style={{paddingRight:"5px"}}/>Import</InputLabel>
-                    <Select
-                      labelId="select-import"
-                      id="select-import"
-                      // value={age}
-                      label="Import"
-                      // onChange={handleChange}
-                    >
-                    
-                      <MenuItem value={10}> 
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <File size={15} />
-                          <div style={{paddingLeft:"5px"}}>XML</div>
-                        </div>
-                      </MenuItem>
-                      
-                      <MenuItem value={10}> 
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <File size={15} />
-                          <div style={{paddingLeft:"5px"}}>CVS</div>
-                        </div>
-                      </MenuItem>
-                      
-                      <MenuItem value={10}> 
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <File size={15} />
-                          <div style={{paddingLeft:"5px"}}>Excel</div>
-                        </div>
-                      </MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControl style={{border: "1px solid"}} sx={{  minWidth: 120 }} size="medium">
-                  <InputLabel   id="select-export"><Upload size={20} style={{paddingRight:"5px"}}/>Export</InputLabel>
-                    <Select
-                    outlined
-                      labelId="select-export"
-                      id="select-export"
-                      variant="outlined"
-                      // value={age}
-                      label="Import"
-                      // onChange={handleChange}
-                    >
-                    
-                      <MenuItem value={10}> 
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <File size={15} />
-                          <div style={{paddingLeft:"5px"}}>XML</div>
-                        </div>
-                      </MenuItem>
-                      
-                      <MenuItem value={10}> 
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <File size={15} />
-                          <div style={{paddingLeft:"5px"}}>CVS</div>
-                        </div>
-                      </MenuItem>
-                      
-                      <MenuItem value={10}> 
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <File size={15} />
-                          <div style={{paddingLeft:"5px"}}>Excel</div>
-                        </div>
-                      </MenuItem>
-                    </Select>
-                </FormControl>
+               
                 <button className='btn-Create-New-Project' ><Plus size={15}/> Create New Project</button>
               </div>
               
@@ -215,4 +144,4 @@ class ProjectList extends React.Component {
       }
     }
 
-export default ProjectList
+export default AllProjectList
