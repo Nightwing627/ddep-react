@@ -3,118 +3,118 @@ import { Mail, Home, Circle, FileText, Settings} from 'react-feather'
 export default [
   {
     id: 'home',
-    title: 'Dashboard',
+    title: 'Home',
     icon: <Home size={20} />,
     navLink: '/home'
   },
   {
     id: 'secondPage',
-    title: 'Project',
+    title: 'Item',
     icon: <FileText size={20} />,
     navLink: '/second-page',
     children: [
       {
-        id: "shop",
+        id: "secondPage",
         title: "List",
-        type: "item",
+        // type: "item",
         icon: <Circle size={12} />,
-        permissions: ["admin", "editor"],
+        // permissions: ["admin", "editor"],
         navLink: "/second-page/List"
       },
       {
-        id: "detail",
+        id: "secondPage",
         title: "add",
-        type: "item",
+        // type: "item",
         icon: <Circle size={12} />,
-        permissions: ["admin", "editor"],
-        navLink: "/second-page/add"
-      }
-    ]
-  },
-  {
-    id: 'Admin Configure',
-    title: 'Admin Configure',
-    icon: <Settings size={20} />,
-    navLink: '/second-page',
-    children: [
-      {
-        id: "User Maintenancet",
-        title: "User Maintenancet",
-        type: "item",
-       
-        permissions: ["admin", "editor"],
-        navLink: "/second-page/List",
-        children: [
-          {
-            id: "shop",
-            title: "List",
-            type: "item",
-            icon: <Circle size={12} />,
-            permissions: ["admin", "editor"],
-            navLink: "/User Maintenancet/List"
-          },
-          {
-            id: "detail",
-            title: "Access Rights",
-            type: "item",
-            icon: <Circle size={12} />,
-            permissions: ["admin", "editor"],
-            navLink: "/User Maintenancet/Access Rights"
-          }
-        ]
-      },
-      {
-        id: "Template",
-        title: "Template",
-        type: "item",
-        
-        permissions: ["admin", "editor"],
-        navLink: "/Template/add",
-        children: [
-          {
-            id: "shop",
-            title: "List",
-            type: "item",
-            icon: <Circle size={12} />,
-            permissions: ["admin", "editor"],
-            navLink: "/Template/List"
-          },
-          {
-            id: "detail",
-            title: "Add",
-            type: "item",
-            icon: <Circle size={12} />,
-            permissions: ["admin", "editor"],
-            navLink: "/Template/Add"
-          }
-        ]
-      },
-      {
-        id: "Template",
-        title: "Basic Information",
-        type: "item",
-        icon: <Circle size={15} />,
-        permissions: ["admin", "editor"],
-        navLink: "/Basic Information"
-      },
-      {
-        id: "Analytics Report",
-        title: "Analytics Report",
-        type: "item",
-        icon: <Circle size={15} />,
-        permissions: ["admin", "editor"],
-        navLink: "/Analytics Report"
-      },
-      {
-        id: "Notification / Alert",
-        title: "Notification / Alert",
-        type: "item",
-        icon: <Circle size={15} />,
-        permissions: ["admin", "editor"],
-        navLink: "/Notification / Alert"
+        // permissions: ["admin", "editor"],
+        navLink: "/secondPage/Add"
       }
     ]
   }
+  // {
+  //   id: 'Admin Configure',
+  //   title: 'Admin Configure',
+  //   icon: <Settings size={20} />,
+  //   navLink: '/second-page',
+  //   children: [
+  //     {
+  //       id: "User Maintenancet",
+  //       title: "User Maintenancet",
+  //       type: "item",
+       
+  //       permissions: ["admin", "editor"],
+  //       navLink: "/second-page/List",
+  //       children: [
+  //         {
+  //           id: "shop",
+  //           title: "List",
+  //           type: "item",
+  //           icon: <Circle size={12} />,
+  //           permissions: ["admin", "editor"],
+  //           navLink: "/User Maintenancet/List"
+  //         },
+  //         {
+  //           id: "detail",
+  //           title: "Access Rights",
+  //           type: "item",
+  //           icon: <Circle size={12} />,
+  //           permissions: ["admin", "editor"],
+  //           navLink: "/User Maintenancet/Access Rights"
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: "Template",
+  //       title: "Template",
+  //       type: "item",
+        
+  //       permissions: ["admin", "editor"],
+  //       navLink: "/Template/add",
+  //       children: [
+  //         {
+  //           id: "shop",
+  //           title: "List",
+  //           type: "item",
+  //           icon: <Circle size={12} />,
+  //           permissions: ["admin", "editor"],
+  //           navLink: "/Template/List"
+  //         },
+  //         {
+  //           id: "detail",
+  //           title: "Add",
+  //           type: "item",
+  //           icon: <Circle size={12} />,
+  //           permissions: ["admin", "editor"],
+  //           navLink: "/Template/Add"
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: "Template",
+  //       title: "Basic Information",
+  //       type: "item",
+  //       icon: <Circle size={15} />,
+  //       permissions: ["admin", "editor"],
+  //       navLink: "/Basic Information"
+  //     },
+  //     {
+  //       id: "Analytics Report",
+  //       title: "Analytics Report",
+  //       type: "item",
+  //       icon: <Circle size={15} />,
+  //       permissions: ["admin", "editor"],
+  //       navLink: "/Analytics Report"
+  //     },
+  //     {
+  //       id: "Notification / Alert",
+  //       title: "Notification / Alert",
+  //       type: "item",
+  //       icon: <Circle size={15} />,
+  //       permissions: ["admin", "editor"],
+  //       navLink: "/Notification / Alert"
+  //     }
+  //   ]
+  // }
   // {
   //   id: "eCommerce",
   //   title: "Ecommerce",
