@@ -9,7 +9,7 @@ export default [
   },
   {
     id: 'secondPage',
-    title: 'Item',
+    title: 'Project',
     icon: <FileText size={20} />,
     navLink: '/second-page',
     children: [

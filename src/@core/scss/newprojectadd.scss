@@ -6,11 +6,11 @@
     }
 }
 .input-feild{
-    .MuiInputBase-input {
+    // .MuiInputBase-input {
         
-        border: 0;
-        height: 0.1rem;
-    }
+    //     border: 0;
+    //     height: 0.1rem;
+    // }
     .sonar-field-helper{
         margin-bottom: 5px;
     }
@@ -43,6 +43,23 @@
          background-color: none; 
     }
     .grp-text{
-        padding-bottom: 16px;
+        padding-bottom: 5px;
     }
+    .form-control:focus {
+    background-color: #fff;
+    border-color: #8DC454 ;
+    color: #5e5873;
+    }
+}
+.select-box{
+    // .select-box-option:active{
+    //     background-color:  #8DC454 !important ;
+    //     color: #fff;
+    // }
+    .select-box-option:hover{
+        background-color:  #8DC454 !important ;
+    }
+}
+.input-feild{
+    padding-top: 15px;
 }
