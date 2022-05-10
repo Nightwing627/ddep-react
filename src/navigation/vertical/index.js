@@ -90,7 +90,7 @@ export default [
         ]
       },
       {
-        id: "Template",
+        id: "BasicInformation",
         title: "Basic Information",
         type: "item",
         icon: <Circle size={15} />,

@@ -13,27 +13,13 @@ import DataGrid, {
 } from 'devextreme-react/data-grid'
 import './ProjectList.scss'
 // import { Select } from '@mui/material'
-import { customers } from './data.js'
+import { projectList } from './data.js'
 // import MenuItem from '@mui/material/MenuItem'
 import { SelectChangeEvent, Select, MenuItem, InputLabel, FormControl} from '@mui/material'
 import {FormGroup, Input} from 'reactstrap'
 import { Activity, BookOpen, ChevronDown, Copy, Disc, Download, Edit, File, Plus, Settings, Upload } from 'react-feather'
 
-const columns = ['COMPANY', 'PROJECTCODE', 'LASTRUNSTATUS', 'LASTRUNDATE', 'ACTION']
-
-
 const pageSizes = [2, 10, 25, 50, 100]
-
-const dataSourceOptions = {
-  store: new ODataStore({
-    url: 'https://js.devexpress.com/Demos/SalesViewer/odata/DaySaleDtoes',
-    key: 'Id',
-    beforeSend(request) {
-      request.params.startDate = '2020-05-10'
-      request.params.endDate = '2020-05-15'
-    }
-  })
-}
 
 class ProjectList extends React.Component {
     constructor(props) {
@@ -135,7 +121,7 @@ class ProjectList extends React.Component {
           </div>
           <hr></hr>
             <DataGrid
-            dataSource={customers}
+            dataSource={projectList}
             allowColumnReordering={true}
             rowAlternationEnabled={true}
             showBorders={true}
@@ -193,7 +179,7 @@ class ProjectList extends React.Component {
                 </Item>
           
             </Toolbar>
-            <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} />
+            {/* <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} /> */}
             <Paging
                     defaultPageSize={4}
                     defaultPageIndex={0} />

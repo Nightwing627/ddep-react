@@ -18,7 +18,7 @@ const Routes = [
   },
   {
     path: '/second-page/List',
-    component: lazy(() => import('../../views/componets/ProjectList'))
+    component: lazy(() => import('../../views/componets/AllProjectList'))
   },
   {
     path: '/login',

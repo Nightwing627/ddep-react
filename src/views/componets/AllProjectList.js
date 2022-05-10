@@ -2,25 +2,30 @@ import React, { Fragment } from 'react'
 
 import ODataStore from 'devextreme/data/odata/store'
 
-import DataGrid, {
+import {
   Column,
-  Grouping,
+  DataGrid,
+  FilterRow,
+  HeaderFilter,
   GroupPanel,
-  Pager,
-  Button,
+  Scrolling,
+  Editing,
+  Grouping,
   Paging,
-  SearchPanel, Toolbar, Item, ColumnChooser
+  Lookup,
+  MasterDetail,
+  Button,
+  Toolbar,
+  Item, SearchPanel
 } from 'devextreme-react/data-grid'
-import './ProjectList.scss'
-// import { Select } from '@mui/material'
-import { customers } from './data.js'
+import './AllProjectList.scss'
+import { allProjectList, projectDescription } from './data.js'
 // import MenuItem from '@mui/material/MenuItem'
 import { SelectChangeEvent, Select, MenuItem, InputLabel, FormControl} from '@mui/material'
 import {FormGroup, Input} from 'reactstrap'
-import { Activity, BookOpen, ChevronDown, Copy, Disc, Download, Edit, File, Plus, Settings, Upload } from 'react-feather'
-
-const columns = ['COMPANY', 'PROJECTCODE', 'LASTRUNSTATUS', 'LASTRUNDATE', 'ACTION']
-
+import { Activity, BookOpen, ChevronDown, Copy, Disc, Download, Edit, File, FilePlus, Plus, RefreshCw, Settings, Upload } from 'react-feather'
+import customItem from './CustomItem'
+import { Sync } from '@mui/icons-material'
 
 const pageSizes = [2, 10, 25, 50, 100]
 
@@ -46,12 +51,12 @@ class AllProjectList extends React.Component {
     
       
       render() {
-        
+      
         return (
           
           <Fragment>
-            <div className='bg-white'>
-            <div className='clearfix bg-white'>
+            <div className='bg-white main-class'>
+            <div className='clearfix '>
             <div className='float-right'>
               <div className='d-flex ' style={{columnGap: "1.5em", marginTop:"15px"}}>
              
@@ -63,70 +68,72 @@ class AllProjectList extends React.Component {
 
           </div>
           <hr></hr>
-            <DataGrid
-            dataSource={customers}
-            allowColumnReordering={true}
-            rowAlternationEnabled={true}
+          <DataGrid
+            dataSource={allProjectList}
+            showColumnLines= {false}
+            showRowLines= {true}
             showBorders={true}
-            // defaultColumns={columns}
-            
-            groupIndex={0}
-            onContentReady={this.onContentReady}
-          >
-            
-               <ColumnChooser enabled={true} />
-            <GroupPanel visible={true} />
-            <SearchPanel visible={true} highlightCaseSensitive={true} />
-            <Grouping autoExpandAll={false} />
-    
-            <Column dataField="COMPANY" caption="COMPANY" groupIndex={0} />
-            <Column
-              dataField="COMPANY"
-              caption="COMPANY"
-              
-            />
-            <Column
-              dataField="PROJECTCODE"
-              caption="PROJECTCODE"
-              
-            />
-            <Column
-              dataField="LASTRUNSTATUS"
-              caption="LASTRUNSTATUS"
-             
-            />
-            <Column dataField="LASTRUNDATE" caption="LASTRUNDATE" dataType="date" />
-            
-            
-            <Column dataField="ACTION" caption="ACTION" type="buttons" width="auto" className="text-wrap" >
-            
-            <Button><span className='btn-Edit'> <Settings size={15}/> Test</span></Button>
-            <Button><span className='btn-Edit'> <BookOpen size={15}/> History</span></Button>
-            <Button><span className='btn-Edit'> <Edit size={15}/> Edit</span></Button>
-            <Button><span className='btn-Edit'> <Copy size={15}/> Copy</span></Button>
-            <Button><span className='btn-Edit'> <Disc size={15}/> Active</span></Button>
-       
-            </Column>
-            <Toolbar>
-         
-                <Item location="before"
-                render={renderShow}></Item>
-                <Item location="before"
-                widget="dxSelectBox">
-                </Item>
-                <Item location="before"
-                render={renderEntries}></Item>
+            height={600}
+            remoteOperations={true}
+            className="data-Grid"
+            >
+                <MasterDetail
+                  enabled={true}
+                  component={customItem}
+                />
+                <FilterRow visible={false} />
+                <HeaderFilter visible={false} />
+                <SearchPanel visible={true} highlightCaseSensitive={true} />
+                <GroupPanel visible={true} className="group-Panel" />
+                <Scrolling mode="virtual" />
+                <Editing
+                  mode="row"
+                  allowAdding={true}
+                  allowDeleting={true}
+                  allowUpdating={true}
+                />
+                <Grouping autoExpandAll={false} />
+                
+                <Column
+                  dataField="ITEM NAME"
+                  caption="PROJECT/ITEM NAME"
+                  width="auto"
+                  
+                />
+                <Column
+                  dataField="VERSION"
+                  caption="VERSION"
+                  
+                  
+                />
+                <Column
+                  dataField="IN TYPE"
+                  caption="IN TYPE"
+                
+                />
+                <Column dataField="IN/OUT FORMAT" caption="IN/OUT FORMAT"  />
+                <Column dataField="SCHEDULE" caption="SCHEDULE"  />
+                <Column dataField="SYNC STATUS" caption="SYNC STATUS"  />
+                
+                <Column dataField="ACTIONNAME" caption="ACTION" type="buttons" width="auto" className="text-wrap" >
+                
+                <Button><span className='btn-Edit'> <Disc size={15}/></span></Button>
+                <Button><span className='btn-Edit'>  <FilePlus size={15}/></span></Button>
+                <Button><span className='btn-Edit'>  <RefreshCw size={15}/></span></Button>
+                <Button><span className='btn-Edit'>  <Edit size={15}/></span></Button>
+          
+                </Column>
+                <Toolbar>
                 <Item location="after"
                 locateInMenu="auto"
                 name="searchPanel">
                 </Item>
           
             </Toolbar>
-            <Pager allowedPageSizes={pageSizes} showPageSizeSelector={true} />
-            <Paging
-                    defaultPageSize={4}
-                    defaultPageIndex={0} />
-            </DataGrid>
+                <Paging
+                        defaultPageSize={1}
+                        defaultPageIndex={0} />
+          </DataGrid>
             </div>
             
           </Fragment>
