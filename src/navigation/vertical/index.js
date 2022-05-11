@@ -68,6 +68,7 @@ export default [
   //       title: "Template",
   //       type: "item",
         
+
   //       permissions: ["admin", "editor"],
   //       navLink: "/Template/add",
   //       children: [
@@ -115,6 +116,7 @@ export default [
   //     }
   //   ]
   // }
+
   // {
   //   id: "eCommerce",
   //   title: "Ecommerce",
