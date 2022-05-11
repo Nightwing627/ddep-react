@@ -1,81 +1,74 @@
 import React from 'react'
-import DataGrid from 'devextreme-react/data-grid'
+import { DataGrid, Column, Button } from 'devextreme-react/data-grid'
 import { allProjectList, projectDescription, companies } from './data.js'
 import '../componets/CustomItem.scss'
 import CustomTitle from './CustomTitle.js'
-const url = 'https://js.devexpress.com/Demos/Mvc/api/DataGridWebApi'
+import {  BookOpen, Copy, Disc, Edit, FilePlus, RefreshCw } from 'react-feather'
 
-class customItem extends React.Component {
+class CustomItem extends React.Component {
   constructor(props) {
     super(props)
     this.projectDescription = allProjectList
-    this.state = {
-      selectedItems: [this.projectDescription[0]],
-      multiple: false,
-      collapsible: false,
-      animationDuration: 300
-    }
-    this.selectionChanged = this.selectionChanged.bind(this)
-    this.selectedItemsChanged = this.selectedItemsChanged.bind(this)
-    this.multipleChanged = this.multipleChanged.bind(this)
-    this.collapsibleChanged = this.collapsibleChanged.bind(this)
-    this.animationDurationChanged = this.animationDurationChanged.bind(this)
-  }
-
-  render() {
-    const {
-      selectedItems, multiple, collapsible, animationDuration
-    } = this.state
-    return (
-      <div id="accordion">
-        {this.projectDescription.map(item => {
-          // console.log(item.PROJECTNAME)
-          return <div style={{marginBottom:"10px"}}>{item.PROJECTNAME}</div>
-        })}
     
-      </div>
+  }
+  onRowPreparedFunction (e) {
+    e.rowElement.css({ height: 70, alignItems: "center"})
+  }
+  render() {
+   
+    return (
+
+      <DataGrid
+        dataSource={this.projectDescription}
+        showBorders={false}
+        showRowLines={true}
+        showColumnLines={false}
+        
+       className='child-Data-Grid'
+       onRowPrepared={this.onRowPreparedFunction}
+      >
+
+                <Column
+                  dataField="ITEM NAME"
+                  caption="PROJECT/ITEM NAME"
+                  width="auto"
+                  cssClass="col-field"
+                  alignment="center"
+                  allowHiding={true}
+                  // cssClass="child-Data-Grid"
+                />
+               
+                <Column
+                  dataField="VERSION"
+                 
+                  
+                />
+                <Column
+                  dataField="IN TYPE"
+                
+                />
+                <Column dataField="IN/OUT FORMAT"   />
+                <Column dataField="SCHEDULE"   />
+                <Column dataField="SYNC STATUS"   />
+                
+                <Column dataField="ACTIONNAME"  type="buttons" width="auto" className="text-wrap" alignment="center" >
+                
+                <Button className="btn-Action"><span className='btn-Edit'> <Disc size={25}/></span></Button>
+                <Button  className="btn-Action"><span className='btn-Edit'>  <Copy size={25}/></span></Button>
+                <Button  className="btn-Action"><span className='btn-Edit'>  <BookOpen size={25}/></span></Button>
+                <Button  className="btn-Action"><span className='btn-Edit'>  <Edit size={25}/></span></Button>
+          
+                </Column>
+        </DataGrid>
+      // <div >
+      //   {this.projectDescription.map((itemDescription, index) => {
+      //     // console.log(item.PROJECTNAME)
+      //     return <div key={index}  style={{marginBottom:"10px"}}>{itemDescription.PROJECTNAME}</div>
+      //   })}
+    
+      // </div>
     )
-  }
-
-  selectionChanged(e) {
-    let newItems = [...this.state.selectedItems]
-    e.removedItems.forEach((item) => {
-      const index = newItems.indexOf(item)
-      if (index >= 0) {
-        newItems.splice(index, 1)
-      }
-    })
-    if (e.addedItems.length) {
-      newItems = [...newItems, ...e.addedItems]
-    }
-    this.setState({
-      selectedItems: newItems
-    })
-  }
-
-  selectedItemsChanged(e) {
-    this.setState({
-      selectedItems: e.value
-    })
-  }
-
-  multipleChanged(e) {
-    this.setState({
-      multiple: e.value
-    })
-  }
-
-  collapsibleChanged(e) {
-    this.setState({
-      collapsible: e.value
-    })
-  }
-
-  animationDurationChanged(e) {
-    this.setState({
-      animationDuration: e.value
-    })
   }
 }
 
-export default customItem
+export default CustomItem

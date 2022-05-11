@@ -3,3 +3,38 @@
     margin-bottom: 10px;
     padding: 10px;
 }
+.child-Data-Grid{
+    font-size: 15px;
+    border-radius: 0.428rem;
+    box-shadow: 0 4px 24px 0 #ccc;
+    word-wrap: break-word;
+}
+// .child-Data-Grid tr.dx-row.dx-header-row {
+//     display: none;
+// }
+tr.dx-row.dx-data-row.dx-column-lines {
+    border: 0;
+}
+.dx-datagrid-rowsview.dx-datagrid-nowrap {
+    border: 0;
+}
+.dx-datagrid-headers.dx-datagrid-nowrap {
+    border: 0;
+}
+.dx-datagrid-content {
+    border-radius: 0.428rem;
+    box-shadow: 0 4px 24px 0 #ccc;
+}
+.dx-datagrid-content:first-child{
+    border: radius 1.428rem;;
+    box-shadow:none;
+
+}
+[dir=ltr] .dx-datagrid-group-closed::before, [dir=ltr] .dx-datagrid-group-opened::before {
+    right: 0;
+    left: 0;
+    top: 20px;
+}
+.dx-datagrid.dx-gridbase-container {
+    border-radius: 0.428rem;
+}

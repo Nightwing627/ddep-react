@@ -45,7 +45,7 @@ export const allProjectList = [
   'IN/OUT FORMAT': 'Json > Json',
   SCHEDULE:'Trigger by External',
   'SYNC STATUS': '',
-  'ACTION NAME': 'action'
+  'ACTION NAME': ''
   
 }, {
   ID: 2,
