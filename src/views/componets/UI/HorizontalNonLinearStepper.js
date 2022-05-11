@@ -26,17 +26,17 @@ function getSteps() {
   return ["1", 'Create New Project']
 }
 
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return 'Step 1: Select campaign settings...'
-//     case 1:
-//       return 'dsfsf'
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return 'Step 1: Select campaign settings...'
+    case 1:
+      return 'dsfsf'
     
-//     default:
-//       return 'Unknown step'
-//   }
-// }
+    default:
+      return 'Unknown step'
+  }
+}
 
 export default function HorizontalNonLinearStepper() {
   const classes = useStyles()

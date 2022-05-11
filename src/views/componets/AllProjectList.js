@@ -26,6 +26,7 @@ import {FormGroup, Input} from 'reactstrap'
 import { Activity, BookOpen, ChevronDown, Copy, Disc, Download, Edit, File, FilePlus, Plus, RefreshCw, Settings, Upload } from 'react-feather'
 import customItem from './CustomItem'
 import { Sync } from '@mui/icons-material'
+// import Index from "./CreateNewProject.js"
 
 const pageSizes = [2, 10, 25, 50, 100]
 
@@ -44,24 +45,42 @@ class AllProjectList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          collapsed: false
+          collapsed: false,
+          title:""
         }
         this.onContentReady = this.onContentReady.bind(this)
+        this.handleopen = this.handleopen.bind(this)
       }
     
+      // const handleopen = () =>{
+
+      // }
+      onContentReady(e) {
+        if (!this.state.collapsed) {
+          e.component.expandRow(['EnviroCare'])
+          this.setState({
+            collapsed: true
+          })
+        }
+      }
       
+      handleopen() {
+        // this.setState({title: "Hello World"})
+        console.log('Hello')
+        // window.location.href = "/newitem"
+        this.props.history.push("/newitem")
+        // < Index/>
+      }
       render() {
       
         return (
-          
+         
           <Fragment>
             <div className='bg-white main-class'>
             <div className='clearfix '>
             <div className='float-right'>
               <div className='d-flex ' style={{columnGap: "1.5em", marginTop:"15px"}}>
-             
-               
-                <button className='btn-Create-New-Project' ><Plus size={15}/> Create New Project</button>
+                <button className='btn-Create-New-Project' onClick={() => this.handleopen()} ><Plus size={15}/> Create New Project</button>
               </div>
               
             </div>
@@ -131,8 +150,8 @@ class AllProjectList extends React.Component {
           
             </Toolbar>
                 <Paging
-                        defaultPageSize={1}
-                        defaultPageIndex={0} />
+                 defaultPageSize={1}
+                  defaultPageIndex={0} />
           </DataGrid>
             </div>
             
@@ -141,14 +160,7 @@ class AllProjectList extends React.Component {
         )
       }
     
-      onContentReady(e) {
-        if (!this.state.collapsed) {
-          e.component.expandRow(['EnviroCare'])
-          this.setState({
-            collapsed: true
-          })
-        }
-      }
+     
     }
 
 export default AllProjectList
