@@ -1,0 +1,47 @@
+@import "../../../@core/scss/base/bootstrap-extended/variables";
+
+.stepper-inner{
+    padding-bottom: 10px;
+        border-bottom: 1px solid #efefef;
+    .MuiSvgIcon-root{
+        display: none;
+    }
+    
+    .MuiStepConnector-root {
+        flex: 0;
+    }
+    .MuiStepper-root {
+        
+        padding: 0;
+    }
+    .MuiStepButton-root {
+        padding: 0;
+    }
+    .MuiStepLabel-label.MuiStepLabel-active {
+        background-color: #8DC454;
+        color: #fff;
+        height: 38px;
+        padding: 14px;
+        border-radius: 5px;
+        line-height: 9px;
+        
+    }
+    .MuiStepLabel-label{
+        color: #8DC454;
+        font-size: 16px;
+    }
+    .MuiStepLabel-root {
+        // display: flex;
+        // align-items: center;
+        outline: none;
+    }
+    button:focus {
+        outline: none;
+        outline: 0px auto -webkit-focus-ring-color;
+    }
+    
+    .MuiStep-horizontal {
+       padding: 0;
+    } 
+    
+}
