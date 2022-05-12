@@ -184,6 +184,7 @@ const Add = () => {
          Global
       </option>
     </Input> */}
+    
     <Select  options={options}  theme={theme}  className="React"/>
   </FormGroup>
             </Grid>
