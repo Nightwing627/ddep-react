@@ -5,7 +5,8 @@ import Stack from '@mui/material/Stack'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import  Steps  from "./steps"
 import { Button, Card, CardBody, Input, Label, FormGroup } from 'reactstrap'
-
+import "../../../@core/scss/newprojectadd.scss"
+import "./Newitem.scss"
 function handleClick(event) {
   event.preventDefault()
   console.info('You clicked a breadcrumb.')
@@ -37,9 +38,9 @@ const Index = () => {
       </Breadcrumbs>
     </Stack>
     <Card >
-      <CardBody >
+      
         <Steps/>
-      </CardBody>
+      
     </Card >
     
     </div>
