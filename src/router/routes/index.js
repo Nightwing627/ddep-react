@@ -22,7 +22,7 @@ const Routes = [
   },
   {
     path: '/Edit',
-    component: lazy(() => import('../../views/componets/EditProject/index'))
+    component: lazy(() => import('../../views/componets/wizard/EditStepper'))
   },
   {
     path: '/login',

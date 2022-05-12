@@ -1,3 +1,4 @@
+@import '../../@core/scss/base/bootstrap-extended/_variables';
 .inner-Class{
     box-shadow: 0 4px 24px 0 #ccc;
     margin-bottom: 10px;
@@ -5,6 +6,7 @@
 }
 .child-Data-Grid{
     font-size: 15px;
+    font-family: $font-family-monospace;
     border-radius: 0.428rem;
     box-shadow: 0 4px 24px 0 #ccc;
     word-wrap: break-word;

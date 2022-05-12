@@ -1,4 +1,4 @@
-import React from "react"
+import { React, Fragment, useState } from "react"
 import {
   Card,
   CardHeader,
@@ -8,118 +8,98 @@ import {
   Row,
   Col,
   Input,
-  Form,
   Button,
   Label
+  
 } from "reactstrap"
+import Select from 'react-select'
+import { selectThemeColors } from '@utils'
+import '../../../assets/scss/EditProject.scss'
+import { useHistory } from "react-router-dom"
+import {
+  AvForm,
+  AvGroup,
+  AvField,
+  AvInput,
+  AvFeedback,
+  AvRadioGroup,
+  AvCheckboxGroup,
+  AvRadio,
+  AvCheckbox
+} from 'availity-reactstrap-validation-safe'
+const groupOptions = [
+  { value: 'select', label: 'Select' },
+  { value: 'bgrs', label: 'BGRS' },
+  { value: 'i-rms', label: 'I-RMS' },
+  { value: 'global', label: 'Global' }
+]
 
-class EditProject extends React.Component {
-  render() {
-    return (
+const EditProject = ({ stepper, type }) => {
+  const history = useHistory()
+  const [validate, setValidate] = useState({ projectCode:'test',
+    projectName:''
+  })
+  
+  function handleSubmit() {
    
-      <Card>
-        <CardHeader >
-          <CardTitle>
-              <div className=" d-flex"   >
-                <Card color="success"
-                style={{height:"50px"}}
-                    >
-                    <CardHeader>
-                        <CardTitle  style={{color:"white", marginTop:"-10px" }}>1
-                        </CardTitle>
-                    </CardHeader>
-                </Card>
-                <Card style={{marginTop:"-10px"}}>
-                    <CardHeader>
-                        <CardTitle>
-                        Edit Project
-                        </CardTitle>
-                    </CardHeader>
-                    </Card>
-                {/* <hr className="h-10 bg-black" style={}  ></hr> */}
-              </div>
-          </CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Form>
-            <Row>
-              <Col sm="12">
-                <FormGroup>
-                  <Label for="code">Project Code <span style={{color:"red"}}>*</span></Label>
-                  <Input
-                    type="text"
-                    
-                    id="code"
-                    placeholder="Project Code "
-                  />
-                </FormGroup>
-              </Col>
-              <Col sm="12">
-                <FormGroup>
-                  <Label for="txtname">Project Name *</Label>
-                  <Input
-                    type="text"
-                    id="txtname"
-                    placeholder="Project Name"
-                  />
-                </FormGroup>
-              </Col>
-              <Col sm="12">
-                <FormGroup>
-                  <Label for="description">Project Description*</Label>
-                  <Input
-                    type="textarea"
-                    row="5" 
-                    id="description"
-                    placeholder="Project Description"
-                  />
-                </FormGroup>
-              </Col>
-              <Col sm="12">
-                <FormGroup>
-                  <Label for="txtSequence">Sequence *</Label>
-                  <Input
-                    type="text"
-                    
-                    id="txtSequence"
-                    placeholder="Sequence"
-                  />
-                </FormGroup>
-              </Col>
-              <Col sm="12">
-                  <FormGroup>
-                      <Label for="group"> Group *</Label>
-                      <Input
-                        type="select"
-                        name="select"
-                        id="select"
-                        defaultValue={'DEFAULT'}
-                        >
-                        <option value="--Select--" >--Select--</option>
-                        <option value="Test Name(Test Code)" >BGRS</option>
-                        <option value="Test Name2(Test Code2)">I-RMS</option>
-                        <option value="Test Name3(Test Code3)">Global</option>
-                </Input>
-                  </FormGroup>
-              </Col>
-              <Col sm="12">
-                <FormGroup>
-                  <Button.Ripple
-                    color="success"
-                    type="submit"
-                    className="mr-1 mb-1"
-                    onClick={e => e.preventDefault()}
-                  >
-                    Save
-                  </Button.Ripple>
-                 
-                </FormGroup>
-              </Col>
-            </Row>
-          </Form>
-        </CardBody>
-      </Card>
-    )
+    if  (validate.projectCode !== "" && validate.projectName !== "") {
+      console.log("validate project code is not empty")
+      history.push("/second-page/List")
+    } else {
+      console.log("validate project code is  empty")
+    }
+      
+  
   }
+  function handleChange(event) {
+    const { name, value } = event.target
+    setValidate({ ...validate, [name]: value })
+    
+  }
+
+  return (
+    <Fragment>
+
+<AvForm onSubmit={handleSubmit}>
+          <AvGroup>
+            <Label for='projectCode'>Project Code <span style={{color:'red'}}>*</span></Label>
+            <AvInput name='projectCode' disabled id='projectCode' placeholder='Project Code' value={validate.projectCode} onChange= { (e) => { handleChange(e) } }  required />
+            <AvFeedback>Please enter a valid Project Code!</AvFeedback>
+          </AvGroup>
+          <AvGroup>
+            <Label for='projectName'>Project Name <span style={{color:'red'}}>*</span></Label>
+            <AvInput name='projectName'  id='projectName' value={validate.projectName}  onChange={ (e) => { handleChange(e) } }  placeholder='Project Name' required />
+            <AvFeedback>Please enter a valid Project Name!</AvFeedback>
+          </AvGroup>
+          <AvGroup>
+            <Label for='projectDescription'>Project Description</Label>
+            <AvInput name='projectDescription' type='textarea' rows='8' placeholder='Project Description' id='bprojectDescriptionio'  />
+            <AvFeedback>Please enter Project Description!</AvFeedback>
+          </AvGroup>
+          <AvGroup>
+            <Label for='sequence'>Sequence</Label>
+            <AvInput name='sequence'  placeholder='Sequence'  id='sequence'  />
+            <AvFeedback>Please enter a valid Sequence!</AvFeedback>
+          </AvGroup>
+          <AvGroup>
+            <Label for='group'>Group</Label>
+            <Select
+               
+                className='react-select'
+                classNamePrefix='select'
+                defaultValue={groupOptions[0]}
+                options={groupOptions}
+                isClearable={false}
+              />
+            <AvFeedback>Please select a Group</AvFeedback>
+          </AvGroup>
+          <Button color='primary' type='submit'>
+            Save
+          </Button>
+        </AvForm>
+        
+    </Fragment>
+  )
 }
+
 export default EditProject

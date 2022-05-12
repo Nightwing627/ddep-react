@@ -9,10 +9,13 @@ class CustomItem extends React.Component {
   constructor(props) {
     super(props)
     this.projectDescription = allProjectList
-    
+    this.editBtn = this.editBtn.bind(this)
   }
   onRowPreparedFunction (e) {
     e.rowElement.css({ height: 70, alignItems: "center"})
+  }
+  editBtn = () => {
+    window.location.href = "/Edit"
   }
   render() {
    
@@ -56,7 +59,7 @@ class CustomItem extends React.Component {
                 <Button className="btn-Action"><span className='btn-Edit'> <Disc size={25}/></span></Button>
                 <Button  className="btn-Action"><span className='btn-Edit'>  <Copy size={25}/></span></Button>
                 <Button  className="btn-Action"><span className='btn-Edit'>  <BookOpen size={25}/></span></Button>
-                <Button  className="btn-Action"><span className='btn-Edit'>  <Edit size={25}/></span></Button>
+                <Button  className="btn-Action" onClick={this.editBtn}><span className='btn-Edit'>  <Edit size={25}/></span></Button>
           
                 </Column>
         </DataGrid>
