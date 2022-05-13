@@ -75,7 +75,7 @@ const AppCollapse = props => {
             /*eslint-enable */
           >
             <CardTitle className='collapse-title'>{title}</CardTitle>
-            <ChevronUp size={14} />
+            {/* <ChevronUp size={14} /> */}
           </CardHeader>
           <Collapse isOpen={accordion ? openCollapse === index : openCollapse.includes(index)}>
             <CardBody>{content}</CardBody>
@@ -91,7 +91,7 @@ const AppCollapse = props => {
         [className]: className,
         'collapse-default': !type,
         'collapse-shadow': type === 'shadow',
-        'collapse-border': type === 'border',
+        // 'collapse-border': type === 'border',
         'collapse-margin': type === 'margin'
       })}
     >
