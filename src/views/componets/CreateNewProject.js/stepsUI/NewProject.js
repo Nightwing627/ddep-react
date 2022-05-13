@@ -15,10 +15,12 @@ import {
 import Select from 'react-select'
 import { Check, Star } from "react-feather"
 import "../Newitem.scss"
+
 const NewProject = (props) => {
  const saveAndNext = () => {
       props.stepper.next()
   }
+
   return (
     <div>
       
@@ -135,8 +137,8 @@ const NewProject = (props) => {
         </Row>
         
         <Button className="btn-relief " color="primary" >
-                    Save
-                </Button>
+            Save
+       </Button>
                 <hr/>
       </Container>
       <div className="d-flex justify-content-between prev-next-btn-block">
