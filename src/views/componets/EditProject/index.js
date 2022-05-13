@@ -43,7 +43,6 @@ const EditProject = ({ stepper, type }) => {
   function handleSubmit() {
    
     if  (validate.projectCode !== "" && validate.projectName !== "") {
-      console.log("validate project code is not empty")
       history.push("/second-page/List")
     } else {
       console.log("validate project code is  empty")
@@ -60,7 +59,7 @@ const EditProject = ({ stepper, type }) => {
   return (
     <Fragment>
 
-<AvForm onSubmit={handleSubmit}>
+        <AvForm onSubmit={handleSubmit}>
           <AvGroup>
             <Label for='projectCode'>Project Code <span style={{color:'red'}}>*</span></Label>
             <AvInput name='projectCode' disabled id='projectCode' placeholder='Project Code' value={validate.projectCode} onChange= { (e) => { handleChange(e) } }  required />

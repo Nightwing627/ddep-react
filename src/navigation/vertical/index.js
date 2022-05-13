@@ -14,7 +14,7 @@ export default [
     navLink: '/second-page',
     children: [
       {
-        id: "shop",
+        id: "allProjectList",
         title: "List",
         type: "item",
         icon: <Circle size={12} />,

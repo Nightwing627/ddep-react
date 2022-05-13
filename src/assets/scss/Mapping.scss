@@ -1,0 +1,48 @@
+textarea#inBound {
+    min-height: 200px;
+}
+textarea#outBound {
+    min-height: 200px;
+}
+.upload-Row.row {
+    text-align: right;
+}
+.upload-Content{
+
+}
+.upload-Content {
+    display: flex;
+    justify-content: end;
+    align-items: baseline;
+    gap: 5px;
+}
+a.btn-inBound-DownLoadJson {
+    color: #4c92e2;
+    display: none;
+}
+a.btn-inBound-DownLoadJson:hover{
+    text-decoration: underline !important;
+}
+a.btn-outBound-DownLoadJson {
+    color: #4c92e2;
+    
+}
+a.btn-outBound-DownLoadJson:hover{
+    text-decoration: underline !important;
+}
+.tbl-Content{
+    border-radius: 0.428rem;
+    box-shadow: 0 4px 24px 0 #ccc;
+}
+.tbl-Data{
+    border-radius: 1rem; 
+}
+.table-responsive {
+    border-radius: 1rem;
+}
+.btn-Upload{
+    margin-right: 15px;
+}
+.btn-Skip{
+    color: black;
+}
