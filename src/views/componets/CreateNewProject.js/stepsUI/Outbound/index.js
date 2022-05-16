@@ -32,7 +32,7 @@ const Outbound = (props) => {
           color="primary"
            outline  >
           <PlayCircle size={15} />
-          Inbound
+         Active
         </Button>
 
       </div>

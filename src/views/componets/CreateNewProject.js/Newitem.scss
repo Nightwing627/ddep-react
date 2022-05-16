@@ -25,7 +25,13 @@
  
 }
 .inbound{
-    // .collapse-title{
-    //     color: blue !important;
-    // }
+    .collapse-title{
+        color: blue;
+    }
+}
+[dir] [class*='collapse-'] .card:not(:last-of-type) {
+    border-bottom: none;
+}
+.inbound-comp.card {
+    box-shadow: 0 4px 24px 0 #0000001a
 }

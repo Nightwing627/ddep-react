@@ -26,7 +26,7 @@ const NewProject = (props) => {
       
       <Container>
       <h5 className='font-item item-wrap'>Create New Item</h5>
-        <Row>
+        <Row className="mb-2">
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
              Exchange Name
@@ -75,11 +75,11 @@ const NewProject = (props) => {
         </Row>
       
         
-        <h5 className='font-item alerts'>Alerts</h5>
+        {/* <h5 className='font-item alerts'>Alerts</h5> */}
         {/* <FormGroup className=''>
           <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
         </FormGroup> */}
-        <Form>
+        {/* <Form>
           <CustomInput
             inline
             type="checkbox"
@@ -112,8 +112,8 @@ const NewProject = (props) => {
             color="primary"
           />
           
-        </Form>
-        <br />
+        </Form> */}
+        {/* <br />
         <Row>
           <Col xs="1" className="project-text item-wrap">
             <Label className="form-text font-item">
@@ -133,8 +133,8 @@ const NewProject = (props) => {
               placeholder="xxxx@xxx.com"
             />
             {/* {validation.pname && <p>{validation.pname}</p>} */}
-          </Col>
-        </Row>
+          {/* </Col>
+        </Row> */} 
         
         <Button className="btn-relief " color="primary" >
             Save

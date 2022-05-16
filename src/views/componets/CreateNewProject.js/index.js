@@ -38,9 +38,7 @@ const Index = () => {
       </Breadcrumbs>
     </Stack>
     <Card >
-      
-        <Steps/>
-      
+    <Steps/>
     </Card >
     
     </div>

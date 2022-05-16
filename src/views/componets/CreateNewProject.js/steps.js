@@ -6,7 +6,8 @@ import Stepper from "@components/wizard"
 import NewProject from "./stepsUI/NewProject"
 import Inbound from './stepsUI/Inbound/Inbound'
 import Outbound from './stepsUI/Outbound'
-
+import Schedule from "./stepsUI/Schedule"
+import Mapping from './stepsUI/Mapping'
 export default function Steps() { 
   const [stepper, setStepper] = useState(null)
   const myRef = React.useRef(null)
@@ -38,16 +39,15 @@ export default function Steps() {
       title: "Mapping",
       subtitle: "",
       icon: 4,
-      content: "Create New Item"
-      // content: <Outbound stepper={stepper} />
+      // content: "Create New Item"
+      content: <Mapping stepper={stepper} />
     },
     {
       id: "Schedule",
       title: "Schedule",
       subtitle: "",
       icon: 5,
-      content: "Create New Item"
-      // content: <Outbound stepper={stepper} />
+      content: <Schedule stepper={stepper} />
     }
   ]
  

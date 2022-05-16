@@ -38,15 +38,19 @@ const Inbound = (props) => {
           color="primary"
            outline  >
           <PlayCircle size={15} />
-          Inbound
+          Active
         </Button>
 
       </div>
+      <Card className="inbound-comp">
+       
        <AppCollapse
           data={collapseItems}
           accordion
           active={0}
         /> 
+       
+        </Card>
     <div className="d-flex justify-content-between prev-next-btn-block">
         <Button color="primary" onClick={() => props.stepper.previous()}>
          Previous
