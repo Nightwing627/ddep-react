@@ -42,14 +42,13 @@ const Sftpinfo = () => {
                     variant="outlined"
                     />
                   </Col>
-                  
               </Row>
               <Row className="mb-4">
                   <Col xs="2">
                     <Label className="form-text font-item input-wrap mt-1">
-                    Port
-                        <span className="valid_star">*</span>
-                     </Label>
+                        Port
+                      <span className="valid_star">*</span>
+                    </Label>
                   </Col>
                   <Col xs="9">
                   <Input
@@ -61,7 +60,6 @@ const Sftpinfo = () => {
                     variant="outlined"
                     />
                   </Col>
-                  
               </Row>
               <Row className="mb-4">
                   <Col xs="2">

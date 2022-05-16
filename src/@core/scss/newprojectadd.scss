@@ -31,10 +31,6 @@
     
 }
 .select-box{
-    // .select-box-option:active{
-    //     background-color:  #8DC454 !important ;
-    //     color: #fff;
-    // }
     .select-box-option:hover{
         background-color:  #8DC454 !important ;
     }
@@ -44,10 +40,9 @@
 }
 
 .btn-relief {
-    background-color: #8DC454 !important;
     // box-shadow:  0 -3px 0 0 rgb(34 41 47 / 20%)";
     border-color: #8DC454 !important;
-    color: #fff;
+ 
     transition: all 0.2s ease;
 }
 .btn-relief:active {
@@ -68,4 +63,4 @@
     background-color: #fff;
     border-color: #8DC454 ;
     color: #5e5873;
-    }
+}
