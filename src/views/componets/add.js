@@ -7,8 +7,7 @@ import "../../@core/scss/newprojectadd.scss"
 import { Button, Card, CardBody, Input, Label, FormGroup } from 'reactstrap'
 import { FormHelperText, Grid, Box, Divider, Typography } from "@material-ui/core"
 import Select from "react-select"
-
-
+import HorizontalNonLinearStepper from "./UI/HorizontalNonLinearStepper"
 const theme = theme => ({
   ...theme,
   colors: {
