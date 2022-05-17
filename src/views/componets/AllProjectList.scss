@@ -1,17 +1,20 @@
+@import '../../@core/scss/base/bootstrap-extended/_variables';
 .data-Grid{
     font-size: 15px;
-    border-radius: 0.428rem;
+    font-family: $font-family-monospace;
+    border-radius: 1.428rem;
 }
 .item-Name{
     
     font-weight: bold;
 }
-.main-class{
+.main-class {
     border-radius: 0.428rem;
+    box-shadow: 0 4px 24px 0 #ccc;
 }
 .btn-Edit{
     border: 1px solid #8dc454;
-    padding: 0.2rem 1.5rem;
+    padding: 0.4rem 0.4rem;
     color: #8dc454;
 }
 .btn-Create-New-Project{
@@ -20,6 +23,44 @@
     color: white;
     border: 0;
 }
+.btn-Create-New-Project:focus {
+    outline: 0 !important;
+}
 .group-Panel{
     color: blue;
 }
+.scrollable.dx-visibility-change-handler.dx-scrollable-both.dx-scrollable-simulated {
+     border: 0; 
+    border-radius: 0.428rem;
+}
+.dx-datagrid-rowsview.dx-datagrid-nowrap.dx-scrollable.dx-visibility-change-handler.dx-scrollable-both.dx-scrollable-simulated {
+    border-radius: 0.428rem;
+}
+.dx-datagrid-rowsview.dx-datagrid-nowrap.dx-last-row-border {
+    border: 0;
+    border-radius: 0.428rem;
+}
+.btn-Create-New-Project{
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.col-field{
+    margin: 10px;
+    align-items: center;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row > td, .dx-datagrid-content .dx-datagrid-table .dx-row > tr > td {
+    vertical-align: middle;
+}
+
+[dir=ltr] .dx-datagrid-group-closed::before, [dir=ltr] .dx-datagrid-group-opened::before {
+    right: 0;
+    left: 0;
+    top: 20px;
+}
+.dx-datagrid.dx-gridbase-container.dx-datagrid-borders {
+    border-radius: 0.428rem;
+
+}
+// tr.dx-row.dx-header-row {
+//     display: block;
+// }

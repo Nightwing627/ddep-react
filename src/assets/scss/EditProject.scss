@@ -1,0 +1,18 @@
+@import '../../@core/scss/base/bootstrap-extended/_variables';
+.txtProjectDescription {
+    min-height: 200px;
+}
+.bs-stepper .bs-stepper-header .step.active .step-trigger .bs-stepper-label .bs-stepper-title {
+    color: #8dc454;
+    font-size: 1rem;
+    font-family: $font-family-monospace;
+    
+}
+.bs-stepper .bs-stepper-header .step.active .step-trigger .bs-stepper-box {
+    background-color: #8dc454;
+}
+.select .option:focus {
+    background: linear-gradient(#ff0000, #ff0000);
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+  }

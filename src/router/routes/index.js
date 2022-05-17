@@ -26,6 +26,14 @@ const Routes = [
     component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))
   },
   {
+    path: '/Edit',
+    component: lazy(() => import('../../views/componets/wizard/EditStepper'))
+  },
+  {
+    path: '/mapping',
+    component: lazy(() => import('../../views/componets/Mapping/index'))
+  },
+  {
     path: '/login',
     component: lazy(() => import('../../views/Login')),
     layout: 'BlankLayout'
