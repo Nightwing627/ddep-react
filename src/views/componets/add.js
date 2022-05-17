@@ -5,7 +5,6 @@ import Stack from '@mui/material/Stack'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import "../../@core/scss/newprojectadd.scss"
 import { Button, Card, CardBody, Input, Label, FormGroup } from 'reactstrap'
-import  HorizontalNonLinearStepper from "./UI/HorizontalNonLinearStepper"
 import { FormHelperText, Grid, Box, Divider, Typography } from "@material-ui/core"
 import Select from "react-select"
 
@@ -16,7 +15,6 @@ const theme = theme => ({
     ...theme.colors,
     primary25: "#bcdb9c",
     primary: "#8DC454"
-
   }
 })
 
@@ -164,36 +162,16 @@ const Add = () => {
                 <FormGroup> 
     <Label for="exampleSelect" className="form-text">
     Group
-    </Label>
-    {/* <Input
-      id="exampleSelect"
-      name="Select"
-      type="select"
-    className="select-box"
-    >
-      <option className='select-box-option'>
-       --Select--
-      </option>
-      <option className='select-box-option'>
-        BGRS
-      </option >
-      <option className='select-box-option'>
-      I-RMS
-      </option >
-      <option className='select-box-option'>
-         Global
-      </option>
-    </Input> */}
+    </Label>    
     <Select  options={options}  theme={theme}  className="React"/>
   </FormGroup>
-            </Grid>
-            <Divider />
-                <Button className="btn-relief " onClick={() => handleSubmit()}>
+    </Grid>
+      <Divider />
+        <Button color="primary" className="btn-relief " onClick={() => handleSubmit()}>
                     Save
                 </Button>
             </div>
          </Box>
-
       </CardBody>
     </Card>
 

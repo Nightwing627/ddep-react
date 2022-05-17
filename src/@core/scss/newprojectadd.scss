@@ -1,4 +1,6 @@
 @import "../../@core/scss/base/bootstrap-extended/variables";
+
+
 .breadcrumb-Top{
     .css-63vwl1-MuiTypography-root-MuiBreadcrumbs-root {
         font-size: 16px ;
@@ -14,30 +16,11 @@
     .sonar-field-helper{
         margin-bottom: 5px;
     }
-    .form-text{
-        font-family: $font-family-monospace;
-        color: #5e5873;
-        font-size: 14px;
-       margin: 0;
-    }
-    .valid_star{
-        color: red;
-    }
+    
     .project-text{
         margin-bottom: 16px;
     }
-    .btn-relief {
-        background-color: #8DC454 !important;
-        // box-shadow:  0 -3px 0 0 rgb(34 41 47 / 20%)";
-        border-color: #8DC454 !important;
-        color: #fff;
-        transition: all 0.2s ease;
-    }
-    .btn-relief:active {
-        outline: none;
-        box-shadow: none;
-        transform: translateY(3px) !important;
-    }
+
     .MuiDivider-root {
        
          background-color: none; 
@@ -45,21 +28,39 @@
     .grp-text{
         padding-bottom: 5px;
     }
-    .form-control:focus {
-    background-color: #fff;
-    border-color: #8DC454 ;
-    color: #5e5873;
-    }
+    
 }
 .select-box{
-    // .select-box-option:active{
-    //     background-color:  #8DC454 !important ;
-    //     color: #fff;
-    // }
     .select-box-option:hover{
         background-color:  #8DC454 !important ;
     }
 }
 .input-feild{
     padding-top: 15px;
+}
+
+.btn-relief {
+    // box-shadow:  0 -3px 0 0 rgb(34 41 47 / 20%)";
+    border-color: #8DC454 !important;
+ 
+    transition: all 0.2s ease;
+}
+.btn-relief:active {
+    outline: none;
+    box-shadow: none;
+    transform: translateY(3px) !important;
+}
+.valid_star{
+    color: red;
+}
+.form-text{
+    font-family: $font-family-monospace;
+    color: #5e5873;
+    font-size: 14px;
+     margin: 0;
+}
+.form-control:focus {
+    background-color: #fff;
+    border-color: #8DC454 ;
+    color: #5e5873;
 }

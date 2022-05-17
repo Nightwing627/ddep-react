@@ -1,0 +1,37 @@
+
+.box-stepper{
+    .bs-stepper.wizard-modern .bs-stepper-header {
+        border-bottom: 1px solid #e3e3e3;
+    }
+    .font-item{
+     font-size: .875rem;;
+    }
+    .checkBox-font{
+        font-size: 1rem;
+    }
+    .item-wrap{
+        margin-bottom: 1rem;
+    }
+    .input-wrap{
+        margin-bottom: .286rem;
+    }
+    .alerts{
+        margin:1rem 0  .286rem;
+    }
+
+}
+.inbound_text{
+    font-size: .875rem;
+ 
+}
+.inbound{
+    .collapse-title{
+        color: blue;
+    }
+}
+[dir] [class*='collapse-'] .card:not(:last-of-type) {
+    border-bottom: none;
+}
+.inbound-comp.card {
+    box-shadow: 0 4px 24px 0 #0000001a
+}

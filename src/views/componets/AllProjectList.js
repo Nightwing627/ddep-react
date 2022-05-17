@@ -24,9 +24,10 @@ import { allProjectList, projectDescription } from './data.js'
 import { SelectChangeEvent, Select, MenuItem, InputLabel, FormControl} from '@mui/material'
 import {FormGroup, Input} from 'reactstrap'
 import { Activity, BookOpen, ChevronDown, Copy, Disc, Download, Edit, File, FilePlus, Plus, RefreshCw, Settings, Upload } from 'react-feather'
-import customItem from './CustomItem'
+import CustomItem from './CustomItem'
 import { Sync } from '@mui/icons-material'
-// import Index from "./CreateNewProject.js"
+import 'devextreme/integration/jquery'
+
 
 const pageSizes = [2, 10, 25, 50, 100]
 
@@ -45,24 +46,40 @@ class AllProjectList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          collapsed: false,
-          title:""
+// <<<<<<< HEAD
+//           collapsed: false,
+//           title:""
+//         }
+//         this.onContentReady = this.onContentReady.bind(this)
+//         this.handleopen = this.handleopen.bind(this)
+//       }
+    
+//       // const handleopen = () =>{
+
+//       // }
+//       onContentReady(e) {
+//         if (!this.state.collapsed) {
+//           e.component.expandRow(['EnviroCare'])
+//           this.setState({
+//             collapsed: true
+//           })
+//         }
+//       }
+// =======
+          collapsed: false
+        //  history: this.props
         }
         this.onContentReady = this.onContentReady.bind(this)
-        this.handleopen = this.handleopen.bind(this)
+        this.onRowPreparedFunction = this.onRowPreparedFunction.bind(this)
+        this.nextBtn = this.editBtn.bind(this)
       }
-    
-      // const handleopen = () =>{
+    onRowPreparedFunction (e) {
+      e.rowElement.css({ height: 70, alignItems: "center"})
+    }
+    editBtn = () => {
+      window.location.href = "/Edit"
+    }
 
-      // }
-      onContentReady(e) {
-        if (!this.state.collapsed) {
-          e.component.expandRow(['EnviroCare'])
-          this.setState({
-            collapsed: true
-          })
-        }
-      }
       
       handleopen() {
         // this.setState({title: "Hello World"})
@@ -80,7 +97,11 @@ class AllProjectList extends React.Component {
             <div className='clearfix '>
             <div className='float-right'>
               <div className='d-flex ' style={{columnGap: "1.5em", marginTop:"15px"}}>
-                <button className='btn-Create-New-Project' onClick={() => this.handleopen()} ><Plus size={15}/> Create New Project</button>
+        <button className='btn-Create-New-Project' onClick={() => this.handleopen()} ><Plus size={15}/> Create New Project</button>
+
+             
+                {/* <button className='btn-Create-New-Project' ><Plus size={15}/> Create New Project</button> */}
+
               </div>
               
             </div>
@@ -92,54 +113,54 @@ class AllProjectList extends React.Component {
             showColumnLines= {false}
             showRowLines= {true}
             showBorders={true}
-            height={600}
+            height="auto"
+            onRowPrepared={this.onRowPreparedFunction}
             remoteOperations={true}
             className="data-Grid"
+            location="center"
+            
+            
             >
                 <MasterDetail
                   enabled={true}
-                  component={customItem}
+                  component={CustomItem}
                 />
                 <FilterRow visible={false} />
                 <HeaderFilter visible={false} />
                 <SearchPanel visible={true} highlightCaseSensitive={true} />
                 <GroupPanel visible={true} className="group-Panel" />
                 <Scrolling mode="virtual" />
-                <Editing
-                  mode="row"
-                  allowAdding={true}
-                  allowDeleting={true}
-                  allowUpdating={true}
-                />
+                
                 <Grouping autoExpandAll={false} />
                 
                 <Column
-                  dataField="ITEM NAME"
+                  dataField="PROJECTNAME"
                   caption="PROJECT/ITEM NAME"
                   width="auto"
-                  
+                  cssClass="col-field"
+                  alignment="center"
                 />
                 <Column
-                  dataField="VERSION"
+                  
                   caption="VERSION"
                   
                   
                 />
                 <Column
-                  dataField="IN TYPE"
+                 
                   caption="IN TYPE"
                 
                 />
-                <Column dataField="IN/OUT FORMAT" caption="IN/OUT FORMAT"  />
-                <Column dataField="SCHEDULE" caption="SCHEDULE"  />
-                <Column dataField="SYNC STATUS" caption="SYNC STATUS"  />
+                <Column  caption="IN/OUT FORMAT"  />
+                <Column caption="SCHEDULE"  />
+                <Column  caption="SYNC STATUS"  />
                 
-                <Column dataField="ACTIONNAME" caption="ACTION" type="buttons" width="auto" className="text-wrap" >
+                <Column dataField="" caption="ACTION" type="buttons" width="auto" className="text-wrap" alignment="center" >
                 
-                <Button><span className='btn-Edit'> <Disc size={15}/></span></Button>
-                <Button><span className='btn-Edit'>  <FilePlus size={15}/></span></Button>
-                <Button><span className='btn-Edit'>  <RefreshCw size={15}/></span></Button>
-                <Button><span className='btn-Edit'>  <Edit size={15}/></span></Button>
+                <Button className="btn-Action"><span className='btn-Edit'> <Disc size={25}/></span></Button>
+                <Button  className="btn-Action"><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
+                <Button  className="btn-Action"><span className='btn-Edit'>  <RefreshCw size={25}/></span></Button>
+                <Button onClick={this.editBtn} className="btn-Action"><span className='btn-Edit'>  <Edit size={25}/></span></Button>
           
                 </Column>
                 <Toolbar>
