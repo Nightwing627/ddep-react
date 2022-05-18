@@ -15,7 +15,8 @@ import {
   Table
 } from "reactstrap"
 import '../../../../../assets/scss/Mapp.scss'
-
+import  TreeMapper from "../../typescript/map.tsx"
+// import  { TreeNode } from "../../typescript/map.tsx"
 const Mappings = () => {
     const [downloadShow, setDownloadShow] = useState(false)
     const [downloadShowOutBound, setDownloadShowOutBound] = useState(false)
@@ -131,7 +132,8 @@ const Mappings = () => {
                 </Row>
               </Col>
               <Col sm="8">
-                <div className="" style={{border: "1px solid black", height: "1000px" }}>
+                <div className="" style={{border: "1px solid black" }}>
+                <TreeMapper/>
                 </div>
               </Col>
               <Col sm="4">

@@ -197,6 +197,7 @@
 //               <Col sm="8">
 //                 <div className="" style={{border: "1px solid black", height: "1000px" }}>
 //                 {isPreviewShown && <Project/>}
+                    
 //                 </div>
 //               </Col>
 //               <Col sm="4">
