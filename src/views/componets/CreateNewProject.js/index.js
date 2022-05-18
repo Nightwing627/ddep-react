@@ -9,7 +9,7 @@ import "../../../@core/scss/newprojectadd.scss"
 import "./Newitem.scss"
 function handleClick(event) {
   event.preventDefault()
-  console.info('You clicked a breadcrumb.')
+  console.info('You clicked a breadcrumb.') 
 }
 const Index = () => {
   const breadcrumbs = [
@@ -26,6 +26,7 @@ const Index = () => {
     </Link>
    
   ]
+  
   return (
   <> 
     <div>
