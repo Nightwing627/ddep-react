@@ -35,3 +35,23 @@
 .inbound-comp.card {
     box-shadow: 0 4px 24px 0 #0000001a
 }
+.treebeard{
+    ul li > div {
+        padding: 0 !important;
+    }
+    .css-f91fgu {
+        background-color: #fff !important;
+        border-left: 1px dashed;
+    }
+    .css-79elbk {
+        position: relative;
+        margin-bottom: 10px; 
+    }
+    .header-contain {
+        &::before {
+            content: "-----";
+            color: #b5b5b5;
+            font-weight: 400;
+        }
+    }
+}
