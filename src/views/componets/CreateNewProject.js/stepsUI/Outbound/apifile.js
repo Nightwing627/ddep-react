@@ -79,14 +79,14 @@ class App extends React.Component {
             allowDeleting={true}
             selectTextOnEditStart={this.state.selectTextOnEditStart}
             startEditAction={this.state.startEditAction} />
-            <Column dataField="options1" caption="options1" width={125}>
+            <Column dataField="options1" caption="Logical Operation" width={125}>
             <Lookup dataSource={options1} valueExpr="ID" displayExpr="Name" />
           </Column>
-          <Column dataField="FirstName" />
-          <Column dataField="options2" caption="options2" width={125}>
+          <Column dataField="FirstName" caption="Original Value" width={125}/>
+          <Column dataField="options2" caption="Comparision Oprator" width={125}>
             <Lookup dataSource={options2} valueExpr="ID" displayExpr="Name" />
           </Column>
-          <Column dataField="LastName" />
+          <Column dataField="LastName" caption="Column Value" width={125}/>
         </DataGrid>
         
       </div>
@@ -127,9 +127,10 @@ const Apifile = () => {
                 </Button>
               </Col>    
            </Row> 
+           <div className='Animated_Modal'>
      <AnimatedModal
         show={showModal}
-        title="Example"
+        title="Rules To Control this API When trigger"
         onHide={() => setShowModal(false)}
         closeButton={<strong>X</strong>}
         style={{
@@ -147,6 +148,7 @@ const Apifile = () => {
          < App />
         </div>
       </AnimatedModal>
+      </div>
     </Container>
   
     </div>
