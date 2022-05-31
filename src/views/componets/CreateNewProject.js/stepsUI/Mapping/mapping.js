@@ -17,6 +17,31 @@ import {
 import '../../../../../assets/scss/Mapp.scss'
 import  TreeMapper from "../../typescript/map.tsx"
 // import  { TreeNode } from "../../typescript/map.tsx"
+
+const InboundJson = {
+    BGRSFileNumber:"8392165",
+    ClientParentCompany:"10362",
+    BGRSConsultantFirstName:"Jane",
+    BGRSConsultantPhone:"987-654-3210",
+    bgrsconsultantemail:"jane.doe@bgrs.com",
+    PendingStartDate:"2020-07-22T00:00:00",
+    PendingEndDate:"2020-07-22T00:00:00",
+    Assignee:{
+  FirstName:"Peter",
+  LastName:"Bell",
+  MobilePhone:"",
+  OfficePhone:"2134569877",
+  HomeDestinationPhone:null,
+  OfficeDestinationPhone:null,
+  email:"psmith@gmail.com",
+  MaritalStatus:"Married",
+  Citizenship:"American",
+  JobTitle:"VP",
+  IsSOX:true
+    }
+  }
+
+
 const Mappings = () => {
     const [downloadShow, setDownloadShow] = useState(false)
     const [downloadShowOutBound, setDownloadShowOutBound] = useState(false)
@@ -47,8 +72,8 @@ const Mappings = () => {
                          <Label for="inBound">InBound Format </Label>
                          <Input
                             type="textarea"
-                            id="inBound"
-                            placeholder=" "
+                             id="inBound"
+                             defaultValue ={JSON.stringify(InboundJson)}
                             className="inBound-TextArea"
                         /> 
                     </FormGroup>

@@ -72,6 +72,7 @@
     "react-jsonschema-form": "^1.8.1",
     "react-konva": "^18.1.0",
     "react-leaflet": "2.6.1",
+    "react-md-file": "^2.0.0",
     "react-morphing-modal": "^0.2.2",
     "react-paginate": "7.0.0",
     "react-perfect-scrollbar": "1.5.5",

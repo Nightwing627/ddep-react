@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import * as go from "gojs"
 import { ReactDiagram } from "gojs-react"
 import "./index.scss"
-
+import GraphLinksModel from './go.json'
 class TreeNode extends go.Node {
     constructor() {
         super()
