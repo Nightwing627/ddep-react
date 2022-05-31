@@ -1,7 +1,64 @@
-import React from 'react'
-import { Container, Row, Col, Input, Label, Button } from "reactstrap"
+import React, { useState } from 'react'
+import { Container, Row, Col, Input, Label, Button, ModalFooter, Modal, ModalBody, ModalHeader } from "reactstrap"
 import {  File, Plus, Settings, Upload } from 'react-feather'
+import {Treebeard,  decorators} from 'react-treebeard'
+
+const dummyData = [
+  { 
+  name: 'Document'
+  // toggled: true
+},
+{ 
+  name: 'Img'
+  // toggled: true
+  
+},
+{ 
+  name: 'PDF'
+  // toggled: true
+  
+}
+]
+
 const Sftpinfo = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  
+  const [cursor, setCursor] = useState(false)
+  const [data, setData] = useState(dummyData)
+
+  // const onToggle = (node, toggled) => {
+  //     if (cursor) {
+  //         cursor.active = false
+  //     }
+  //     node.active = true
+  //     if (node.children) {
+  //         node.toggled = toggled
+  //     }
+  //     setCursor(node)
+  //     setData(Object.assign({}, data))
+  // }
+  
+  const handleopen = () => {
+    setIsOpenModal(true)
+   console.log("Hello")
+  }
+  const handleClose = () => {
+    setIsOpenModal(false)
+  }
+  const Header = (props) => {
+      return (
+        <span className='header-contain'>
+          <span className="align-self-center">
+            <File style={{height:"16px"}}/>
+            {props.node.name}
+          </span>
+         
+        </span>
+      )
+    }  
+
+    
+  decorators.Header = Header
   return (
     <>
       <div>
@@ -140,13 +197,13 @@ const Sftpinfo = () => {
                   <Button
                     color="primary"
                     outline
+                    onClick={() => handleopen()}
                 >
-                         <File size={15} />
+                    <File size={15} />
                     Select Folder
                 </Button>
                   </Col>
-                  
-              </Row>
+              </Row> 
               <Row>
                   <Col xs="12">
                       <Button>
@@ -155,7 +212,20 @@ const Sftpinfo = () => {
                   </Col>
               </Row>
           </Container>
-     </div>    
+     </div>   
+     <Modal isOpen={isOpenModal}> 
+    <ModalHeader 
+     toggle={() => handleClose()}
+    >
+     Folder
+    </ModalHeader>
+    <ModalBody className="treebeard">
+     <Treebeard data={data} 
+    //  onToggle={onToggle}
+     />
+    </ModalBody>
+    
+   </Modal> 
     </>
   )
 }
