@@ -17,6 +17,9 @@ import { Check, Star } from "react-feather"
 import "../Newitem.scss"
 
 const NewProject = (props) => {
+  const urls = window.location.href
+  const [has, paramss] = urls?.split("newitem")[1]?.split("?")
+  const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
  const saveAndNext = () => {
       props.stepper.next()
   }
@@ -25,7 +28,7 @@ const NewProject = (props) => {
     <div>
       
       <Container>
-      <h5 className='font-item item-wrap'>Create New Item</h5>
+      <h5 className='font-item item-wrap'>{paramsObj?.orderCode ?  "Edit item" : "Create New item"}</h5>
         <Row className="mb-2">
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">

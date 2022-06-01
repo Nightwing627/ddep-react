@@ -15,7 +15,7 @@ class CustomItem extends React.Component {
     e.rowElement.css({ height: 70, alignItems: "center"})
   }
   editBtn = () => {
-    window.location.href = "/Edit"
+    window.location.href = "/newitem?orderCode=1"
   }
   render() {
    

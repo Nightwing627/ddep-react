@@ -41,7 +41,38 @@ const InboundJson = {
     }
   }
 
+//   const OutboundJson =  {
+//     InitiationBy:{
+//         OrderCode:"dxfgfg",
+//         "InitiationBy":"",
+//         "Email":"",
+//         "PhoneCountryIdd":"",
+//         "PhoneCityIdd":"",
+//         "Phone":"",
+//         "MobileCountryIdd":"",
+//         "MobileCityIdd":"",
+//         "Mobile":"",
+//         "FaxCountryIdd":"",
+//         "FaxCityIdd":"",
+//         "Fax":"",
+//         "CompanyReference":"",
+//         "SuppressWFEmailToHRFg":""
+//     },
+//     "InitiationTransferee":{
+//         "FirstName":"",
+//         "LastName":"",
+    //     "Email":"",
+    //     "OriginMobilePhone":"",
+    //     "OriginPhone":"",
+    //     "DestinationPhone":"",
+    //     "MaritalStatus":"",
+    //     "AssignmentDateFrom":"",
+    //     "AssignmentDateTo":"",  
+    //     "Nationality":"",
+    //     "DestinationNewPosition":"",
+    // },
 
+// }
 const Mappings = () => {
     const [downloadShow, setDownloadShow] = useState(false)
     const [downloadShowOutBound, setDownloadShowOutBound] = useState(false)
@@ -120,6 +151,7 @@ const Mappings = () => {
                             id="outBound"
                             placeholder=" "
                             className="inBound-TextArea"
+                            // defaultValue ={JSON.stringify(OutboundJson)}
                         />
                     </FormGroup>
                     </Col>
