@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 
 import ODataStore from 'devextreme/data/odata/store'
-
 import {
   Column,
   DataGrid,
@@ -27,7 +26,8 @@ import { Activity, BookOpen, ChevronDown, Copy, Disc, Download, Edit, File, File
 import CustomItem from './CustomItem'
 import { Sync } from '@mui/icons-material'
 import 'devextreme/integration/jquery'
-
+import axios from "../../utility/axios"
+// import baseURL from "../../utility/axios"
 const pageSizes = [2, 10, 25, 50, 100]
 
 const dataSourceOptions = {
@@ -40,12 +40,12 @@ const dataSourceOptions = {
     }
   })
 }
-
 class AllProjectList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          collapsed: false
+          collapsed: false,
+          Allprojectdata:[]  
         //  history: this.props
         }
         this.onContentReady = this.onContentReady.bind(this)
@@ -62,7 +62,22 @@ class AllProjectList extends React.Component {
     }
     Handleadd = () => {
       window.location.href = "/newitem"
-    } 
+    }       
+    async componentDidMount() {
+      await axios
+          .get(`/project/fulllist`)
+          .then((res) => {
+            if (res.status === 200) {
+              const sortedData = res?.data?.data
+              console.log("Allprojectdata", sortedData)
+              this.setState({ Allprojectdata: sortedData })
+            }
+          })
+          .catch((err) => {
+            console.log("err", err)
+            // , this.setState({ isLoading: false });
+          })
+        }
     handleopen() {
       //         // this.setState({title: "Hello World"})
       //         console.log('Hello')
@@ -71,9 +86,10 @@ class AllProjectList extends React.Component {
               // this.props.history.push("/newitem")
       //         // < Index/>
             }
-      
+         
       render() {
-      
+      console.log("Allprojectdata", this.state.Allprojectdata)
+      const { Allprojectdata } = this.state
         return (
           
           <Fragment>
@@ -88,7 +104,8 @@ class AllProjectList extends React.Component {
           </div>
           <hr></hr>
           <DataGrid
-            dataSource={allProjectList}
+            // dataSource={allProjectList}
+            dataSource={Allprojectdata}
             showColumnLines= {false}
             showRowLines= {true}
             showBorders={true}
@@ -107,12 +124,10 @@ class AllProjectList extends React.Component {
                 <SearchPanel visible={true} highlightCaseSensitive={true} />
                 <GroupPanel visible={true} className="group-Panel" />
                 <Scrolling mode="virtual" />
-                
                 <Grouping autoExpandAll={false} />
-                
                 <Column
-                  dataField="PROJECTNAME"
-                  caption="PROJECT/ITEM NAME"
+                  dataField="projectName"
+                  caption="projectName"
                   width="auto"
                   cssClass="col-field"
                   alignment="center"
@@ -140,14 +155,12 @@ class AllProjectList extends React.Component {
                 locateInMenu="auto"
                 name="searchPanel">
                 </Item>
-          
             </Toolbar>
                 <Paging
                         defaultPageSize={1}
                         defaultPageIndex={0} />
           </DataGrid>
             </div>
-            
           </Fragment>
          
         )

@@ -35,6 +35,7 @@ const options2 = [
   { ID: 'In', Name: 'In' }
 
 ]
+
 const startEditActions = ['click', 'dblClick']
 
 class App extends React.Component {
