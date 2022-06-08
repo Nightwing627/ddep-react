@@ -63,20 +63,39 @@ class AllProjectList extends React.Component {
     Handleadd = () => {
       window.location.href = "/newitem"
     }       
-    async componentDidMount() {
-      await axios
+     componentDidMount() {
+       axios
           .get(`/project/fulllist`)
           .then((res) => {
             if (res.status === 200) {
+              /*eslint no-var: "error"*/
+              /*eslint-env es6*/
               const sortedData = res?.data?.data
-              console.log("Allprojectdata", sortedData)
-              this.setState({ Allprojectdata: sortedData })
+              console.log("res", res)
+              this.setState({ Allprojectdata: sortedData })  
+              /*eslint no-var: "error"*/ 
+              /*eslint-env es6*/
+              sortedData.forEach(obj => {
+               /*eslint-env es6*/
+                let formattedArray = []
+                const subArray = []
+                const subArr = obj?.items
+               
+                subArr.map((subitem, j) => {
+                  const object = {
+                    ...subitem,
+                    pj_ID: obj?.pj_ID
+                  }
+                  return  (
+                    subArray[j] = object
+                  )
+                })
+                formattedArray = formattedArray.concat(subArray)
+              })
+              localStorage.setItem('projectFullData', formattedArray)
             }
           })
-          .catch((err) => {
-            console.log("err", err)
-            // , this.setState({ isLoading: false });
-          })
+          .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) })
         }
     handleopen() {
       //         // this.setState({title: "Hello World"})
@@ -90,8 +109,7 @@ class AllProjectList extends React.Component {
       render() {
       console.log("Allprojectdata", this.state.Allprojectdata)
       const { Allprojectdata } = this.state
-        return (
-          
+        return ( 
           <Fragment>
             <div className='bg-white main-class'>
             <div className='clearfix '>
@@ -100,66 +118,71 @@ class AllProjectList extends React.Component {
               <button className='btn-Create-New-Project' onClick={() => this.handleopen()} ><Plus size={15}/>Item Page</button>
               </div>
             </div>
-
           </div>
           <hr></hr>
-          <DataGrid
-            // dataSource={allProjectList}
-            dataSource={Allprojectdata}
-            showColumnLines= {false}
-            showRowLines= {true}
-            showBorders={true}
-            height="auto"
-            onRowPrepared={this.onRowPreparedFunction}
-            remoteOperations={true}
-            className="data-Grid"
-            location="center"
-            >
-                <MasterDetail
-                  enabled={true}
-                  component={CustomItem}
-                />
-                <FilterRow visible={false} />
-                <HeaderFilter visible={false} />
-                <SearchPanel visible={true} highlightCaseSensitive={true} />
-                <GroupPanel visible={true} className="group-Panel" />
-                <Scrolling mode="virtual" />
-                <Grouping autoExpandAll={false} />
-                <Column
-                  dataField="projectName"
-                  caption="projectName"
-                  width="auto"
-                  cssClass="col-field"
-                  alignment="center"
-                />
-                <Column
-                  caption="VERSION"
-                />
-                <Column
-                  caption="IN TYPE"
-                />
-                <Column  caption="IN/OUT FORMAT"  />
-                <Column caption="SCHEDULE"  />
-                <Column  caption="SYNC STATUS"  />
+          {
+            Allprojectdata && Allprojectdata.map((item, index) => {
+              return (
+                <DataGrid
+                  // dataSource={allProjectList}
+                  dataSource={Allprojectdata}
+                  showColumnLines= {false}
+                  showRowLines= {true}
+                  showBorders={true}
+                  height="auto" 
+                  onRowPrepared={this.onRowPreparedFunction}
+                  remoteOperations={true}
+                  className="data-Grid"
+                  location="center"
+                  >
+                    {console.log('item', item)}
+                      <MasterDetail
+                        enabled={true}
+                        component={CustomItem}
+                      />
+                      <FilterRow visible={false} />
+                      <HeaderFilter visible={false} />
+                      <SearchPanel visible={true} highlightCaseSensitive={true} />
+                      <GroupPanel visible={true} className="group-Panel" />
+                      <Scrolling mode="virtual" />
+                      <Grouping autoExpandAll={false} />
+                      <Column
+                        dataField="projectName"
+                        caption="PROJECT/ITEM NAME"
+                        width="auto"
+                        cssClass="col-field"
+                        alignment="center"
+                      />
+                      <Column
+                        caption="VERSION"
+                      />
+                      <Column
+                        caption="IN TYPE"
+                      />
+                      <Column  caption="IN/OUT FORMAT"  />
+                      <Column caption="SCHEDULE"  />
+                      <Column  caption="SYNC STATUS"  />
+                      <Column dataField="" caption="ACTION" type="buttons" width="auto" className="text-wrap" alignment="center" >
+                      
+                      <Button className="btn-Action"><span className='btn-Edit'> <Disc size={25}/></span></Button>
+                      <Button  className="btn-Action" onClick={this.Handleadd}><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
+                      <Button  className="btn-Action"><span className='btn-Edit'>  <RefreshCw size={25}/></span></Button>
+                      <Button onClick={this.editBtn} className="btn-Action"><span className='btn-Edit'>  <Edit size={25}/></span></Button> 
                 
-                <Column dataField="" caption="ACTION" type="buttons" width="auto" className="text-wrap" alignment="center" >
-                
-                <Button className="btn-Action"><span className='btn-Edit'> <Disc size={25}/></span></Button>
-                <Button  className="btn-Action" onClick={this.Handleadd}><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
-                <Button  className="btn-Action"><span className='btn-Edit'>  <RefreshCw size={25}/></span></Button>
-                <Button onClick={this.editBtn} className="btn-Action"><span className='btn-Edit'>  <Edit size={25}/></span></Button> 
-          
-                </Column>
-                <Toolbar>
-                <Item location="after"
-                locateInMenu="auto"
-                name="searchPanel">
-                </Item>
-            </Toolbar>
-                <Paging
-                        defaultPageSize={1}
-                        defaultPageIndex={0} />
-          </DataGrid>
+                      </Column>
+                      <Toolbar>
+                      <Item location="after"
+                      locateInMenu="auto"
+                      name="searchPanel">
+                      </Item>
+                  </Toolbar>
+                      <Paging
+                              defaultPageSize={1}
+                              defaultPageIndex={0} />
+                </DataGrid>
+              ) 
+            })
+          }
             </div>
           </Fragment>
          

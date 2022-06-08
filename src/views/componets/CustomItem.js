@@ -18,21 +18,22 @@ class CustomItem extends React.Component {
     window.location.href = "/newitem?orderCode=1"
   }
   render() {
-   
+   console.log('this.props.subArray', this.props.subArray)
     return (
 
       <DataGrid
-        dataSource={this.projectDescription}
+        // dataSource={this.projectDescription}
+        dataSource={this.props.subArray}
         showBorders={false}
         showRowLines={true}
         showColumnLines={false}
-        
        className='child-Data-Grid'
        onRowPrepared={this.onRowPreparedFunction}
       >
 
                 <Column
-                  dataField="ITEM NAME"
+                  // dataField="ITEM NAME"
+                  dataField="item_ID"
                   caption="PROJECT/ITEM NAME"
                   width="auto"
                   cssClass="col-field"
