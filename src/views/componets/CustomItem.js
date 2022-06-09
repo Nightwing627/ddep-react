@@ -4,11 +4,24 @@ import { allProjectList, projectDescription, companies } from './data.js'
 import '../componets/CustomItem.scss'
 import CustomTitle from './CustomTitle.js'
 import {  BookOpen, Copy, Disc, Edit, FilePlus, RefreshCw } from 'react-feather'
+import DataSource from 'devextreme/data/data_source'
+import ArrayStore from 'devextreme/data/array_store'
+
+const childArray = localStorage.getItem('projectFullData')
+function getTasks(key) {
+  return new DataSource({
+    store: new ArrayStore({
+      data:  JSON.parse(childArray),
+      key: 'ID'
+    }),
+    filter: ['id', '=', key]
+  })
+}
 
 class CustomItem extends React.Component {
   constructor(props) {
     super(props)
-    this.projectDescription = allProjectList
+    this.projectDescription = getTasks(this.props.data.key)
     this.editBtn = this.editBtn.bind(this)
   }
   onRowPreparedFunction (e) {
@@ -18,22 +31,21 @@ class CustomItem extends React.Component {
     window.location.href = "/newitem?orderCode=1"
   }
   render() {
-   console.log('this.props.subArray', this.props.subArray)
+    
     return (
 
       <DataGrid
-        // dataSource={this.projectDescription}
-        dataSource={this.props.subArray}
+        dataSource={this.projectDescription}
+        // dataSource={JSON.parse(childArray)}
         showBorders={false}
         showRowLines={true}
         showColumnLines={false}
        className='child-Data-Grid'
        onRowPrepared={this.onRowPreparedFunction}
       >
-
                 <Column
                   // dataField="ITEM NAME"
-                  dataField="item_ID"
+                  dataField="itemName"
                   caption="PROJECT/ITEM NAME"
                   width="auto"
                   cssClass="col-field"
@@ -43,16 +55,16 @@ class CustomItem extends React.Component {
                 />
                
                 <Column
-                  dataField="VERSION"
+                  dataField="version"
                  
                   
                 />
                 <Column
-                  dataField="IN TYPE"
+                  dataField="inboundType"
                 
                 />
-                <Column dataField="IN/OUT FORMAT"   />
-                <Column dataField="SCHEDULE"   />
+                <Column dataField="inboundFormat"   />
+                <Column dataField="scheduleDescr"   />
                 <Column dataField="SYNC STATUS"   />
                 
                 <Column dataField="ACTIONNAME"  type="buttons" width="auto" className="text-wrap" alignment="center" >

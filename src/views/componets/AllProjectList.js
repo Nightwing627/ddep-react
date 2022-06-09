@@ -67,24 +67,36 @@ class AllProjectList extends React.Component {
        axios
           .get(`/project/fulllist`)
           .then((res) => {
-            if (res.status === 200) {
+            if (res.status === 200) { 
               /*eslint no-var: "error"*/
               /*eslint-env es6*/
               const sortedData = res?.data?.data
+              const redesignArray = []
+              sortedData?.map((item, index) => {
+                const obj = {
+                  ...item,
+                  ID: item?.pj_ID
+                }
+                return (
+                  redesignArray[index] = obj
+                )
+              })  
               console.log("res", res)
-              this.setState({ Allprojectdata: sortedData })  
+              this.setState({ Allprojectdata: redesignArray })  
               /*eslint no-var: "error"*/ 
               /*eslint-env es6*/
+              let formattedArray = []
               sortedData.forEach(obj => {
                /*eslint-env es6*/
-                let formattedArray = []
+               
                 const subArray = []
                 const subArr = obj?.items
                
                 subArr.map((subitem, j) => {
                   const object = {
                     ...subitem,
-                    pj_ID: obj?.pj_ID
+                    id: obj?.pj_ID,
+                    ID: j
                   }
                   return  (
                     subArray[j] = object
@@ -92,7 +104,9 @@ class AllProjectList extends React.Component {
                 })
                 formattedArray = formattedArray.concat(subArray)
               })
-              localStorage.setItem('projectFullData', formattedArray)
+              const finalArray = JSON.stringify(formattedArray)
+              console.log('formattedArray', formattedArray)
+              localStorage.setItem('projectFullData', finalArray)
             }
           })
           .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) })
@@ -126,6 +140,7 @@ class AllProjectList extends React.Component {
                 <DataGrid
                   // dataSource={allProjectList}
                   dataSource={Allprojectdata}
+                  keyExpr="ID"
                   showColumnLines= {false}
                   showRowLines= {true}
                   showBorders={true}
