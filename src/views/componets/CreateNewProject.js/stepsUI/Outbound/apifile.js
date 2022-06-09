@@ -35,6 +35,7 @@ const options2 = [
   { ID: 'In', Name: 'In' }
 
 ]
+
 const startEditActions = ['click', 'dblClick']
 
 class App extends React.Component {
@@ -79,14 +80,14 @@ class App extends React.Component {
             allowDeleting={true}
             selectTextOnEditStart={this.state.selectTextOnEditStart}
             startEditAction={this.state.startEditAction} />
-            <Column dataField="options1" caption="Logical Operation" width={125}>
+            <Column dataField="options1" caption="Logical Operation" width={140}>
             <Lookup dataSource={options1} valueExpr="ID" displayExpr="Name" />
           </Column>
-          <Column dataField="FirstName" caption="Original Value" width={125}/>
-          <Column dataField="options2" caption="Comparision Oprator" width={125}>
+          <Column dataField="FirstName" caption="Original Value" width={140}/>
+          <Column dataField="options2" caption="Comparison operations" width={165}>
             <Lookup dataSource={options2} valueExpr="ID" displayExpr="Name" />
           </Column>
-          <Column dataField="LastName" caption="Column Value" width={125}/>
+          <Column dataField="LastName" caption="Column Value" width={140}/>
         </DataGrid>
         
       </div>

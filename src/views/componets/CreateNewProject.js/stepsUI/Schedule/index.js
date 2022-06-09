@@ -6,7 +6,7 @@ import Inboundformate from './Inboundformate'
 const collapseItems = [
     {
       id: 1,
-      title: "Inbound Format",
+      title: " Inbound Schedule ",
       content: <Inboundformate/>
       
     }

@@ -1,6 +1,6 @@
 export const projectList = [
     {
-    ID: 1,
+    pid: 1,
     COMPANYNAME: 'Trimco',
     PROJECTCODE: '1Nik',
     PROJECTNAME: '1Label-Nike',
@@ -9,7 +9,7 @@ export const projectList = [
     ACTION: ''
     
   }, {
-    ID: 2,
+    pid: 1,
     COMPANYNAME: 'Trimco',
     PROJECTCODE: 'ASOS',
     PROJECTNAME: '1Label-ASOS',
@@ -17,7 +17,7 @@ export const projectList = [
     LASTRUNDATE:'2021-7-22 15:44:35',
     ACTION: ''
   }, {
-    ID: 3,
+    pid: 2,
     COMPANYNAME: 'Trimco',
     PROJECTCODE: '1ERP',
     PROJECTNAME: '1Label-1ERP',
@@ -25,7 +25,7 @@ export const projectList = [
     LASTRUNDATE:'2021-7-22 15:44:35',
     ACTION: ''
   }, {
-    ID: 4,
+    pid: 2,
     COMPANYNAME: 'Trimco',
     PROJECTCODE: '1ERP_UAT',
     PROJECTNAME: '1Label-1ERP_UAT',
@@ -58,6 +58,7 @@ export const allProjectList = [
   'SYNC STATUS': '',
   'ACTION NAME': ''
 }, {
+  ID: 3,
   PROJECTNAME: 'i-RMS SilkRelo Data Exchange',
   'ITEM NAME': 'Regular get Exchange Rate from Bank',
   VERSION: '2.5',
@@ -87,6 +88,7 @@ export const allProjectList = [
 
 export const projectDescription = [
   {
+  pid: 1,
   ID: 1,
   PROJECTNAME: 'i-RMS SilkRelo Data Exchange',
   Address: '702 SW 8th Street',
@@ -97,6 +99,7 @@ export const projectDescription = [
   Fax: '(800) 555-2171',
   Website: 'http://www.nowebsitesupermart.com'
 }, {
+  pid: 1,
   ID: 2,
   PROJECTNAME: 'Electronics Depot',
   Address: '2455 Paces Ferry Road NW',
@@ -107,6 +110,7 @@ export const projectDescription = [
   Fax: '(800) 595-3231',
   Website: 'http://www.nowebsitedepot.com'
 }, {
+  pid: 2,
   ID: 3,
   PROJECTNAME: 'K&S Music',
   Address: '1000 Nicllet Mall',
@@ -117,6 +121,7 @@ export const projectDescription = [
   Fax: '(612) 304-6074',
   Website: 'http://www.nowebsitemusic.com'
 }, {
+  pid: 3,
   ID: 4,
   PROJECTNAME: "Tom's Club",
   Address: '999 Lake Drive',

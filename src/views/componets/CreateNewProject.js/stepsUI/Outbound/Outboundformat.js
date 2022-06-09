@@ -8,7 +8,7 @@ const theme = theme => ({
       ...theme.colors,
       primary25: "#bcdb9c",
       primary: "#8DC454"
-  
+      
     }
   })
 

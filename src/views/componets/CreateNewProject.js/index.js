@@ -12,6 +12,10 @@ function handleClick(event) {
   console.info('You clicked a breadcrumb.') 
 }
 const Index = () => {
+  const urls = window.location.href
+  const [has, paramss] = urls?.split("newitem")[1]?.split("?")
+  const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
+  
   const breadcrumbs = [
     <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
       Item
@@ -22,7 +26,7 @@ const Index = () => {
       color="inherit"
       onClick={(e) => handleClick(e)}
     >
-     Add
+   {paramsObj?.orderCode ?  "Edit" : "Add"}
     </Link>
    
   ]

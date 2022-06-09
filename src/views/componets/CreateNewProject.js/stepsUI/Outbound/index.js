@@ -8,7 +8,7 @@ import Apifile from './apifile'
 const collapseItems = [
   {
     id: 1,
-    title: "Inbound Format",
+    title: "Outbound Format",
     content: <Outboundformat/>
   },
   {
@@ -27,7 +27,7 @@ const Outbound = (props) => {
     <>
     <div>
     <div className="d-flex justify-content-between inbound">
-        <span>  Outbound</span>
+        <span>Outbound</span>
       <Button
           color="primary"
            outline  >

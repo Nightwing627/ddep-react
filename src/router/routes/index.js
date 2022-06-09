@@ -27,7 +27,7 @@ const Routes = [
   },
   {
     path: '/Edit',
-    component: lazy(() => import('../../views/componets/wizard/EditStepper'))
+    component: lazy(() => import('../../views/componets/add'))
   },
   {
     path: '/mapping',

@@ -18,29 +18,43 @@ import { projectList } from './data.js'
 import { SelectChangeEvent, Select, MenuItem, InputLabel, FormControl} from '@mui/material'
 import {FormGroup, Input} from 'reactstrap'
 import { Activity, BookOpen, ChevronDown, Copy, Disc, Download, Edit, File, Plus, Settings, Upload } from 'react-feather'
-
+import axios from "../../utility/axios"
 const pageSizes = [2, 10, 25, 50, 100]
 
 class ProjectList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          collapsed: false
+          collapsed: false,
+          ProjectListdata: []
         }
         this.onContentReady = this.onContentReady.bind(this)
       }
     
-      
+      async componentDidMount() {
+        await axios
+            .get(`/project/fulllist`)
+            .then((res) => {
+              if (res.status === 200) {
+                const sortedData = res?.data?.data
+                console.log("ProjectListdata", sortedData)
+                this.setState({ ProjectListdata: sortedData })
+              }
+            })
+            .catch((err) => {
+              console.log("err", err)
+              // , this.setState({ isLoading: false });
+            })
+          }
       render() {
+        console.log("ProjectListdata", this.state.ProjectListdata)+
         function renderShow() {
           return <div className="toolbar-label " style={{margin:"10px"}}>Show</div>
         }
-
         function renderEntries() {
           return <div className="toolbar-label">entries</div>
         }
         return (
-          
           <Fragment>
             <div className='bg-white'>
             <div className='clearfix bg-white'>
@@ -56,21 +70,18 @@ class ProjectList extends React.Component {
                       label="Import"
                       // onChange={handleChange}
                     >
-                    
                       <MenuItem value={10}> 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <File size={15} />
                           <div style={{paddingLeft:"5px"}}>XML</div>
                         </div>
                       </MenuItem>
-                      
                       <MenuItem value={10}> 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <File size={15} />
                           <div style={{paddingLeft:"5px"}}>CVS</div>
                         </div>
                       </MenuItem>
-                      
                       <MenuItem value={10}> 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <File size={15} />
@@ -97,7 +108,6 @@ class ProjectList extends React.Component {
                           <div style={{paddingLeft:"5px"}}>XML</div>
                         </div>
                       </MenuItem>
-                      
                       <MenuItem value={10}> 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <File size={15} />
@@ -115,9 +125,7 @@ class ProjectList extends React.Component {
                 </FormControl>
                 <button className='btn-Create-New-Project' ><Plus size={15}/> Create New Project</button>
               </div>
-              
             </div>
-
           </div>
           <hr></hr>
             <DataGrid
@@ -162,7 +170,6 @@ class ProjectList extends React.Component {
             <Button><span className='btn-Edit'> <Edit size={15}/> Edit</span></Button>
             <Button><span className='btn-Edit'> <Copy size={15}/> Copy</span></Button>
             <Button><span className='btn-Edit'> <Disc size={15}/> Active</span></Button>
-       
             </Column>
             <Toolbar>
          

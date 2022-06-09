@@ -10,11 +10,15 @@ import Schedule from "./stepsUI/Schedule"
 import Mapping from './stepsUI/Mapping'
 export default function Steps() { 
   const [stepper, setStepper] = useState(null)
-  const myRef = React.useRef(null)
+  const myRef = React.useRef(null)  
+  const urls = window.location.href
+  const [has, paramss] = urls?.split("newitem")[1]?.split("?") 
+  const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
   const step = [
+  
     {
       id: "create-new-item",
-      title: "Create New Item",
+      title:  paramsObj?.orderCode ?  "Edit" : "Create New Item",
       subtitle: "",
       icon: 1,
        content: <NewProject stepper={stepper} />
