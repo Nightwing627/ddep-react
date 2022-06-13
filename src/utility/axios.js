@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-  baseURL: 'https://ddep-phase2.a4apple.cn:63303'
+  // baseURL: 'https://ddep-phase2.a4apple.cn:63303'
 })
 
 // if (localStorage.getItem("userData")) {
