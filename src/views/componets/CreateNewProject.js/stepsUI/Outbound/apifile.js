@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Button, Label, Input, Col, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import {Settings } from "react-feather"
 import Select from "react-select"
@@ -64,7 +64,6 @@ class App extends React.Component {
 
   render() {
     const { tableData } = this.state
-    console.log("tableData", tableData)
     return (
       <div id="data-grid-demo">
        <DataGrid
@@ -95,9 +94,15 @@ class App extends React.Component {
   }
 }
 
-const Apifile = () => {
+const Apifile = (props) => {
   
   const [showModal, setShowModal] = useState(false)
+  const [value, setValue] = useState({api_url : ""})
+
+  useEffect(() => {
+    setValue({ api_url: props?.apiData?.outbound_setting?.api_url})
+  }, [props])
+
 
   return (
     <>
@@ -113,9 +118,10 @@ const Apifile = () => {
             <Col xs="8">
              <Input
               fullWidth
-              name="pname"
+              name="api_url"
+              disabled={props?.disable}
               // helperText={errors.pname}
-              // value={input.pname}
+              value={value?.api_url}
               onChange={(e) => handleChange(e)}
               variant="outlined"
                />

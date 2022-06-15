@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col, Input, Label } from "reactstrap"
 
-const Inputddep = () => {
+const Inputddep = (props) => {
+  const [value, setValue] = useState({
+    api_ddep_api:props?.sftpData?.inbound_setting?.api_ddep_api
+  })
+  
+  
   return (
     <>
     <div>
@@ -23,11 +28,12 @@ const Inputddep = () => {
             <Col xs="6">
               <Input
               fullWidth
-              name="pname"
+              name="api_ddep_api"
               // helperText={errors.pname}
-              // value={input.pname}
+              value={value?.api_ddep_api}
               onChange={(e) => handleChange(e)}
               variant="outlined"
+              disabled={props?.disabled}
             />
             </Col>
         </Row>

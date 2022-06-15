@@ -76,13 +76,7 @@ class CustomItem extends React.Component {
           
                 </Column>
         </DataGrid>
-      // <div >
-      //   {this.projectDescription.map((itemDescription, index) => {
-      //     // console.log(item.PROJECTNAME)
-      //     return <div key={index}  style={{marginBottom:"10px"}}>{itemDescription.PROJECTNAME}</div>
-      //   })}
-    
-      // </div>
+     
     )
   }
 }

@@ -81,7 +81,7 @@ class AllProjectList extends React.Component {
                   redesignArray[index] = obj
                 )
               })  
-              console.log("res", res)
+       
               this.setState({ Allprojectdata: redesignArray })  
               /*eslint no-var: "error"*/ 
               /*eslint-env es6*/
@@ -105,23 +105,20 @@ class AllProjectList extends React.Component {
                 formattedArray = formattedArray.concat(subArray)
               })
               const finalArray = JSON.stringify(formattedArray)
-              console.log('formattedArray', formattedArray)
+             
               localStorage.setItem('projectFullData', finalArray)
             }
           })
           .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) })
         }
     handleopen() {
-      //         // this.setState({title: "Hello World"})
-      //         console.log('Hello')
-      //         // window.location.href = "/newitem"
+      
               this.props.history.push("/secondPage/Add")
-              // this.props.history.push("/newitem")
-      //         // < Index/>
+              
             }
          
       render() {
-      console.log("Allprojectdata", this.state.Allprojectdata)
+      
       const { Allprojectdata } = this.state
         return ( 
           <Fragment>
@@ -192,8 +189,9 @@ class AllProjectList extends React.Component {
                       </Item>
                   </Toolbar>
                       <Paging
-                              defaultPageSize={1}
-                              defaultPageIndex={0} />
+                         defaultPageSize={1}
+                         defaultPageIndex={0} 
+                      />
                 </DataGrid>
               ) 
             })

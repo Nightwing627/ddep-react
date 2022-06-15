@@ -34,6 +34,7 @@ class Timepickers extends React.Component {
                   noCalendar: true,
                   dateFormat: "H:i"
                 }}
+                disabled
                 onChange={this.props.onChange ? this.props.onChange : ""}
               />
             </Col>

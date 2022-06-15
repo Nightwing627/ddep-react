@@ -1,7 +1,5 @@
 import React from 'react'
 import Select from "react-select"
-
-
 const theme = theme => ({
     ...theme,
     colors: {
@@ -11,16 +9,19 @@ const theme = theme => ({
   
     }
   })
-
-
-const InboundFormat = () => {
+const InboundFormat = (props) => {
     const options = [
         { value: 'BGRS', label: 'BGRS' },
         { value: 'I-RMS', label: 'I-RMS' },
-        { value: 'Global', label: 'Global' }
+        { value: 'Global', label: 'Global' },
+        { value: 'xml', label: 'XMl'}
       ]
-  return (
-    <div>  <Select  options={options}  theme={theme}  className="React"/></div>
+ 
+      return (
+    <div>
+      <Select  disabled={props?.disabled}   options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === props?.apiData?.inbound_setting?.inbound_format })
+    }/>
+    </div>
   )
 }
 

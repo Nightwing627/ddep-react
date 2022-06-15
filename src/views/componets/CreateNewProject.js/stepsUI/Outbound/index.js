@@ -5,20 +5,19 @@ import Outboundformat from './Outboundformat'
 import AppCollapse from "@components/app-collapse"
 import Apifile from './apifile'
 
-const collapseItems = [
-  {
-    id: 1,
-    title: "Outbound Format",
-    content: <Outboundformat/>
-  },
-  {
-    id: 2,
-    title: "Synchronize Configure",
-    content: < Apifile/>
-  }
-]
-
 const Outbound = (props) => {
+  const collapseItems = [
+    {
+      id: 1,
+      title: "Outbound Format",
+      content: <Outboundformat apiData={props?.apiData} disable={props?.isDisable}/>
+    },
+    {
+      id: 2,
+      title: "Synchronize Configure",
+      content: <Apifile apiData={props?.apiData} disable={props?.isDisable}/>
+    }
+  ]
     const saveAndNext = () => {
             props.stepper.next()
         }

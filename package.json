@@ -2,7 +2,6 @@
   "name": "vuexy-react-admin-dashboard",
   "version": "6.3.0",
   "private": true,
-  "proxy": "https://ddep-phase2.a4apple.cn:63303",
   "dependencies": {
     "@casl/ability": "4.1.6",
     "@casl/react": "2.1.1",
@@ -46,6 +45,7 @@
     "gojs": "^2.2.9",
     "gojs-react": "^1.1.1",
     "history": "4.10.1",
+    "http-proxy-middleware": "^2.0.6",
     "intl-messageformat": "7.8.4",
     "jquery": "3.5.1",
     "jsonwebtoken": "8.5.1",
@@ -119,6 +119,7 @@
     "lint": "eslint src/**/*.js src/**/*.jsx",
     "lint:fix": "eslint src/**/*.js --fix"
   },
+  "proxy": "https://ddep-phase2.a4apple.cn:63303",
   "eslintConfig": {
     "extends": "react-app"
   },
