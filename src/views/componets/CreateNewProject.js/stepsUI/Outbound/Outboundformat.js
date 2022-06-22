@@ -14,16 +14,16 @@ const theme = theme => ({
 
 
 const Outboundformat = (props) => {
-    const options = [
-        { value: 'BGRS', label: 'BGRS' },
-        { value: 'I-RMS', label: 'I-RMS' },
-        { value: 'Global', label: 'Global' },
-        { value: 'json', label: 'json'}
-      ]
+  const options = [
+    { value: 'CSV', label: 'CSV' },
+    { value: 'Excel', label: 'Excel' },
+    { value: 'JSON', label: 'JSON' },
+    { value: 'xml', label: 'XMl'}
+  ]
      
   return (
     <div>
-    <Select  disabled={props?.disable} options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === props?.apiData?.outbound_setting?.outbound_format })
+    <Select  isDisabled={props?.disable} options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === props?.apiData?.outbound_setting?.outbound_format })
   }/>
   </div>
   )

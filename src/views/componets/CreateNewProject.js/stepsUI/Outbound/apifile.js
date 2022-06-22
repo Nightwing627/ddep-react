@@ -103,7 +103,9 @@ const Apifile = (props) => {
     setValue({ api_url: props?.apiData?.outbound_setting?.api_url})
   }, [props])
 
-
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
   return (
     <>
     <div>

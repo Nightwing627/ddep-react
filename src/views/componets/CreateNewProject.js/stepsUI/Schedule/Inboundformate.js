@@ -26,7 +26,7 @@ const Occursevery = (props) => {
     const [startingTime, setStartingTime]  = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_end_inbound)
     const [endingTime, setEndingTime] = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_start_inbound)
     const [radioValue, setradioValue] = useState("")
-
+ 
     return ( 
         <>
         <div>
@@ -36,7 +36,7 @@ const Occursevery = (props) => {
                      <NumberInput/>
                    </Col>
                    <Col xs="2">
-                   <Select disabled={props?.disable}  options={options}  theme={theme}  className="React" 
+                   <Select isDisabled={props?.disable}  options={options}  theme={theme}  className="React" 
     value= {options && options?.find((op) => { return op.value === props?.Occursevery?.schedule_setting?.daily_frequency_every_time_unit_inbound })
   }
   />    
@@ -157,7 +157,7 @@ const Recurring = (props) => {
                      </Col>
                      <Col xs="9">
                      <div>
-    <Select disabled={props?.disable}  options={options}  theme={theme}  className="React" 
+    <Select isDisabled={props?.disable}  options={options}  theme={theme}  className="React" 
     value= {options && options?.find((op) => { return op.value === props?.Recurring?.schedule_setting?.occurs_inbound })
   }/>
   </div>
@@ -272,8 +272,70 @@ const Schedule = (props) => {
         { value: 'Cape Verde Standard Time|UTC-01:00', label: 'Cape Verde Standard Time|UTC-01:00'},
         { value: 'Morocco Standard Time|UTC', label: 'Morocco Standard Time|UTC'},
         { value: 'Coordinated Universal Time|UTC', label: 'Coordinated Universal Time|UTC'},
-   
-        { value: 'GMT Standard Time|UTC', label: 'GMT Standard Time|UTC'}
+        { value: 'GMT Standard Time|UTC', label: 'GMT Standard Time|UTC'},
+        { value: 'Greenwich Standard Time|UTC', label: 'Greenwich Standard Time|UTC'},
+        { value: 'W. Europe Standard Time|UTC+01:00', label: 'W. Europe Standard Time|UTC+01:00'},
+        { value: 'Central Europe Standard Time|UTC+01:00', label: 'Central Europe Standard Time|UTC+01:00'},
+        { value: 'Romance Standard Time|UTC+01:00', label: 'Romance Standard Time|UTC+01:00'},
+        { value: 'Central European Standard Time|UTC+01:00', label: 'Central European Standard Time|UTC+01:00'},
+        { value: 'Libya Standard Time|UTC+01:00', label: 'Libya Standard Time|UTC+01:00'},
+        { value: 'W. Central Africa Standard Time|UTC+01:00', label: 'W. Central Africa Standard Time|UTC+01:00'},
+        { value: 'Namibia Standard Time|UTC+01:00', label: 'Namibia Standard Time|UTC+01:00'},
+        { value: 'GTB Standard Time|UTC+02:00', label: 'GTB Standard Time|UTC+02:00'},
+        { value: 'Middle East Standard Time|UTC+02:00', label: 'Middle East Standard Time|UTC+02:00'},
+        { value: 'Egypt Standard Time|UTC+02:00', label: 'Egypt Standard Time|UTC+02:00'},
+        { value: 'Syria Standard Time|UTC+02:00', label: 'Syria Standard Time|UTC+02:00'},
+        { value: 'E. Europe Standard Time|UTC+02:00', label: 'E. Europe Standard Time|UTC+02:00'},
+        { value: 'South Africa Standard Time|UTC+02:00', label: 'South Africa Standard Time|UTC+02:00'},
+        { value: 'FLE Standard Time|UTC+02:00', label: 'FLE Standard Time|UTC+02:00'},
+        { value: 'Turkey Standard Time|UTC+02:00', label: 'Turkey Standard Time|UTC+02:00'},
+        { value: 'Jerusalem Standard Time|UTC+02:00', label: 'Jerusalem Standard Time|UTC+02:00'},
+        { value: 'Jordan Standard Time|UTC+03:00', label: 'Jordan Standard Time|UTC+03:00'},
+        { value: 'Arabic Standard Time|UTC+03:00', label: 'Arabic Standard Time|UTC+03:00'},
+        { value: 'Kaliningrad Standard Time|UTC+03:00', label: 'Kaliningrad Standard Time|UTC+03:00'},
+        { value: 'Arab Standard Time|UTC+03:00', label: 'Arab Standard Time|UTC+03:00'},
+        { value: 'E. Africa Standard Time|UTC+03:00', label: 'E. Africa Standard Time|UTC+03:00'},
+        { value: 'Iran Standard Time|UTC+03:30', label: 'Iran Standard Time|UTC+03:30'},
+        { value: 'Arabian Standard Time|UTC+04:00', label: 'Arabian Standard Time|UTC+04:00'},
+        { value: 'Azerbaijan Standard Time|UTC+04:00', label: 'Azerbaijan Standard Time|UTC+04:00'},
+        { value: 'Russian Standard Time|UTC+04:00', label: 'Russian Standard Time|UTC+04:00'},
+        { value: 'Mauritius Standard Time|UTC+04:00', label: 'Mauritius Standard Time|UTC+04:00'},
+        { value: 'Georgian Standard Time|UTC+04:00', label: 'Georgian Standard Time|UTC+04:00'},
+        { value: 'Caucasus Standard Time|UTC+04:00', label: 'Caucasus Standard Time|UTC+04:00'},
+        { value: 'Afghanistan Standard Time|UTC+04:30', label: 'Afghanistan Standard Time|UTC+04:30'},
+        { value: 'Pakistan Standard Time|UTC+05:00', label: 'Pakistan Standard Time|UTC+05:00'},
+        { value: 'West Asia Standard Time|UTC+05:00', label: 'West Asia Standard Time|UTC+05:00'},
+        { value: 'India Standard Time|UTC+05:30', label: 'India Standard Time|UTC+05:30'},
+        { value: 'Sri Lanka Standard Time|UTC+05:30', label: 'Sri Lanka Standard Time|UTC+05:30'},
+        { value: 'Nepal Standard Time|UTC+05:45', label: 'Nepal Standard Time|UTC+05:45'},
+        { value: 'Central Asia Standard Time|UTC+06:00', label: 'Central Asia Standard Time|UTC+06:00'},
+        { value: 'Bangladesh Standard Time|UTC+06:00', label: 'Bangladesh Standard Time|UTC+06:00'},
+        { value: 'Ekaterinburg Standard Time|UTC+06:00', label: 'Ekaterinburg Standard Time|UTC+06:00'},
+        { value: 'Myanmar Standard Time|UTC+06:30', label: 'Myanmar Standard Time|UTC+06:30'},
+        { value: 'SE Asia Standard Time|UTC+07:00', label: 'SE Asia Standard Time|UTC+07:00'},
+        { value: 'N. Central Asia Standard Time|UTC+07:00', label: 'N. Central Asia Standard Time|UTC+07:00'},
+        { value: 'China Standard Time|UTC+08:00', label: 'China Standard Time|UTC+08:00'},
+        { value: 'North Asia Standard Time|UTC+08:00', label: 'North Asia Standard Time|UTC+08:00'},
+        { value: 'Malay Peninsula Standard Time|UTC+08:00', label: 'Malay Peninsula Standard Time|UTC+08:00'},
+        { value: 'W. Australia Standard Time|UTC+08:00', label: 'W. Australia Standard Time|UTC+08:00'},
+        { value: 'Taipei Standard Time|UTC+08:00', label: 'Taipei Standard Time|UTC+08:00'},
+        { value: 'Ulaanbaatar Standard Time|UTC+08:00', label: 'Ulaanbaatar Standard Time|UTC+08:00'},
+        { value: 'North Asia East Standard Time|UTC+09:00', label: 'North Asia East Standard Time|UTC+09:00'},
+        { value: 'Tokyo Standard Time|UTC+09:00', label: 'Tokyo Standard Time|UTC+09:00'},
+        { value: 'Korea Standard Time|UTC+09:00', label: 'Korea Standard Time|UTC+09:00'},
+        { value: 'Cen. Australia Standard Time|UTC+09:30', label: 'Cen. Australia Standard Time|UTC+09:30'},
+        { value: 'AUS Central Standard Time|UTC+09:30', label: 'AUS Central Standard Time|UTC+09:30'},
+        { value: 'E. Australia Standard Time|UTC+10:00', label: 'E. Australia Standard Time|UTC+10:00'},
+        { value: 'AUS Eastern Standard Time|UTC+10:00', label: 'AUS Eastern Standard Time|UTC+10:00'},
+        { value: 'West Pacific Standard Time|UTC+10:00', label: 'West Pacific Standard Time|UTC+10:00'},
+        { value: 'Tasmania Standard Time|UTC+10:00', label: 'Tasmania Standard Time|UTC+10:00'},
+        { value: 'Yakutsk Standard Time|UTC+10:00', label: 'Yakutsk Standard Time|UTC+10:00'},
+        { value: 'Central Pacific Standard Time|UTC+11:00', label: 'Central Pacific Standard Time|UTC+11:00'},
+        { value: 'Vladivostok Standard Time|UTC+11:00', label: 'Vladivostok Standard Time|UTC+11:00'},
+        { value: 'New Zealand Standard Time|UTC+12:00', label: 'New Zealand Standard Time|UTC+12:00'},
+        { value: 'UTC+12|UTC+12:00', label: 'UTC+12|UTC+12:00'},
+        { value: 'Fiji Standard Time|UTC+12:0', label: 'Fiji Standard Time|UTC+12:0'},
+        { value: 'Magadan Standard Time|UTC+12:00', label: 'Magadan Standard Time|UTC+12:00'}
         
       ]
     const [startingDate, setstartingDate] = useState(new Date())
@@ -295,7 +357,7 @@ const Schedule = (props) => {
                     </Label>
                      </Col>
                      <Col xs="9">
-                     <Select disabled={props?.disable}  options={options}  theme={theme}  className="React" 
+                     <Select isDisabled={props?.disable}  options={options}  theme={theme}   className="React" style={{zIndex:10}}
     // value= {options && options?.find((op) => { return op.value === props?.Recurring?.schedule_setting?.occurs_inbound })
 //   }
   />
@@ -326,6 +388,7 @@ const Schedule = (props) => {
                         name="user_type"
                         className="ml-1"
                         value="recurring"
+                        style={{  zIndex: '-1' }}
                         onClick={(e) => {
                             setradioValue("recurring")
                         }}
@@ -338,6 +401,7 @@ const Schedule = (props) => {
                         defaultChecked={false}
                         name="user_type"
                         className="ml-1"
+                        zindex={-1}
                         value="onetime"
                         onClick={(e) => {
                             setradioValue("onetime")

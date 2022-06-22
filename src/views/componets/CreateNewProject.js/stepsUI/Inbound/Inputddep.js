@@ -6,7 +6,9 @@ const Inputddep = (props) => {
     api_ddep_api:props?.sftpData?.inbound_setting?.api_ddep_api
   })
   
-  
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
   return (
     <>
     <div>

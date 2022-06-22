@@ -66,13 +66,13 @@ export default function Steps() {
 
   const getda2ta = () => {
     axios
-      .get("/project/item/detail/<item id>")
+      .get("/project/item/detail/62aa1710be609e225d411275")
       .then((res) => {
         if (res.status === 200) {
           const sortedData = res?.data?.data
           const newData = { data: [] }
           setApiDate(sortedData)
-          
+          console.log("first,", sortedData)
         }
       })
       .catch((error) => { console.log("error", error) })

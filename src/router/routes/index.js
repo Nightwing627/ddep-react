@@ -19,11 +19,10 @@ const Routes = [
   {
     path: '/second-page/List',
     component: lazy(() => import('../../views/componets/AllProjectList'))
-
   },
   {
     path: '/newitem',
-    component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))
+    component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
   },
   {
     path: '/Edit',

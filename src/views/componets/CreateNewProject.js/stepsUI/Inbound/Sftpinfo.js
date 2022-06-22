@@ -31,13 +31,16 @@ const Sftpinfo = (props) => {
   })
   const [cursor, setCursor] = useState(false)
   const [data, setData] = useState(dummyData)
-
+  
   const handleopen = () => {
     setIsOpenModal(true)
  
   }
   const handleClose = () => {
     setIsOpenModal(false)
+  }
+  const handleChange = () => {
+    setValue(e.target.value)
   }
   const Header = (props) => {
       return (

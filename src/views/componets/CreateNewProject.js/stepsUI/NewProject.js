@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   Container,
   Col,
@@ -18,12 +18,16 @@ import "../Newitem.scss"
 
 const NewProject = (props) => {
   const urls = window.location.href
+  const [value, setValue] = useState()
   const [has, paramss] = urls?.split("newitem")[1]?.split("?")
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
  const saveAndNext = () => {
       props.stepper.next()
   }
 
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
   return (
     <div>
       <Container>
