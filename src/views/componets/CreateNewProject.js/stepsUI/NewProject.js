@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   Container,
   Col,
@@ -18,30 +18,35 @@ import "../Newitem.scss"
 
 const NewProject = (props) => {
   const urls = window.location.href
+  const [value, setValue] = useState()
   const [has, paramss] = urls?.split("newitem")[1]?.split("?")
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
  const saveAndNext = () => {
       props.stepper.next()
   }
 
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
   return (
     <div>
-      
       <Container>
       <h5 className='font-item item-wrap'>{paramsObj?.orderCode ?  "Edit item" : "Create New item"}</h5>
         <Row className="mb-2">
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
-             Exchange Name
+             Exchange Name 
               <span className="valid_star">*</span>
             </Label>
             <Input
               fullWidth
+              // value={apiData?}
               name="pname"
               // helperText={errors.pname}
               // value={input.pname}
               onChange={(e) => handleChange(e)}
               variant="outlined"
+              disabled={props?.isDisable} 
             />
             {/* {validation.pname && <p>{validation.pname}</p>} */}
           </Col>
@@ -53,7 +58,8 @@ const NewProject = (props) => {
             <Input
               fullWidth
               name="pname"
-              // helperText={errors.pname}
+              disabled={props?.isDisable} 
+                // helperText={errors.pname}
               // value={input.pname}
               onChange={(e) => handleChange(e)}
               variant="outlined"
@@ -70,6 +76,7 @@ const NewProject = (props) => {
               name="pname"
               // helperText={errors.pname}
               // value={input.pname}
+              disabled={props?.isDisable} 
               onChange={(e) => handleChange(e)}
               variant="outlined"
             />
@@ -138,10 +145,10 @@ const NewProject = (props) => {
             {/* {validation.pname && <p>{validation.pname}</p>} */}
           {/* </Col>
         </Row> */} 
-        
-        <Button className="btn-relief " color="primary" >
+        {props?.isDisable ?  "" :  <Button className="btn-relief " color="primary" >
             Save
-       </Button>
+       </Button>}
+      
                 <hr/>
       </Container>
       <div className="d-flex justify-content-between prev-next-btn-block">

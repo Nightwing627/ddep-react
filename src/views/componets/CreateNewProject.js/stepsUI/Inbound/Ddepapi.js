@@ -3,16 +3,14 @@ import { CustomInput } from "reactstrap"
 import AppCollapse from "@components/app-collapse"
 import Inputddep from './Inputddep'
 import Sftpinfo from "./Sftpinfo"
-const api = [
+const DDEP = (props) => {
+  const api = [
     {
       id: 1,
       title: "DDEP API",
-      content:  < Inputddep />
+      content:  < Inputddep  DdepData={props?.DdepData} disabled={props?.disabled}/>
     }
   ]
-  
-
-const DDEP = () => {
   return (
   <>
   <AppCollapse
@@ -23,15 +21,16 @@ const DDEP = () => {
   </>
   )
 }
-const data = [
+
+const SFTP = (props) => {
+  const data = [
     {
       id: 1,
       title: "FTP/SFTP",
-      content:  < Sftpinfo />
+      content:  <Sftpinfo  sftpData={props?.sftpData} disabled={props?.disabled}/>
     }
   ]
   
-const SFTP = () => {
   return (
   <>
   <AppCollapse
@@ -43,10 +42,10 @@ const SFTP = () => {
   )
 }
 
-const Ddepapi = () => {
+const Ddepapi = (props) => {
     const [radioValue, setradioValue] = useState("") 
 
-    console.log("radioValue", radioValue)
+    
   return (<> 
     <div className='d-flex'>
         <CustomInput inline
@@ -54,10 +53,11 @@ const Ddepapi = () => {
           label="DDEP API"
           color="primary"
           id="DDEPAPI"
-          defaultChecked={false}
+          defaultChecked={true}
           name="user_type"
           className="ml-1"
           value="DDEPAPI"
+          // disabled={props?.isDisable} 
           onClick={(e) => {
             setradioValue("DDEPAPI")
         }} 
@@ -66,6 +66,7 @@ const Ddepapi = () => {
         type="radio"
         label="FTP/SFTP"
         color="primary" 
+        // disabled={props?.disabled}
         id="SFTP"
         defaultChecked={false}
         name="user_type"
@@ -74,7 +75,6 @@ const Ddepapi = () => {
         onClick={(e) => {
             setradioValue("FTP/SFTP")
         }}
-       
       /> 
          </div>
         <div>
@@ -83,7 +83,7 @@ const Ddepapi = () => {
           accordion
           active={0}
         />  */}
-        {radioValue === "DDEPAPI" ? <DDEP /> : radioValue === "FTP/SFTP" ? <SFTP /> : ""  }
+        {radioValue === "DDEPAPI" ? <DDEP DdepData={props?.apiData} disabled={props?.disabled}/> : radioValue === "FTP/SFTP" ? <SFTP sftpData={props?.apiData} disabled={props?.disabled}/> : ""  }
         </div>
    
   </>)

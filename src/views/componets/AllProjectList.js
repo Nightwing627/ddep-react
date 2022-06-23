@@ -40,6 +40,119 @@ const dataSourceOptions = {
     }
   })
 }
+// const  data = [
+//   {
+//     pj_ID: "62592d4a5c4b8a9d970b56aa",
+//     projectCode: "iRMS-Extrnal-Exchange",
+//     projectName: "i-RMS Exteernal Exchange Data",
+//     projectDescr:
+//       "all External Parties requested integrate data will be added in here",
+//     group: "",
+//     isActive: "1",
+//     createdAt: "2022-04-15T08:31:06.196Z",
+//     updatedAt: "2022-05-19T06:42:06.239Z",
+//     items: [
+//       {
+//         item_ID: "62592d715c4b8a9d970b56a1",
+//         itemCode: "BGRS-Initiations-Synchronize",
+//         itemName: "BGRS Initiations Synchronize",
+//         itemDescr: "BGRS will share their business to multiple parties",
+//         isActive: "1",
+//         version: "1.7",
+//         inboundType: "DDEP API",
+//         inboundFormat: "JSON",
+//         outboundFormat: "JSON",
+//         scheduleDescr: "Daily 18:00"
+//       },
+//       {
+//         item_ID: "62592d715c4b8a9d970b5634",
+//         itemCode: "BGRS-Initiations",
+//         itemName: "BGRS Initiations",
+//         itemDescr: "BGRS will share their business to multiple parties",
+//         isActive: "1",
+//         version: "1.7",
+//         inboundType: "DDEP API",
+//         inboundFormat: "JSON",
+//         outboundFormat: "JSON",
+//         scheduleDescr: "Daily 18:00"
+//       }
+//     ]
+//   },
+//   {
+//     pj_ID: "62592d4a5c4b8a9d970b56ab",
+//     projectCode: "iRMS-Exchange",
+//     projectName: "i-RMS External Exchange Data",
+//     projectDescr:
+//       "all External Parties requested integrate data will be added in here",
+//     group: "",
+//     isActive: "1",
+//     createdAt: "2022-04-15T08:31:06.196Z",
+//     updatedAt: "2022-05-19T06:42:06.239Z",
+//     items: [
+//       {
+//         item_ID: "62592d715c4b8a9d970b56a1",
+//         itemCode: "BGRS-Initiations-Synchronize",
+//         itemName: "BGRS Initiations Synchronize",
+//         itemDescr: "BGRS will share their business to multiple parties",
+//         isActive: "1",
+//         version: "1.7",
+//         inboundType: "DDEP API",
+//         inboundFormat: "JSON",
+//         outboundFormat: "JSON",
+//         scheduleDescr: "Daily 18:00"
+//       },
+//       {
+//         item_ID: "62592d715c4b8a9d970b5634",
+//         itemCode: "BGRS-Initiations",
+//         itemName: "BGRS Initiations",
+//         itemDescr: "BGRS will share their business to multiple parties",
+//         isActive: "1",
+//         version: "1.7",
+//         inboundType: "DDEP API",
+//         inboundFormat: "JSON",
+//         outboundFormat: "JSON",
+//         scheduleDescr: "Daily 18:00"
+//       }
+//     ]
+//   },
+//   {
+//     pj_ID: "62592d4a5c4b8a9d970b56ac",
+//     projectCode: "iRMS-External",
+//     projectName: "i-RMS External Exchange Data",
+//     projectDescr:
+//       "all External Parties requested integrate data whas maill be added in here",
+//     group: "",
+//     isActive: "1",
+//     createdAt: "2022-04-15T08:31:06.196Z",
+//     updatedAt: "2022-05-19T06:42:06.239Z",
+//     items: [
+//       {
+//         item_ID: "62592d715c4b8a9d970b56a1",
+//         itemCode: "BGRS-Initiations-Synchronize",
+//         itemName: "BGRS Initiations Synchronize",
+//         itemDescr: "BGRS will share their business to multiple parties",
+//         isActive: "1",
+//         version: "1.7",
+//         inboundType: "DDEP API",
+//         inboundFormat: "JSON",
+//         outboundFormat: "JSON",
+//         scheduleDescr: "Daily 18:00"
+//       },
+//       {
+//         item_ID: "62592d715c4b8a9d970b5634",
+//         itemCode: "BGRS-Initiations",
+//         itemName: "BGRS Initiations",
+//         itemDescr: "BGRS will share their business to multiple parties",
+//         isActive: "1",
+//         version: "1.7",
+//         inboundType: "DDEP API",
+//         inboundFormat: "JSON",
+//         outboundFormat: "JSON",
+//         scheduleDescr: "Daily 18:00"
+//       }
+//     ]
+//   }
+// ]
 class AllProjectList extends React.Component {
     constructor(props) {
         super(props)
@@ -62,7 +175,8 @@ class AllProjectList extends React.Component {
     }
     Handleadd = () => {
       window.location.href = "/newitem"
-    }       
+    }  
+   
      componentDidMount() {
        axios
           .get(`/project/fulllist`)
@@ -81,7 +195,7 @@ class AllProjectList extends React.Component {
                   redesignArray[index] = obj
                 )
               })  
-              console.log("res", res)
+       
               this.setState({ Allprojectdata: redesignArray })  
               /*eslint no-var: "error"*/ 
               /*eslint-env es6*/
@@ -105,23 +219,18 @@ class AllProjectList extends React.Component {
                 formattedArray = formattedArray.concat(subArray)
               })
               const finalArray = JSON.stringify(formattedArray)
-              console.log('formattedArray', formattedArray)
+             
               localStorage.setItem('projectFullData', finalArray)
+              // console.log("res", data)
             }
           })
           .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) })
         }
     handleopen() {
-      //         // this.setState({title: "Hello World"})
-      //         console.log('Hello')
-      //         // window.location.href = "/newitem"
               this.props.history.push("/secondPage/Add")
-              // this.props.history.push("/newitem")
-      //         // < Index/>
             }
-         
       render() {
-      console.log("Allprojectdata", this.state.Allprojectdata)
+      
       const { Allprojectdata } = this.state
         return ( 
           <Fragment>
@@ -134,9 +243,9 @@ class AllProjectList extends React.Component {
             </div>
           </div>
           <hr></hr>
-          {
-            Allprojectdata && Allprojectdata.map((item, index) => {
-              return (
+      
+           {/* {Allprojectdata && Allprojectdata.map((item, index) => { 
+               return ( */}
                 <DataGrid
                   // dataSource={allProjectList}
                   dataSource={Allprojectdata}
@@ -150,7 +259,7 @@ class AllProjectList extends React.Component {
                   className="data-Grid"
                   location="center"
                   >
-                    {console.log('item', item)}
+                    {/* {console.log('item', item)} */}
                       <MasterDetail
                         enabled={true}
                         component={CustomItem}
@@ -192,12 +301,13 @@ class AllProjectList extends React.Component {
                       </Item>
                   </Toolbar>
                       <Paging
-                              defaultPageSize={1}
-                              defaultPageIndex={0} />
+                         defaultPageSize={1}
+                         defaultPageIndex={0} 
+                      />
                 </DataGrid>
-              ) 
-            })
-          }
+                {/* ) 
+              })
+           }  */}
             </div>
           </Fragment>
          

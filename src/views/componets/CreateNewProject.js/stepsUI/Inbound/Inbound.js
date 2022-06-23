@@ -8,29 +8,33 @@ import Ddepapi from './Ddepapi'
 // import  Playcircle from 'react-feather'
 import { PlayCircle } from 'react-feather'
 
-const collapseItems = [
-  {
-    id: 1,
-    title: "Inbound Format",
-    content: <InboundFormat/>
-  },
-  {
-    id: 2,
-    title: "Synchronize Configure",
-    content: < Ddepapi />
-  }
-]
 
 const Inbound = (props) => {
+  const [inputValue, setInputValue] = useState("")
   const saveAndNext = () => {
         props.stepper.next()
     }
   const [collapseID, setcollapseID] = useState("")
   const [radioValue, setradioValue] = useState("")
+  const collapseItems = [
+    {
+      id: 1,
+      title: "Inbound Format",
+      content: <InboundFormat 
+      apiData={props.apiData}
+      disabled={props?.isDisable} 
+      />
+    },
+    {
+      id: 2,
+      title: "Synchronize Configure",
+      content: < Ddepapi apiData={props.apiData} 
+      disabled={props?.isDisable} />
+    }
+  ]
   
   return (
     <>
- 
     <div>   
       <div className="d-flex justify-content-between inbound">
         <span>  Inbound</span>
@@ -40,7 +44,6 @@ const Inbound = (props) => {
           <PlayCircle size={15} />
           Active
         </Button>
-
       </div>
       <Card className="inbound-comp">
        

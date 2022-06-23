@@ -8,6 +8,8 @@ import { Button, Card, CardBody, Input, Label, FormGroup } from 'reactstrap'
 import { FormHelperText, Grid, Box, Divider, Typography } from "@material-ui/core"
 import Select from "react-select"
 import HorizontalNonLinearStepper from "./UI/HorizontalNonLinearStepper"
+
+import axios from "../../utility/axios"
 const theme = theme => ({
   ...theme,
   colors: {
@@ -43,7 +45,34 @@ const Add = () => {
   setinput({...input, [name]: value})
   console.log(input)
   }
- 
+  // const SubmitHandler = async (event) => {
+    
+  //   await axios
+  //     .post("/project/item/add")
+  //     .then((res) => {
+  //       const sortedData = res
+  //       console.log("janki", sortedData)
+        
+  //     })
+  //     .catch((error) => { console.log("error", error) })
+  // }
+
+  // const getda2ta = () => {
+  //   axios
+  //     .post("/project/item/add")
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         const sortedData = res
+  //         const newData = { data: [] }
+  //         setApiDate(sortedData)
+  //         console.log("first,", sortedData)
+  //       }
+  //     })
+  //     .catch((error) => { console.log("error", error) })
+  // }
+  // useEffect(() => {
+  //   SubmitHandler()
+  // }, [])
   const validation = () => {
     const val = input
     const error = {}
@@ -86,7 +115,7 @@ const Add = () => {
         </Link>
        
       ]
-      console.log("errors", errors)
+      // console.log("errors", errors)
   return (
   <div>
        <Stack spacing={2} className="breadcrumb-Top mb-2">

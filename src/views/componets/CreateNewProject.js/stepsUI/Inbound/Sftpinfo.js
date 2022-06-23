@@ -10,8 +10,7 @@ const dummyData = [
 },
 { 
   name: 'Img'
-  // toggled: true
-  
+  // toggled: true  
 },
 { 
   name: 'PDF'
@@ -20,30 +19,28 @@ const dummyData = [
 }
 ]
 
-const Sftpinfo = () => {
+const Sftpinfo = (props) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
-  
+  const [value, setValue] = useState({
+    ftp_server_link:  props?.sftpData?.inbound_setting?.ftp_server_link,
+    ftp_port: props?.sftpData?.inbound_setting?.ftp_port,
+    login_name: props?.sftpData?.inbound_setting?.login_name,
+    password:  props?.sftpData?.inbound_setting?.password,
+    is_password_encrypted: props?.sftpData?.inbound_setting?.is_password_encrypted,
+    folder: props?.sftpData?.inbound_setting?.folder
+  })
   const [cursor, setCursor] = useState(false)
   const [data, setData] = useState(dummyData)
-
-  // const onToggle = (node, toggled) => {
-  //     if (cursor) {
-  //         cursor.active = false
-  //     }
-  //     node.active = true
-  //     if (node.children) {
-  //         node.toggled = toggled
-  //     }
-  //     setCursor(node)
-  //     setData(Object.assign({}, data))
-  // }
   
   const handleopen = () => {
     setIsOpenModal(true)
-   console.log("Hello")
+ 
   }
   const handleClose = () => {
     setIsOpenModal(false)
+  }
+  const handleChange = () => {
+    setValue(e.target.value)
   }
   const Header = (props) => {
       return (
@@ -56,9 +53,9 @@ const Sftpinfo = () => {
         </span>
       )
     }  
-
-    
   decorators.Header = Header
+
+ 
   return (
     <>
       <div>
@@ -72,15 +69,15 @@ const Sftpinfo = () => {
                   </Col>
                   <Col xs="9">
                   <Input
-                    fullWidth
-                    name="pname"
+                    fullWidth 
+                    name="pname" 
                     // helperText={errors.pname}
-                    // value={input.pname}
+                    value={value?.ftp_server_link}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"
+                    disabled={props?.disabled}
                     />
-                  </Col>
-                  
+                  </Col>  
               </Row>
               <Row className="mb-4">
                   <Col xs="2">
@@ -94,9 +91,10 @@ const Sftpinfo = () => {
                     fullWidth
                     name="pname"
                     // helperText={errors.pname}
-                    // value={input.pname}
+                    // value={value?.ftp_server_link}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"
+                    disabled={props?.disabled}
                     />
                   </Col>
               </Row>
@@ -110,11 +108,12 @@ const Sftpinfo = () => {
                   <Col xs="9">
                   <Input
                     fullWidth
-                    name="pname"
+                    name="ftp_port"
                     // helperText={errors.pname}
-                    // value={input.pname}
+                    value={value?.ftp_port}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"
+                    disabled={props?.disabled}
                     />
                   </Col>
               </Row>
@@ -128,11 +127,12 @@ const Sftpinfo = () => {
                   <Col xs="9">
                   <Input
                     fullWidth
-                    name="pname"
+                    name="login_name"
                     // helperText={errors.pname}
-                    // value={input.pname}
+                    value={value?.login_name}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"
+                    disabled={props?.disabled}
                     />
                   </Col>
                   
@@ -147,10 +147,11 @@ const Sftpinfo = () => {
                   <Col xs="9">
                   <Input
                     fullWidth
-                    name="pname"
+                    name="password"
                     // helperText={errors.pname}
-                    // value={input.pname}
+                    value={value?.password}
                     onChange={(e) => handleChange(e)}
+                    disabled={props?.disabled}
                     variant="outlined"
                     />
                   </Col>
@@ -167,10 +168,11 @@ const Sftpinfo = () => {
                   <Input
                     select
                     fullWidth
-                    name="pname"
+                    name=" is_password_encrypted"
                     // helperText={errors.pname}
-                    // value={input.pname}
+                    value={value?.is_password_encrypted}
                     onChange={(e) => handleChange(e)}
+                    disabled={props?.disabled}
                     variant="outlined"
                     />
                   </Col>
@@ -188,8 +190,9 @@ const Sftpinfo = () => {
                     fullWidth
                     name="pname"
                     // helperText={errors.pname}
-                    // value={input.pname}
+                    value={value?.folder}
                     onChange={(e) => handleChange(e)}
+                    disabled={props?.disabled}
                     variant="outlined"
                     />
                   </Col>

@@ -1,4 +1,4 @@
-import { React, Fragment, useState } from "react"
+import { React, Fragment, useState, useEffect  } from "react"
 import {
   Card,
   CardHeader,
@@ -27,6 +27,7 @@ import {
   AvRadio,
   AvCheckbox
 } from 'availity-reactstrap-validation-safe'
+import axios from "../../../utility/axios"
 const groupOptions = [
   { value: 'select', label: 'Select' },
   { value: 'bgrs', label: 'BGRS' },
@@ -39,7 +40,14 @@ const EditProject = ({ stepper, type }) => {
   const [validate, setValidate] = useState({ projectCode:'test',
     projectName:''
   })
-  
+  const [editApidata, seteditApidata] = useState({
+    projectCode: "",
+    projectName: "",
+    projectDescr:"",
+    group:"",
+    pj_ID:""
+  })
+ 
   function handleSubmit() {
    
     if  (validate.projectCode !== "" && validate.projectName !== "") {
@@ -47,32 +55,48 @@ const EditProject = ({ stepper, type }) => {
     } else {
       console.log("validate project code is  empty")
     }
-      
-  
   }
   function handleChange(event) {
-    const { name, value } = event.target
-    setValidate({ ...validate, [name]: value })
-    
+    // const { name, value } = event.target
+    // seteditApidata({ ...editApidata, [name]: value })
+    seteditApidata(e.target.editApidata)
   }
-
+  const getdata = () => {
+    axios
+      .get("/project/detail/<project id>")
+      .then((res) => {
+        if (res.status === 200) {
+          const sortedData = res?.data
+          const newData = { data: [] }
+          
+          // window.location.href = "/second-page/List"
+        }
+      })
+      .catch((error) => { console.log("error", error) })
+  }
+  useEffect(() => {
+    getdata()
+  }, [])
+  const handlesave = () => {
+    window.location.href = "/second-page/List"
+  }
   return (
     <Fragment>
 
         <AvForm onSubmit={handleSubmit}>
           <AvGroup>
             <Label for='projectCode'>Project Code <span style={{color:'red'}}>*</span></Label>
-            <AvInput name='projectCode' disabled id='projectCode' placeholder='Project Code' value={validate.projectCode} onChange= { (e) => { handleChange(e) } }  required />
+            <AvInput name='projectCode' disabled id='projectCode'  placeholder='Project Code' value={editApidata?.projectCode} onChange= { (e) => { handleChange(e) } }  required />
             <AvFeedback>Please enter a valid Project Code!</AvFeedback>
           </AvGroup>
           <AvGroup>
             <Label for='projectName'>Project Name <span style={{color:'red'}}>*</span></Label>
-            <AvInput name='projectName'  id='projectName' value={validate.projectName}  onChange={ (e) => { handleChange(e) } }  placeholder='Project Name' required />
+            <AvInput name='projectName'  id='projectName' value={editApidata?.projectName}  onChange={ (e) => { handleChange(e) } }  placeholder='Project Name' required />
             <AvFeedback>Please enter a valid Project Name!</AvFeedback>
           </AvGroup>
           <AvGroup>
             <Label for='projectDescription'>Project Description</Label>
-            <AvInput name='projectDescription' type='textarea' rows='8' placeholder='Project Description' id='bprojectDescriptionio'  />
+            <AvInput name='projectDescription' type='textarea' value={editApidata?.projectDescr} rows='8' placeholder='Project Description' id='bprojectDescriptionio'  />
             <AvFeedback>Please enter Project Description!</AvFeedback>
           </AvGroup>
           <AvGroup>
@@ -83,7 +107,7 @@ const EditProject = ({ stepper, type }) => {
           <AvGroup>
             <Label for='group'>Group</Label>
             <Select
-               
+                value={editApidata?.group}
                 className='react-select'
                 classNamePrefix='select'
                 defaultValue={groupOptions[0]}
@@ -92,7 +116,7 @@ const EditProject = ({ stepper, type }) => {
               />
             <AvFeedback>Please select a Group</AvFeedback>
           </AvGroup>
-          <Button color='primary' type='submit'>
+          <Button color='primary' type='submit'  onClick={() => handlesave()}>
             Save
           </Button>
         </AvForm>

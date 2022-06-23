@@ -37,7 +37,6 @@ class ProjectList extends React.Component {
             .then((res) => {
               if (res.status === 200) {
                 const sortedData = res?.data?.data
-                console.log("ProjectListdata", sortedData)
                 this.setState({ ProjectListdata: sortedData })
               }
             })

@@ -3,16 +3,16 @@ import { Button } from 'reactstrap'
 import AppCollapse from "@components/app-collapse"
 import Inboundformate from './Inboundformate'
 
-const collapseItems = [
+const Schedule = (props) => {
+  const collapseItems = [
     {
       id: 1,
       title: " Inbound Schedule ",
-      content: <Inboundformate/>
+      content: <Inboundformate apiData={props?.apiData} disable={props?.isDisable}/>
       
     }
   ]
-
-const Schedule = (props) => {
+ 
   return (
       <>
       <div>
@@ -29,7 +29,6 @@ const Schedule = (props) => {
     <Button
       color="primary"
       className="ml-1"
-      
     >
     submit
     </Button>
