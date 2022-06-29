@@ -221,7 +221,7 @@ class AllProjectList extends React.Component {
               const finalArray = JSON.stringify(formattedArray)
              
               localStorage.setItem('projectFullData', finalArray)
-              // console.log("res", data)
+              console.log("res", res)
             }
           })
           .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) })
@@ -288,10 +288,10 @@ class AllProjectList extends React.Component {
                       <Column  caption="SYNC STATUS"  />
                       <Column dataField="" caption="ACTION" type="buttons" width="auto" className="text-wrap" alignment="center" >
                       
-                      <Button className="btn-Action"><span className='btn-Edit'> <Disc size={25}/></span></Button>
-                      <Button  className="btn-Action" onClick={this.Handleadd}><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
-                      <Button  className="btn-Action"><span className='btn-Edit'>  <RefreshCw size={25}/></span></Button>
-                      <Button onClick={this.editBtn} className="btn-Action"><span className='btn-Edit'>  <Edit size={25}/></span></Button> 
+                      <Button className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}> <Disc size={25}/></span></Button>
+                      <Button  className="btn-Action" onClick={this.Handleadd} style={{cursor:"pointer"}}><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
+                      <Button  className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}>  <RefreshCw size={25}/></span></Button>
+                      <Button onClick={this.editBtn} className="btn-Action"><span style={{cursor:"pointer"}} className='btn-Edit'>  <Edit size={25}/></span></Button> 
                 
                       </Column>
                       <Toolbar>

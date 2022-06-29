@@ -135,7 +135,7 @@ const Recurring = (props) => {
     const [radioValue, setradioValue] = useState("")
    
     const options = [
-        { value: 'Daily', label: 'Daily' },
+        { value: "daily", label: 'Daily' },
         { value: 'Weekly', label: 'Weekly' },
         { value: 'Monthly', label: 'Monthly' }
       ]

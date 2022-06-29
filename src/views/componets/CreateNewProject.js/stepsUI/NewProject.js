@@ -21,13 +21,82 @@ const NewProject = (props) => {
   const [value, setValue] = useState()
   const [has, paramss] = urls?.split("newitem")[1]?.split("?")
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
- const saveAndNext = () => {
-      props.stepper.next()
-  }
+  const [input, setinput] = useState({
+    Exchangename:"",
+    ExchangeDescription:"",
+    Version:""
+  })
+  const [ExchangenameError, setExchangenameError] = useState("")
+  const [ExchangeDescriptionError, setExchangeDescriptionError] = useState("")
+  const [VersionError, setVersionError] = useState("")
+  // const [pcodeError, setpcodeError] = useState("")
+  // const [desError, setDesError] = useState("")
 
-  const handleChange = (e) => {
-    setValue(e.target.value)
+  const [errors, setErrors] = useState({}) 
+  const validation = () => {
+    const val = input
+    let flag = true
+console.log("input", input)
+
+    // Exchangename
+    if (input.Exchangename.trim() === "") {
+      flag = false
+      setExchangenameError('Exchange Name is required')
+    }  else {
+      setExchangenameError('')
+    }
+    // Exchange Description
+    if (input.ExchangeDescription.trim() === "") {
+      flag = false
+      setExchangeDescriptionError('Exchange Description  is required')
+    } else {
+      setExchangeDescriptionError('')
+    }
+
+    // Version
+    if (input.Version.trim() === "") {
+      flag = false
+      setVersionError('Version  is required')
+    }  else {
+      setVersionError('')
+    }
+    //pcode
+    // if (input.pcode.trim() === "") {
+    //   flag = false
+    //   setpcodeError('pcode is required')
+    // } else if (special_char.test(input.pcode)) {
+    //   flag = false
+    //   setpcodeError('valid')
+    // } else {
+    //   setpcodeError('')
+    // }
+
+    // //pdescription
+    // if (input.pdescription.trim() === "") {
+    //   flag = false
+    //   setDesError('project descrition is required')
+    // } else if (special_char.test(input.pdescription)) {
+    //   flag = false
+    //   setDesError('valid')
+    // } else {
+    //   setDesError('')
+    // }
+   
+    return flag
   }
+ const saveAndNext = (isTrue) => {
+   console.log("isTrue", isTrue)
+   if (isTrue) {
+    props.stepper.next()
+   } else if (validation()) {
+    props.stepper.next()
+  }
+ }
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setinput({...input, [name]: value})
+  }
+  console.log("errors", errors)
   return (
     <div>
       <Container>
@@ -41,14 +110,14 @@ const NewProject = (props) => {
             <Input
               fullWidth
               // value={apiData?}
-              name="pname"
+              name="Exchangename"
               // helperText={errors.pname}
               // value={input.pname}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => { handleChange(e); setExchangenameError("") }}
               variant="outlined"
               disabled={props?.isDisable} 
             />
-            {/* {validation.pname && <p>{validation.pname}</p>} */}
+            <span className='text-danger'>{ExchangenameError}</span>
           </Col>
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
@@ -57,14 +126,14 @@ const NewProject = (props) => {
             </Label>
             <Input
               fullWidth
-              name="pname"
+              name="ExchangeDescription"
               disabled={props?.isDisable} 
                 // helperText={errors.pname}
               // value={input.pname}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => { handleChange(e);  setExchangeDescriptionError("") }}
               variant="outlined"
             />
-            {/* {validation.pname && <p>{validation.pname}</p>} */}
+            <span className='text-danger'>{ExchangeDescriptionError}</span>
           </Col>
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
@@ -73,14 +142,14 @@ const NewProject = (props) => {
             </Label>
             <Input
               fullWidth
-              name="pname"
+              name="Version"
               // helperText={errors.pname}
               // value={input.pname}
               disabled={props?.isDisable} 
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => { handleChange(e); setVersionError("") }}
               variant="outlined"
             />
-            {/* {validation.pname && <p>{validation.pname}</p>} */}
+            <span className='text-danger'>{VersionError}</span>
           </Col>
         </Row>
       
@@ -158,7 +227,7 @@ const NewProject = (props) => {
           <Button
             color="primary"
             className="ml-1"
-            onClick={() => saveAndNext()}
+            onClick={() => saveAndNext(props?.isDisable)}
           >
             Next  
           </Button>

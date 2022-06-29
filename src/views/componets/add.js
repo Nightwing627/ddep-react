@@ -32,19 +32,31 @@ const Add = () => {
   const [input, setinput] = useState({
     pname:"",
     pcode:"",
-    Sequence:""
+    Sequence:"",
+    pdescription:"",
+    option:[]
   })
+  const [pnameError, setPnameError] = useState("")
+  const [pcodeError, setpcodeError] = useState("")
+  const [desError, setDesError] = useState("")
+  const [Sequence, setSequence] = useState("")
+  const [optionError, setoptionError] = useState("")
   // const [validation, setvalidation] = useState({
   //   pname:"",
   //   pcode:"",
   //   Sequence:""
   // })
   const [errors, setErrors] = useState({}) 
-  const handleChange = (e) => {
-  const { name, value } = e.target
-  setinput({...input, [name]: value})
-  console.log(input)
-  }
+  const handleChange = (e, type) => {
+    console.log("e", e)
+    if (type === "selectBox") {
+      setinput({...input, option : e})
+    } else {
+      const { name, value } = e.target
+      setinput({...input, [name]: value})
+      console.log(input)
+    }  
+}
   // const SubmitHandler = async (event) => {
     
   //   await axios
@@ -75,25 +87,67 @@ const Add = () => {
   // }, [])
   const validation = () => {
     const val = input
-    const error = {}
-    const flag = true
-    const special_char = /[^a-zA-Z0-9 ]/
-    
-    const number_valid = /[^0-9]/
-    //Project Name validation
+    let flag = true
+    // pname
     if (input.pname.trim() === "") {
-      error.pname = 'Project name is required'
-      // flag = false
-    } else if (special_char.test(input.pname)) {
-      error.pname = "valid"
-      // flag = false
-    } else if (!number_valid.test(input.pname)) {
-      error.pname = "not valid"
-      // flag = false
+      flag = false
+      setPnameError('Project name is required')
+    } else {
+      setPnameError('')
     }
-    setErrors(error)
+  
+    //pcode
+    if (input.pcode.trim() === "") {
+      flag = false
+      setpcodeError('pcode is required')
+    } else {
+      setpcodeError('')
+    }
+
+    //pdescription
+    if (input.pdescription.trim() === "") {
+      flag = false
+      setDesError('project descrition is required')
+    } else {
+      setDesError('')
+    }
+    //Sequence
+    if (input.Sequence.trim() === "") {
+      flag = false
+      setSequence('Sequence is required')
+    } else {
+      setSequence('')
+    }
+    //grp
+    if (input.option) {
+      flag = false
+      setoptionError('select  is required')
+    } else {
+      setoptionError('')
+    }
     return flag
   }
+  // const validation = () => {
+  //   const val = input
+  //   const error = {}
+  //   const flag = true
+  //   const special_char = /[^a-zA-Z0-9 ]/
+    
+  //   const number_valid = /[^0-9]/
+  //   //Project Name validation
+  //   if (input.pname.trim() === "") {
+  //     error.pname = 'Project name is required'
+  //     // flag = false
+  //   } else if (special_char.test(input.pname)) {
+  //     error.pname = "valid"
+  //     // flag = false
+  //   } else if (!number_valid.test(input.pname)) {
+  //     error.pname = "not valid"
+  //     // flag = false
+  //   }
+  //   setErrors(error)
+  //   return flag
+  // }
   const handleSubmit = () => {
     // e.preventDefault()
 
@@ -115,19 +169,18 @@ const Add = () => {
         </Link>
        
       ]
-      // console.log("errors", errors)
+      console.log("errors", errors)
   return (
   <div>
        <Stack spacing={2} className="breadcrumb-Top mb-2">
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
-      >
+        aria-label="breadcrumb">
         {breadcrumbs}
-      </Breadcrumbs>
+      </Breadcrumbs> 
     </Stack>
     <Card >
-      <CardBody >
+      <CardBody>
           <HorizontalNonLinearStepper />
           <Box className='input-feild'>
           <div>
@@ -140,8 +193,9 @@ const Add = () => {
                 fullWidth
                 name='pcode'
                 value={input.pcode}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => { handleChange(e); setpcodeError("") } }
                 variant="outlined"/>
+               <span className='text-danger'>{pcodeError}</span>
             </Grid>
             <Grid item xs={12} md={12}  className="project-text">
                 <Label className="form-text">
@@ -153,9 +207,9 @@ const Add = () => {
                 name='pname'
                 helperText={errors.pname}
                 value={input.pname}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => { handleChange(e); setPnameError("") }}
                 variant="outlined"/>
-                {/* {validation.pname && <p>{validation.pname}</p>} */}
+                <span className='text-danger'>{pnameError}</span>
             </Grid>
             <Grid item xs={12} md={12}   className="project-text">
                 <Label className="form-text">
@@ -167,7 +221,9 @@ const Add = () => {
                 multiple
                 value={input.pdescription}
                 name='pdescription'
+                onChange={(e) => { handleChange(e); setDesError("") }}
                 variant="outlined"/>
+                <span className='text-danger'>{desError}</span>
             </Grid>
             <Grid item xs={12} md={12}  className="project-text">
                 <Label className="form-text">
@@ -177,8 +233,9 @@ const Add = () => {
                 fullWidth
                 name='Sequence'
                 value={input.Sequence}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => { handleChange(e); setSequence("") }}
                 variant="outlined"/>
+                <span className='text-danger'>{Sequence}</span>
             </Grid>
             <Grid item xs={12} md={12}  className="project-text grp-text">
                 
@@ -191,7 +248,9 @@ const Add = () => {
     <Label for="exampleSelect" className="form-text">
     Group
     </Label>    
-    <Select  options={options}  theme={theme}  className="React"/>
+    <Select  options={options}  theme={theme}  className="React" onChange={(e) => { handleChange(e, "selectBox"); setoptionError("") }}/>
+    <span className='text-danger'>{optionError}</span>
+    
   </FormGroup>
     </Grid>
       <Divider />
