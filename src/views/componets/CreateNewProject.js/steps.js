@@ -6,6 +6,7 @@ import { Card, CardBody } from "reactstrap"
 import Stepper from "@components/wizard"
 import NewProject from "./stepsUI/NewProject"
 import Inbound from './stepsUI/Inbound/Inbound'
+
 import Outbound from './stepsUI/Outbound'
 import Schedule from "./stepsUI/Schedule"
 import Mapping from './stepsUI/Mapping'
@@ -63,10 +64,11 @@ export default function Steps() {
       content: <Schedule stepper={stepper} apiData={apiData} isDisable={paramsObj?.isView}/>
     }
   ]
+  console.log("janki", apiData)
 
   const getda2ta = () => {
     axios
-      .get("/project/item/detail/62aa1710be609e225d411275")
+      .get("/project/item/detail/62592d4a5c4b8a9d970b56aa")
       .then((res) => {
         if (res.status === 200) {
           const sortedData = res?.data?.data

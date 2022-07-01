@@ -24,14 +24,50 @@ const Sftpinfo = (props) => {
   const [value, setValue] = useState({
     ftp_server_link:  props?.sftpData?.inbound_setting?.ftp_server_link,
     ftp_port: props?.sftpData?.inbound_setting?.ftp_port,
-    login_name: props?.sftpData?.inbound_setting?.login_name,
-    password:  props?.sftpData?.inbound_setting?.password,
+    ftp_login_name: props?.sftpData?.inbound_setting?.ftp_login_name,
+    ftp_password:  props?.sftpData?.inbound_setting?.ftp_password,
     is_password_encrypted: props?.sftpData?.inbound_setting?.is_password_encrypted,
-    folder: props?.sftpData?.inbound_setting?.folder
+    ftp_folder: props?.sftpData?.inbound_setting?.ftp_folder
   })
+  // console.log("janu", props)
   const [cursor, setCursor] = useState(false)
   const [data, setData] = useState(dummyData)
-  
+  const [input, setinput] = useState({
+    ftp_server_link:"",
+    ExchangeDescription:"",
+    Version:""
+  })
+  const [linkError, setlinkError] = useState("")
+  const [ExchangeDescriptionError, setExchangeDescriptionError] = useState("")
+  const [VersionError, setVersionError] = useState("")
+  // const [pcodeError, setpcodeError] = useState("")
+  // const [desError, setDesError] = useState("")
+
+  const [errors, setErrors] = useState({}) 
+  const validation = () => {
+    const val = input
+    let flag = true
+console.log("input", input)
+
+    // Exchangename
+    if (input.ftp_server_link.trim() === "") {
+      flag = false
+      setlink('Exchange Name is required')
+    }  else {
+      setlink('')
+    }
+    return flag
+  }
+ const saveAndNext = () => {
+  if (validation()) {
+    props.stepper.next()
+  }
+ }
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setValue({...input, [name]: value})
+  }
+  console.log("errors", errors)
   const handleopen = () => {
     setIsOpenModal(true)
  
@@ -39,9 +75,9 @@ const Sftpinfo = (props) => {
   const handleClose = () => {
     setIsOpenModal(false)
   }
-  const handleChange = () => {
-    setValue(e.target.value)
-  }
+  // const handleChange = () => {
+  //   setValue(e.target.value)
+  // }
   const Header = (props) => {
       return (
         <span className='header-contain'>
@@ -70,13 +106,14 @@ const Sftpinfo = (props) => {
                   <Col xs="9">
                   <Input
                     fullWidth 
-                    name="pname" 
+                    name="ftp_server_link" 
                     // helperText={errors.pname}
                     value={value?.ftp_server_link}
-                    onChange={(e) => handleChange(e)}
+                onChange={(e) => { handleChange(e);  setlinkError("") }}
                     variant="outlined"
                     disabled={props?.disabled}
                     />
+                    <span className='text-danger'>{linkError}</span>
                   </Col>  
               </Row>
               <Row className="mb-4">
@@ -129,7 +166,7 @@ const Sftpinfo = (props) => {
                     fullWidth
                     name="login_name"
                     // helperText={errors.pname}
-                    value={value?.login_name}
+                    value={value?.ftp_login_name}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"
                     disabled={props?.disabled}
@@ -149,7 +186,7 @@ const Sftpinfo = (props) => {
                     fullWidth
                     name="password"
                     // helperText={errors.pname}
-                    value={value?.password}
+                    value={value?.ftp_password}
                     onChange={(e) => handleChange(e)}
                     disabled={props?.disabled}
                     variant="outlined"
@@ -190,7 +227,7 @@ const Sftpinfo = (props) => {
                     fullWidth
                     name="pname"
                     // helperText={errors.pname}
-                    value={value?.folder}
+                    value={value?.ftp_folder}
                     onChange={(e) => handleChange(e)}
                     disabled={props?.disabled}
                     variant="outlined"
