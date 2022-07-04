@@ -4,6 +4,9 @@ import NumberInput from "@components/number-input"
 import Select from "react-select"
 import Timepicker from "@components/Time/Timepicker"
 import Datepickers from '@components/Time/Datepickers'
+import axios from "../../../../../utility/axios"
+import { connect, useDispatch } from "react-redux"
+import { itemsDetailsDataStore } from "@store/actions/itemDetails"
 const theme = theme => ({
   ...theme,
   colors: {
@@ -145,8 +148,8 @@ const Schedule = (props) => {
   const [radioValue, setradioValue] = useState("")
   const [recurValue, setrecurValue] = useState("")
   const [ocurValue, setocurValue] = useState("")
-  const [collapseID, setcollapseID] = useState(1)
-  const [inValue, setInValue] = useState({
+  const [collapseID, setcollapseID] = useState(1) 
+  const [inValue, setInValue] = useState({ 
     option : ""  })
 const handleChange = (e, type) => {
   console.log("e", e)
@@ -157,6 +160,9 @@ const handleChange = (e, type) => {
     setInValue({...inValue, [name]: value})
   }  
 }
+const urls = window.location.href
+const [has, paramss] = urls?.split("newitem")[1]?.split("?") 
+const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
 const [optionError, setoptionError] = useState("")
 const validation = () => {
   let flag = true
@@ -173,8 +179,111 @@ const validation = () => {
 }
 const handlesubmit = () => {
    if (validation()) {
-  console.log("hello")
+     if (paramsObj?.orderCode) {
+        console.log("edit api")
+     } else {
+      const newData = {
+        ...props.itemDetailsData,
+        invalue : inValue
+      }
+   console.log("itemDetailsData", newData)
+      const payload = [
+        {
+            type:"basic",
+            ProjectId:"",
+            ItemCode:"",
+            ItemName: newData?.basic?.ExchangeName,
+            CompanyName:"", 
+            isActive:"1",
+            ExchangeDescription: newData?.basic?.ExchangeDescription,
+            Version: newData?.basic?.Version
+        },
+        {   
+            type:"inbound",
+            item_id: "62ba9dd852964bbc1a80a515",
+            inbound_format: newData?.inbound?.inbound_format?.value, 
+            sync_type:"API",
+            port: newData?.inbound?.ftp_port,
+            host: newData?.inbound?.host,
+            login_name: newData?.inbound?.ftp_login_name,
+            password: newData?.inbound?.ftp_password,
+            is_password_encrypted: newData?.inbound?.is_password_encrypted,
+            folder: newData?.inbound?.ftp_folder,
+            backup_folder:"",
+            api_ddep_api: newData?.inbound?.api_ddep_api,
+            api_user_api:"",
+            api_type:"DDEP_API",
+            is_active:"inactive"
+        },
+        {
+            type:"outbound",
+            item_id: "62ba9dd852964bbc1a80a515",
+            api_url:newData?.outbound?.api_url,
+            outbound_format: newData?.outbound?.outbound_format?.value,
+            is_active:"Active"
+        },
+        {
+            type: "schedule",
+            item_id: "62ba9dd852964bbc1a80a515",
+            Schedule_configure_inbound: "schedule",
+            schedule_type_inbound: "Recurring",
+           one_time_occurrence_inbound_date: "",
+            one_time_occurrence_inbound_time: "",
+            occurs_inbound: "daily",
+            day_frequency_inbound_count: "2",
+            day_frequency_outbound_count: "1",
+            weekly_frequency_inbound_count: "1",
+            weekly_frequency_outbound_count: "1",
+            monthly_frequency_day_inbound: "1",
+            monthly_frequency_day_inbound_count :"1",
+            monthly_frequency_day_outbound: "1",
+            monthly_frequency_day_outbound_count: "1",
+            monthly_frequency_the_inbound_count: "1",
+            monthly_frequency_the_outbound_count: "1",
+            daily_frequency_type_inbound: "Occurs Once At",
+            daily_frequency_type_outbound: "Occurs Once At",
+            daily_frequency_once_time_inbound: "",
+            daily_frequency_once_time_outbound: "",
+            daily_frequency_every_time_unit_inbound: "hour",
+            daily_frequency_every_time_unit_outbound: "hour",
+            daily_frequency_every_time_count_inbound: "1",
+            daily_frequency_every_time_count_outbound: "1",
+            daily_frequency_every_time_count_start_inbound: "",
+            daily_frequency_every_time_count_end_inbound: "",
+            daily_frequency_every_time_count_end_outbound: "",
+            daily_frequency_every_time_count_start_outbound: "",
+            Schedule_configure_outbound: "schedule",
+            schedule_type_outbound: "Recurring",
+            one_time_occurrence_outbound_date: "",
+            one_time_occurrence_outbound_time: "",
+            occurs_outbound: "daily",
+            duration_inbound_start_date: "2022-06-28",
+            duration_inbound_is_end_date: "no_end_date",
+            duration_inbound_end_date: "",
+            duration_outbound_start_date: "",
+            duration_outbound_is_end_date: "no_end_date",
+            duration_outbound_end_date: "",
+            next_date_inbound: "NaN",
+            next_date_outbound: "NaN"
+        }
+    ]
+    console.log("add api", payload) 
+    
+        axios
+        .post("/project/item/add", payload)
+        .then((res) => {
+          if (res.status === 200) {
+            // const sortedData = res
+            // const newData = { data: [] }
+            // setApiDate(sortedData)
+            console.log("first,", res?.data)
+          }
+        })
+        .catch((error) => { console.log("error", error) })
+     }
+   
  }
+
 }
 
   console.log("first", props)
@@ -513,5 +622,9 @@ const handlesubmit = () => {
 </>
   )
 }
+const mapStateToProps = (state) => ({
+  itemDetailsData : state.itemDetails.itemDetails
+})
 
-export default Schedule
+const mapDispatchToProps = (dispatch) => ({})
+export default connect(mapStateToProps, mapDispatchToProps)(Schedule)  

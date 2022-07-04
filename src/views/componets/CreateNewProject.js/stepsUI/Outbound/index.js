@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { PlayCircle, Settings } from 'react-feather'
-import Outboundformat from './Outboundformat'
-import AppCollapse from "@components/app-collapse"
-// import Apifile from './apifile'
-import {Modal, ModalBody, ModalHeader, Container, Row, Col, Input, Collapse, Label, Card, CardHeader, CardTitle, CardBody, CustomInput, Button} from "reactstrap"
+import {Container, Row, Col, Input, Collapse, Label, Card, CardHeader, CardTitle, CardBody, CustomInput, Button} from "reactstrap"
 import Select from "react-select"
-
-// import { Container, Row, Button, Label, Input, Col, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-// import {Settings } from "react-feather"
 import  AnimatedModal from 'simple-react-animated-modal'
 import 'simple-react-animated-modal/dist/index.css'
 import DataGrid, {
@@ -16,9 +10,8 @@ import DataGrid, {
   Paging,
   Lookup
 } from 'devextreme-react/data-grid'
-import CheckBox from 'devextreme-react/check-box'
-import SelectBox from 'devextreme-react/select-box'
-
+import { connect, useDispatch } from "react-redux"
+import { itemsDetailsDataStore } from "@store/actions/itemDetails"
 const options1 = [
  { ID: 'AND', Name: 'AND'},
  { ID: 'OR', Name: 'OR'}
@@ -32,7 +25,6 @@ const options2 = [
   { ID: '<>', Name: '<>' },
   { ID: 'Not In', Name: 'Not In' },
   { ID: 'In', Name: 'In' }
-
 ]
 
 const startEditActions = ['click', 'dblClick']
@@ -104,7 +96,7 @@ const theme = theme => ({
   })
 
 const Outbound = (props) => {
-
+  const dispatch = useDispatch()
 const options = [
   { value: 'CSV', label: 'CSV' },
   { value: 'Excel', label: 'Excel' },
@@ -147,6 +139,11 @@ const saveAndNext = (isTrue) => {
    props.stepper.next()
   } else if (validation()) {
    props.stepper.next()
+   const passData = {
+    ...props?.itemDetailsData,
+    outbound : inputValue 
+   }
+  dispatch(itemsDetailsDataStore(passData))
  }
 }
 const handleChange = (e, type) => {
@@ -262,4 +259,9 @@ console.log("first", props)
   )
 }
 
-export default Outbound
+const mapStateToProps = (state) => ({
+  itemDetailsData : state.itemDetails.itemDetails
+})
+
+const mapDispatchToProps = (dispatch) => ({})
+export default connect(mapStateToProps, mapDispatchToProps)(Outbound)

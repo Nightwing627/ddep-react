@@ -15,8 +15,11 @@ import {
 import Select from 'react-select'
 import { Check, Star } from "react-feather"
 import "../Newitem.scss"
+import { connect, useDispatch } from "react-redux"
+import { itemsDetailsDataStore } from "@store/actions/itemDetails"
 
 const NewProject = (props) => {
+  const dispatch = useDispatch()
   const urls = window.location.href
   const [value, setValue] = useState()
   const [has, paramss] = urls?.split("newitem")[1]?.split("?")
@@ -29,9 +32,6 @@ const NewProject = (props) => {
   const [ExchangenameError, setExchangenameError] = useState("")
   const [ExchangeDescriptionError, setExchangeDescriptionError] = useState("")
   const [VersionError, setVersionError] = useState("")
-  // const [pcodeError, setpcodeError] = useState("")
-  // const [desError, setDesError] = useState("")
-
   const [errors, setErrors] = useState({}) 
   const validation = () => {
     const val = input
@@ -60,28 +60,7 @@ console.log("input", input)
     }  else {
       setVersionError('')
     }
-    //pcode
-    // if (input.pcode.trim() === "") {
-    //   flag = false
-    //   setpcodeError('pcode is required')
-    // } else if (special_char.test(input.pcode)) {
-    //   flag = false
-    //   setpcodeError('valid')
-    // } else {
-    //   setpcodeError('')
-    // }
-
-    // //pdescription
-    // if (input.pdescription.trim() === "") {
-    //   flag = false
-    //   setDesError('project descrition is required')
-    // } else if (special_char.test(input.pdescription)) {
-    //   flag = false
-    //   setDesError('valid')
-    // } else {
-    //   setDesError('')
-    // }
-   
+ 
     return flag
   }
  const saveAndNext = (isTrue) => {
@@ -90,13 +69,16 @@ console.log("input", input)
     props.stepper.next()
    } else if (validation()) {
     props.stepper.next()
+    const passData = { basic : input }
+    dispatch(itemsDetailsDataStore(passData))
+
   }
  }
   const handleChange = (e) => {
     const { name, value } = e.target
     setinput({...input, [name]: value})
   }
-  console.log("errors", errors)
+  console.log("errors", props?.itemDetailsData)
   return (
     <div>
       <Container>
@@ -112,7 +94,7 @@ console.log("input", input)
               // value={apiData?}
               name="Exchangename"
               // helperText={errors.pname}
-              // value={input.pname}
+              value={input.Exchangename}
               onChange={(e) => { handleChange(e); setExchangenameError("") }}
               variant="outlined"
               disabled={props?.isDisable} 
@@ -129,7 +111,7 @@ console.log("input", input)
               name="ExchangeDescription"
               disabled={props?.isDisable} 
                 // helperText={errors.pname}
-              // value={input.pname}
+              value={input.ExchangeDescription}
               onChange={(e) => { handleChange(e);  setExchangeDescriptionError("") }}
               variant="outlined"
             />
@@ -217,8 +199,7 @@ console.log("input", input)
         {props?.isDisable ?  "" :  <Button className="btn-relief " color="primary" >
             Save
        </Button>}
-      
-                <hr/>
+          <hr/>
       </Container>
       <div className="d-flex justify-content-between prev-next-btn-block">
           <Button color="primary" disabled>
@@ -236,4 +217,9 @@ console.log("input", input)
   )
 }
 
-export default NewProject
+const mapStateToProps = (state) => ({
+  itemDetailsData : state.itemDetails.itemDetails
+})
+
+const mapDispatchToProps = (dispatch) => ({})
+export default connect(mapStateToProps, mapDispatchToProps)(NewProject)

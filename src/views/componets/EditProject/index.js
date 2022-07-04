@@ -16,17 +16,6 @@ import Select from 'react-select'
 import { selectThemeColors } from '@utils'
 import '../../../assets/scss/EditProject.scss'
 import { useHistory } from "react-router-dom"
-import {
-  AvForm,
-  AvGroup,
-  AvField,
-  AvInput,
-  AvFeedback,
-  AvRadioGroup,
-  AvCheckboxGroup,
-  AvRadio,
-  AvCheckbox
-} from 'availity-reactstrap-validation-safe'
 import axios from "../../../utility/axios"
 const options = [
   { value: 'select', label: 'Select' },
@@ -57,7 +46,7 @@ const EditProject = ({ stepper, type }) => {
     pcode:"",
     Sequence:"",
     pdescription:"",
-    option:""
+    options:""
   })
   const [pnameError, setPnameError] = useState("")
   const [pcodeError, setpcodeError] = useState("")
@@ -71,9 +60,6 @@ const EditProject = ({ stepper, type }) => {
     if (input.pname.trim() === "") {
       flag = false
       setPnameError('Project name is required')
-    } else if (special_char.test(input.pname)) {
-      flag = false
-      setPnameError('valid')
     } else {
       setPnameError('')
     }
@@ -101,7 +87,7 @@ const EditProject = ({ stepper, type }) => {
       setSequence('')
     }
     //grp
-    if (input.option) {
+    if (input.options === "") {
       flag = false
       setoptionError('select  is required')
     } else {
@@ -113,17 +99,15 @@ const EditProject = ({ stepper, type }) => {
    
     if  (validate.projectCode !== "" && validate.projectName !== "") {
       history.push("/second-page/List")
-    } else {
-      console.log("validate project code is  empty")
-    }
+     
   }
   function handleChange(e, type) {
-    // const { name, value } = event.target
+    const { name, value } = e.target
     // seteditApidata({ ...editApidata, [name]: value })
-    seteditApidata(e.target.editApidata)
+      // seteditApidata(e.target.editApidata)
     console.log("e", e)
     if (type === "selectBox") {
-      setinput({...input, option : e})
+      setinput({...input, options : e})
     } else {
       const { name, value } = e.target
       setinput({...input, [name]: value})
@@ -149,50 +133,32 @@ const EditProject = ({ stepper, type }) => {
   const handlesave = () => {
     if (validation()) { 
       window.location.href = "/second-page/List"
+      const payload = [
+        {
+          projectCode: input?.projectCode,
+          projectName: input?.projectName,
+          projectDescr: input?.projectDescr,
+          group: input?.group,
+          isActive: "1"
+      }
+      ]
+      axios
+      .post("/project/modify/62bea32e1e1529e2dbd04d27", payload)
+      .then((res) => {
+        if (res.status === 200) {
+          // const sortedData = res
+          // const newData = { data: [] }
+          // setApiDate(sortedData)
+          console.log("cz,", res)
+        }
+      })
+      .catch((error) => { console.log("error", error) })
+   } else {
+      console.log("validate project code is  empty")
+    }
     } 
   }
   return (
-    // <Fragment>
-
-    //     <AvForm onSubmit={handleSubmit}>
-    //       <AvGroup>
-    //         <Label for='projectCode'>Project Code <span style={{color:'red'}}>*</span></Label>
-    //         <AvInput name='projectCode' disabled id='projectCode'  placeholder='Project Code' value={editApidata?.projectCode} onChange= { (e) => { handleChange(e) } }  required />
-    //         <AvFeedback>Please enter a valid Project Code!</AvFeedback>
-    //       </AvGroup>
-    //       <AvGroup>
-    //         <Label for='projectName'>Project Name <span style={{color:'red'}}>*</span></Label>
-    //         <AvInput name='projectName'  id='projectName' value={editApidata?.projectName}  onChange={ (e) => { handleChange(e) } }  placeholder='Project Name' required />
-    //         <AvFeedback>Please enter a valid Project Name!</AvFeedback>
-    //       </AvGroup>
-    //       <AvGroup>
-    //         <Label for='projectDescription'>Project Description</Label>
-    //         <AvInput name='projectDescription' type='textarea' value={editApidata?.projectDescr} rows='8' placeholder='Project Description' id='bprojectDescriptionio'  />
-    //         <AvFeedback>Please enter Project Description!</AvFeedback>
-    //       </AvGroup>
-    //       <AvGroup>
-    //         <Label for='sequence'>Sequence</Label>
-    //         <AvInput name='sequence'  placeholder='Sequence'  id='sequence'  />
-    //         <AvFeedback>Please enter a valid Sequence!</AvFeedback>
-    //       </AvGroup>
-    //       <AvGroup>
-    //         <Label for='group'>Group</Label>
-    //         <Select
-    //             value={editApidata?.group}
-    //             className='react-select'
-    //             classNamePrefix='select'
-    //             defaultValue={groupOptions[0]}
-    //             options={groupOptions}
-    //             isClearable={false}
-    //           />
-    //         <AvFeedback>Please select a Group</AvFeedback>
-    //       </AvGroup>
-    //       <Button color='primary' type='submit'  onClick={() => handlesave()}>
-    //         Save
-    //       </Button>
-    //     </AvForm>
-        
-    // </Fragment>
     <>
        <Box className='input-feild'>
           <div>
@@ -205,7 +171,7 @@ const EditProject = ({ stepper, type }) => {
                 fullWidth
                 name='pcode'
                 value={input.pcode}
-                disabled id='projectCode'
+                // disabled id='projectCode'
                 onChange={(e) => { handleChange(e); setpcodeError("") } }
                 variant="outlined"/>
                <span className='text-danger'>{pcodeError}</span>

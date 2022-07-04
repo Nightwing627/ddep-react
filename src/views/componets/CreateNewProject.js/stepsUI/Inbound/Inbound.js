@@ -4,9 +4,11 @@ import classnames from "classnames"
 import AppCollapse from "@components/app-collapse"
 import Radio from "@components/radio/RadioVuexy"
 import Select from "react-select"
-import Ddepapi from './Ddepapi'
 import {Treebeard,  decorators} from 'react-treebeard'
 import {  File, PlayCircle, Settings, Upload } from 'react-feather'
+import { connect, useDispatch } from "react-redux"
+import { itemsDetailsDataStore } from "@store/actions/itemDetails"
+
 const theme = theme => ({
   ...theme,
   colors: {
@@ -79,7 +81,7 @@ const dummyData = [
 
 // export default InboundFormat
 const Inbound = (props) => {
-
+  const dispatch = useDispatch()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [inputValue, setInputValue] = useState({
     inbound_format : props?.apiData?.inbound_setting?.inbound_format || "",
@@ -211,10 +213,15 @@ const Inbound = (props) => {
      props.stepper.next()
     } else if (validation()) {
      props.stepper.next()
+     const passData = {
+      ...props?.itemDetailsData,
+      inbound : inputValue 
+     }
+    dispatch(itemsDetailsDataStore(passData))
    }
 }
 console.log("dis", inputValue, props)
-
+console.log("2nd step", props?.itemDetailsData)  
 const Header = (props) => {
   return (
     <span className='header-contain'>
@@ -540,4 +547,10 @@ decorators.Header = Header
   )
 
 }
-export default Inbound
+
+const mapStateToProps = (state) => ({
+  itemDetailsData : state.itemDetails.itemDetails
+})
+
+const mapDispatchToProps = (dispatch) => ({})
+export default connect(mapStateToProps, mapDispatchToProps)(Inbound)
