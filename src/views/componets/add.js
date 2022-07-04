@@ -34,8 +34,9 @@ const Add = () => {
     pcode:"",
     Sequence:"",
     pdescription:"",
-    option:[]
+    options: ""
   })
+  // const [ ]
   const [pnameError, setPnameError] = useState("")
   const [pcodeError, setpcodeError] = useState("")
   const [desError, setDesError] = useState("")
@@ -50,7 +51,7 @@ const Add = () => {
   const handleChange = (e, type) => {
     console.log("e", e)
     if (type === "selectBox") {
-      setinput({...input, option : e})
+      setinput({...input, options : e})
     } else {
       const { name, value } = e.target
       setinput({...input, [name]: value})
@@ -119,7 +120,7 @@ const Add = () => {
       setSequence('')
     }
     //grp
-    if (input.option) {
+    if (input.options === "") {
       flag = false
       setoptionError('select  is required')
     } else {
@@ -152,8 +153,29 @@ const Add = () => {
     // e.preventDefault()
 
     if (validation()) {
-      console.log('hello')
-    }
+      const payload = [
+        {
+          projectCode: input?.pcode,
+          projectName: input?.pname,
+          projectDescr: input?.pdescription,
+          group:  input?.options?.value,
+          isActive: "1"
+      }
+      ]
+      console.log("PAYLOAD", payload)
+      axios
+      .post("/project/add", payload)
+      .then((res) => {
+        if (res.status === 200) {
+          // const sortedData = res
+          // const newData = { data: [] }
+          // setApiDate(sortedData)
+          console.log("c,", res)
+        }
+      })
+      .catch((error) => { console.log("error", error) })
+   }
+    
   }
     const breadcrumbs = [
         <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>

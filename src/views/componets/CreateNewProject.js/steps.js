@@ -79,8 +79,11 @@ export default function Steps() {
       })
       .catch((error) => { console.log("error", error) })
   }
+
+  
   useEffect(() => {
     getda2ta()
+   
   }, [])
   return (
   <>

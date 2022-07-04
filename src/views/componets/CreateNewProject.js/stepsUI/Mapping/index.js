@@ -1,9 +1,17 @@
 import React from 'react'
 import { Button } from 'reactstrap'
 import Mappings from "./mapping"
+import { connect, useDispatch } from "react-redux"
+import { itemsDetailsDataStore } from "@store/actions/itemDetails"
 const Mapping = (props) => {
+  
+  const dispatch = useDispatch()
     const saveAndNext = () => {
         props.stepper.next()
+        const passData = {
+          ...props?.itemDetailsData
+         }
+        dispatch(itemsDetailsDataStore(passData))
     }
     
   return (
@@ -28,4 +36,9 @@ const Mapping = (props) => {
     )
 }
 
-export default Mapping
+const mapStateToProps = (state) => ({
+  itemDetailsData : state.itemDetails.itemDetails
+})
+
+const mapDispatchToProps = (dispatch) => ({})
+export default connect(mapStateToProps, mapDispatchToProps)(Mapping)
