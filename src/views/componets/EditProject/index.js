@@ -32,6 +32,9 @@ const theme = theme => ({
   }
 })
 const EditProject = ({ stepper, type }) => {
+  const urls = window.location.href
+  const [has, paramss] = urls?.split("edit")[1]?.split("?") 
+  const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
   const history = useHistory()
     const [editApidata, seteditApidata] = useState({
     projectCode: "",
@@ -40,6 +43,7 @@ const EditProject = ({ stepper, type }) => {
     group:"",
     pj_ID:""
   })
+
   const [errors, setErrors] = useState({}) 
   const [input, setinput] = useState({
     pname:"",
@@ -53,6 +57,41 @@ const EditProject = ({ stepper, type }) => {
   const [desError, setDesError] = useState("")
   const [Sequence, setSequence] = useState("")
   const [optionError, setoptionError] = useState("")
+ 
+  const getdata = () => {
+    axios
+      .get(`/project/detail/${paramsObj?.pId}`)
+      .then((res) => {
+        if (res.status === 200) {
+          const sortedData = res?.data
+          const newData = { data: [] }
+          console.log("response", sortedData)
+          setinput({
+            pname: sortedData?.ProjectName,
+            pcode:sortedData?.ProjectCode, 
+            Sequence:"",
+            pdescription: sortedData?.ProjectDescr,
+            options:""
+          })
+          // window.location.href = "/second-page/List"
+        }
+      })
+      .catch((error) => { console.log("error", error) })
+  }
+  useEffect(() => {
+    getdata()
+  }, [])
+
+  const handleChange = (e, type) => {
+    console.log("e", e)
+    if (type === "selectBox") {
+      setinput({...input, options : e})
+    } else {
+      const { name, value } = e.target
+      setinput({...input, [name]: value})
+      console.log(input)
+    }  
+}
   const validation = () => {
     const val = input
     let flag = true
@@ -95,55 +134,22 @@ const EditProject = ({ stepper, type }) => {
     }
     return flag
   }
-  function handleSubmit() {
-   
-    if  (validate.projectCode !== "" && validate.projectName !== "") {
-      history.push("/second-page/List")
-     
-  }
-  function handleChange(e, type) {
-    const { name, value } = e.target
-    // seteditApidata({ ...editApidata, [name]: value })
-      // seteditApidata(e.target.editApidata)
-    console.log("e", e)
-    if (type === "selectBox") {
-      setinput({...input, options : e})
-    } else {
-      const { name, value } = e.target
-      setinput({...input, [name]: value})
-      console.log(input)
-    }  
-  }
-  const getdata = () => {
-    axios
-      .get("/project/detail/<project id>")
-      .then((res) => {
-        if (res.status === 200) {
-          const sortedData = res?.data
-          const newData = { data: [] }
-          
-          // window.location.href = "/second-page/List"
-        }
-      })
-      .catch((error) => { console.log("error", error) })
-  }
-  useEffect(() => {
-    getdata()
-  }, [])
   const handlesave = () => {
     if (validation()) { 
-      window.location.href = "/second-page/List"
+      // window.location.href = "/second-page/List"
       const payload = [
         {
-          projectCode: input?.projectCode,
-          projectName: input?.projectName,
-          projectDescr: input?.projectDescr,
-          group: input?.group,
+          projectCode: input?.pcode,
+          projectName: input?.pname,
+          projectDescr: input?.pdescription,
+          group: input?.options?.value,
           isActive: "1"
       }
+     
       ]
+      console.log("payload", payload)
       axios
-      .post("/project/modify/62bea32e1e1529e2dbd04d27", payload)
+      .post(`/project/modify/${paramsObj?.pId}`, payload)
       .then((res) => {
         if (res.status === 200) {
           // const sortedData = res
@@ -156,7 +162,14 @@ const EditProject = ({ stepper, type }) => {
    } else {
       console.log("validate project code is  empty")
     }
-    } 
+  }
+  function handleSubmit() {
+   
+    if  (validate.projectCode !== "" && validate.projectName !== "") {
+      history.push("/second-page/List")
+     
+  }
+  
   }
   return (
     <>
@@ -231,7 +244,7 @@ const EditProject = ({ stepper, type }) => {
   </FormGroup>
     </Grid>
       <Divider />
-      <Button color='primary' type='submit'  onClick={() => handlesave()}>
+      <Button color='primary' type='submit'  onClick={(e) => handlesave(e)}>
          Save
      </Button>
             </div>

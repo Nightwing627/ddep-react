@@ -170,13 +170,13 @@ class AllProjectList extends React.Component {
     onRowPreparedFunction (e) {
       e.rowElement.css({ height: 70, alignItems: "center"})
     }
-    editBtn = () => {
-      window.location.href = "/edit" 
+    editBtn = (e) => {
+      window.location.href = `/edit?pId=${e.row?.data?.pj_ID}` 
     }
     Handleadd = () => {
       window.location.href = "/newitem"
     }  
-   
+ 
      componentDidMount() {
        axios
           .get(`/project/fulllist`)
@@ -291,7 +291,7 @@ class AllProjectList extends React.Component {
                       <Button className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}> <Disc size={25}/></span></Button>
                       <Button  className="btn-Action" onClick={this.Handleadd} style={{cursor:"pointer"}}><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
                       <Button  className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}>  <RefreshCw size={25}/></span></Button>
-                      <Button onClick={this.editBtn} className="btn-Action"><span style={{cursor:"pointer"}} className='btn-Edit'>  <Edit size={25}/></span></Button> 
+                      <Button  onClick={(e) => this.editBtn(e)} className="btn-Action"><span style={{cursor:"pointer"}} className='btn-Edit'>  <Edit size={25}/></span></Button> 
                 
                       </Column>
                       <Toolbar>
