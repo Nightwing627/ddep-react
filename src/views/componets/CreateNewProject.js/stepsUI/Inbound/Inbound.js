@@ -96,8 +96,7 @@ const Inbound = (props) => {
   })
   console.log("first.....................", props?.apiData?.inbound_setting?.ftp_folder)
   const options = [
-    { value: 'CSV', label: 'CSV' },
-    { value: 'Excel', label: 'Excel' },
+   
     { value: 'json', label: 'JSON' },
     { value: 'xml', label: 'XMl'}
   ] 
