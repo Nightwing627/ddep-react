@@ -153,15 +153,14 @@ const Add = () => {
     // e.preventDefault()
 
     if (validation()) {
-      const payload = [
-        {
+      const payload = {
           projectCode: input?.pcode,
           projectName: input?.pname,
           projectDescr: input?.pdescription,
           group:  input?.options?.value,
           isActive: "1"
       }
-      ]
+      
       console.log("PAYLOAD", payload)
       axios
       .post("/project/add", payload)

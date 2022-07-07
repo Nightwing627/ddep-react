@@ -18,10 +18,9 @@ import '../../../assets/scss/EditProject.scss'
 import { useHistory } from "react-router-dom"
 import axios from "../../../utility/axios"
 const options = [
-  { value: 'select', label: 'Select' },
-  { value: 'bgrs', label: 'BGRS' },
-  { value: 'i-rms', label: 'I-RMS' },
-  { value: 'global', label: 'Global' }
+  { value: 'BGRS', label: 'BGRS' },
+  { value: 'I-RMS', label: 'I-RMS' },
+  { value: 'Global', label: 'Global' }
 ]
 const theme = theme => ({
   ...theme,
@@ -70,8 +69,8 @@ const EditProject = ({ stepper, type }) => {
             pname: sortedData?.ProjectName,
             pcode:sortedData?.ProjectCode, 
             Sequence:"",
-            pdescription: sortedData?.ProjectDescr,
-            options:""
+            pdescription: sortedData?.CompanyName,
+            options: sortedData?.group
           })
           // window.location.href = "/second-page/List"
         }
@@ -85,7 +84,7 @@ const EditProject = ({ stepper, type }) => {
   const handleChange = (e, type) => {
     console.log("e", e)
     if (type === "selectBox") {
-      setinput({...input, options : e})
+      setinput({...input, options : e.value})
     } else {
       const { name, value } = e.target
       setinput({...input, [name]: value})
@@ -137,16 +136,16 @@ const EditProject = ({ stepper, type }) => {
   const handlesave = () => {
     if (validation()) { 
       // window.location.href = "/second-page/List"
-      const payload = [
+      const payload = 
         {
           projectCode: input?.pcode,
           projectName: input?.pname,
           projectDescr: input?.pdescription,
-          group: input?.options?.value,
+          group: input?.options,
           isActive: "1"
       }
      
-      ]
+      
       console.log("payload", payload)
       axios
       .post(`/project/modify/${paramsObj?.pId}`, payload)
@@ -238,7 +237,7 @@ const EditProject = ({ stepper, type }) => {
     <Label for="exampleSelect" className="form-text">
     Group
     </Label>    
-    <Select  options={options}  theme={theme}  className="React" onChange={(e) => { handleChange(e, "selectBox"); setoptionError("") }}/>
+    <Select value={options && options.find((op) => { return op.value === input.options })}  options={options}  theme={theme}  className="React" onChange={(e) => { handleChange(e, "selectBox"); setoptionError("") }}/>
     <span className='text-danger'>{optionError}</span>
     
   </FormGroup>
