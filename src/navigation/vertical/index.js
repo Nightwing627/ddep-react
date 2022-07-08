@@ -11,7 +11,7 @@ export default [
     id: 'secondPage',
     title: 'Project',
     icon: <FileText size={20} />,
-    navLink: '/second-page',
+    navLink: '/projects',
     children: [
       {
 
@@ -22,7 +22,7 @@ export default [
         // type: "item",
         icon: <Circle size={12} />,
         // permissions: ["admin", "editor"],
-        navLink: "/second-page/List"
+        navLink: "/projects/project-list"
       },
       {
         id: "secondPage",

@@ -11,6 +11,8 @@ import Outbound from './stepsUI/Outbound'
 import Schedule from "./stepsUI/Schedule"
 import Mapping from './stepsUI/Mapping'
 import axios from "../../../utility/axios"
+import { useParams } from 'react-router-dom'
+
 export default function Steps() { 
   const [stepper, setStepper] = useState(null)
   const myRef = React.useRef(null)  
@@ -22,13 +24,13 @@ export default function Steps() {
   })
   const [apiData, setApiDate] = useState(null)
   const urls = window.location.href
-  const [has, paramss] = urls?.split("newitem")[1]?.split("?") 
+  const [has, paramss] = urls?.split("projects")[1]?.split("?") 
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
-
+  const params = useParams()
   const step = [
     {
       id: "create-new-item",
-      title:  paramsObj?.orderCode ?  "Edit" : "Create New Item",
+      title:  params?.id ?  "Edit" : "Create New Item",
       subtitle: "",
       icon: 1,
        content: <NewProject stepper={stepper} apiData={apiData} isDisable={paramsObj?.isView}/>
@@ -64,7 +66,7 @@ export default function Steps() {
       content: <Schedule stepper={stepper} apiData={apiData} isDisable={paramsObj?.isView}/>
     }
   ]
-  console.log("janki", apiData)
+  console.log("janki", paramsObj?.isView)
 
   const getda2ta = () => {
     axios

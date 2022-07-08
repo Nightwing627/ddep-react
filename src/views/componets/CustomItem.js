@@ -35,10 +35,10 @@ class CustomItem extends React.Component {
     e.rowElement.css({ height: 70, alignItems: "center"})
   }
   editBtn = () => {
-    window.location.href = "/newitem?orderCode=1"
+    window.location.href = "/projects/edit/62aa1710be609e225d411275"
   }
   viewbtn = () => {
-    window.location.href = "/newitem?orderCode=1&isView=true"
+    window.location.href = "/projects/edit/62aa1710be609e225d411275=1?isView=true"
     console.log("first")
   }
   handleopen  ()  {
