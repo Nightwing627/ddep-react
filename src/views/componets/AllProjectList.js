@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-
 import ODataStore from 'devextreme/data/odata/store'
 import {
   Column,
@@ -177,57 +176,63 @@ class AllProjectList extends React.Component {
       window.location.href = "/projects/add"
     }  
  
-     componentDidMount() {
-       axios
-          .get(`/project/fulllist`)
-          .then((res) => {
-            if (res.status === 200) { 
-              /*eslint no-var: "error"*/
-              /*eslint-env es6*/
-              const sortedData = res?.data?.data
-              const redesignArray = []
-              sortedData?.map((item, index) => {
-                const obj = {
-                  ...item,
-                  ID: item?.pj_ID
-                }
-                return (
-                  redesignArray[index] = obj
-                )
-              })  
-       
-              this.setState({ Allprojectdata: redesignArray })  
-              /*eslint no-var: "error"*/ 
-              /*eslint-env es6*/
-              let formattedArray = []
-              sortedData.forEach(obj => {
-               /*eslint-env es6*/
-               
-                const subArray = []
-                const subArr = obj?.items
-               
-                subArr.map((subitem, j) => {
-                  const object = {
-                    ...subitem,
-                    id: obj?.pj_ID,
-                    ID: j
-                  }
-                  return  (
-                    subArray[j] = object
-                  )
-                })
-                formattedArray = formattedArray.concat(subArray)
-              })
-              const finalArray = JSON.stringify(formattedArray)
-             
-              localStorage.setItem('projectFullData', finalArray)
-              console.log("res", res)
-            }
-          })
-          .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) })
+     componentDidMount ()  {
+        this.projectList()
         }
+    projectList () {
+      axios
+      .get(`/project/fulllist`)
+      .then((res) => {
+        console.log("status", res.status)
+        if (res.status === 200) { 
+          
+          /*eslint no-var: "error"*/
+          /*eslint-env es6*/
+          const sortedData = res?.data?.data
+          const redesignArray = []
+          sortedData?.map((item, index) => {
+            const obj = {
+              ...item,
+              ID: item?.pj_ID
+            }
+            return (
+              redesignArray[index] = obj
+            )
+          })  
+   
+          this.setState({ Allprojectdata: redesignArray })  
+          /*eslint no-var: "error"*/ 
+          /*eslint-env es6*/
+          let formattedArray = []
+          sortedData.forEach(obj => {
+           /*eslint-env es6*/
+           
+            const subArray = []
+            const subArr = obj?.items
+           
+            subArr.map((subitem, j) => {
+              const object = {
+                ...subitem,
+                id: obj?.pj_ID,
+                ID: j
+              }
+              return  (
+                subArray[j] = object
+              )
+            })
+            formattedArray = formattedArray.concat(subArray)
+          })
+          const finalArray = JSON.stringify(formattedArray)
+         
+          localStorage.setItem('projectFullData', finalArray)
+          console.log("res", res)
+        }
+      })
+      .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) }) 
+
+    }    
     handleopen() {
-              this.props.history.push("/projects/add")
+              this.props.history.push("/secondpage/Add")
             }
       render() {
       
@@ -238,7 +243,7 @@ class AllProjectList extends React.Component {
             <div className='clearfix '>
             <div className='float-right'>
               <div className='d-flex ' style={{columnGap: "1.5em", marginTop:"15px"}}>
-              <button className='btn-Create-New-Project' onClick={() => this.handleopen()} ><Plus size={15}/>Item Page</button>
+              <button className='btn-Create-New-Project' onClick={() => this.handleopen()} ><Plus size={15}/>Create New Project</button>
               </div>
             </div>
           </div>

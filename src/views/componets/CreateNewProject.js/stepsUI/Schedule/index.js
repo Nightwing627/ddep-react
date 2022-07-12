@@ -615,7 +615,7 @@ const handlesubmit = () => {
       color="primary"
       className="ml-1"
     >
-    submit
+    Submit
     </Button>
     
 </div>

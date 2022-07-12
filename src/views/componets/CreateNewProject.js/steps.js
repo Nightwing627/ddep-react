@@ -30,7 +30,7 @@ export default function Steps() {
   const step = [
     {
       id: "create-new-item",
-      title:  params?.id ?  "Edit" : "Create New Item",
+      title:  params?.id ?  "Edit" : "create new project",
       subtitle: "",
       icon: 1,
        content: <NewProject stepper={stepper} apiData={apiData} isDisable={paramsObj?.isView}/>
