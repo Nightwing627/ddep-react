@@ -174,7 +174,7 @@ class AllProjectList extends React.Component {
       window.location.href = `/edit?pId=${e.row?.data?.pj_ID}` 
     }
     Handleadd = () => {
-      window.location.href = "/newitem"
+      window.location.href = "/projects/add"
     }  
  
      componentDidMount() {
@@ -227,7 +227,7 @@ class AllProjectList extends React.Component {
           .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) })
         }
     handleopen() {
-              this.props.history.push("/secondPage/Add")
+              this.props.history.push("/projects/add")
             }
       render() {
       

@@ -17,13 +17,14 @@ import { Check, Star } from "react-feather"
 import "../Newitem.scss"
 import { connect, useDispatch } from "react-redux"
 import { itemsDetailsDataStore } from "@store/actions/itemDetails"
-
+import { useParams } from 'react-router-dom'
 const NewProject = (props) => {
   const dispatch = useDispatch()
   const urls = window.location.href
   const [value, setValue] = useState()
-  const [has, paramss] = urls?.split("newitem")[1]?.split("?")
+  const [has, paramss] = urls?.split("projects")[1]?.split("?")
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
+  const params = useParams()
   const [input, setinput] = useState({
     Exchangename:"",
     ExchangeDescription:"",
@@ -33,10 +34,14 @@ const NewProject = (props) => {
   const [ExchangeDescriptionError, setExchangeDescriptionError] = useState("")
   const [VersionError, setVersionError] = useState("")
   const [errors, setErrors] = useState({}) 
+
+  const handlesave = () => {
+    localStorage.setItem("key", "input")
+    console.log("input", input)
+  }
   const validation = () => {
     const val = input
     let flag = true
-console.log("input", input)
 
     // Exchangename
     if (input.Exchangename.trim() === "") {
@@ -82,7 +87,7 @@ console.log("input", input)
   return (
     <div>
       <Container>
-      <h5 className='font-item item-wrap'>{paramsObj?.orderCode ?  "Edit item" : "Create New item"}</h5>
+      <h5 className='font-item item-wrap'>{params?.id ?  "Edit item" : "Create New item"}</h5>
         <Row className="mb-2">
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
@@ -196,7 +201,7 @@ console.log("input", input)
             {/* {validation.pname && <p>{validation.pname}</p>} */}
           {/* </Col>
         </Row> */} 
-        {props?.isDisable ?  "" :  <Button className="btn-relief " color="primary" >
+        {props?.isDisable ?  "" :  <Button className="btn-relief " color="primary" onClick={() => handlesave()}>
             Save
        </Button>}
           <hr/>

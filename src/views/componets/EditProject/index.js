@@ -165,7 +165,7 @@ const EditProject = ({ stepper, type }) => {
   function handleSubmit() {
    
     if  (validate.projectCode !== "" && validate.projectName !== "") {
-      history.push("/second-page/List")
+      history.push("/projects/project-list")
      
   }
   

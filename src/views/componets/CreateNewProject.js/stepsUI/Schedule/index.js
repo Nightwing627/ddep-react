@@ -161,7 +161,7 @@ const handleChange = (e, type) => {
   }  
 }
 const urls = window.location.href
-const [has, paramss] = urls?.split("newitem")[1]?.split("?") 
+const [has, paramss] = urls?.split("projects")[1]?.split("?") 
 const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
 const [optionError, setoptionError] = useState("")
 const validation = () => {

@@ -240,8 +240,8 @@ decorators.Header = Header
         <span>Inbound</span>
       <Button
           color="primary"
-           outline  >
-          <PlayCircle size={15} />
+           outline >
+          <PlayCircle className="mr-1" size={15} />
           Active
         </Button>
       </div>

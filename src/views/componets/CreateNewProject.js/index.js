@@ -7,15 +7,18 @@ import  Steps  from "./steps"
 import { Button, Card, CardBody, Input, Label, FormGroup } from 'reactstrap'
 import "../../../@core/scss/newprojectadd.scss"
 import "./Newitem.scss"
+import { useParams } from 'react-router-dom'
+
 function handleClick(event) {
   event.preventDefault()
   console.info('You clicked a breadcrumb.') 
 }
 const Index = () => {
   const urls = window.location.href
-  const [has, paramss] = urls?.split("newitem")[1]?.split("?")
+  const [has, paramss] = urls?.split("projects")[1]?.split("?")
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
-  
+  const params = useParams()
+  console.log('paramsObj', params)
   const breadcrumbs = [
     <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
       Item
@@ -26,7 +29,7 @@ const Index = () => {
       color="inherit"
       onClick={(e) => handleClick(e)}
     >
-   {paramsObj?.orderCode ?  "Edit" : "Add"}
+   {params?.id ?  "Edit" : "Add"}
     </Link>
    
   ]

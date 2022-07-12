@@ -48,7 +48,7 @@ const NavbarUser = props => {
      toggle={() => handleToggle()} 
      className="dropdwon-menu"
   >
-    <DropdownToggle caret>
+    <DropdownToggle >
     
 
     <ReactCountryFlag className="country-flag" countryCode="us"  style={{

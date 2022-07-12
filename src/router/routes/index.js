@@ -16,12 +16,24 @@ const Routes = [
     path: '/secondpage/Add',
     component: lazy(() => import('../../views/componets/add'))
   },
+  // {
+  //   path: '/projects/project-list',
+  //   component: lazy(() => import('../../views/componets/add'))
+  // },
   {
-    path: '/second-page/List',
+    path: '/projects/project-list',
     component: lazy(() => import('../../views/componets/AllProjectList'))
   },
   {
-    path: '/newitem',
+    path: '/pronewitem',
+    component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
+  },
+  {
+    path: '/projects/add',
+    component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
+  },
+  {
+    path: '/projects/edit/:id',
     component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
   },
   {
