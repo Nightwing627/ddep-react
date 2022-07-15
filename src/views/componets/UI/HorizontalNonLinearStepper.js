@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function getSteps() {
-  return ["1", 'Create New Project']
+  return ["1", 'Create Project Page']
 }
 
 function getStepContent(step) {
