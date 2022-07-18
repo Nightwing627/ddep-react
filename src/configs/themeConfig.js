@@ -4,7 +4,7 @@
 const themeConfig = {
   app: {
     appName: 'DDEP',
-    appLogoImage: require('@src/assets/images/logo/logo.svg').default
+    appLogoImage: require('@src/assets/images/logo/a4appz.png').default
   },
   layout: {
     isRTL: false,

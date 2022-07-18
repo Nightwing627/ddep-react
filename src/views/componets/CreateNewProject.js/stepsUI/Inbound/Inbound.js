@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {Modal, ModalBody, ModalHeader, Container, Row, Col, Input, Collapse, Label, Card, CardHeader, CardTitle, CardBody, CustomInput, Button} from "reactstrap"
 import classnames from "classnames"
 import AppCollapse from "@components/app-collapse"
@@ -94,7 +94,21 @@ const Inbound = (props) => {
     ftp_folder: props?.apiData?.inbound_setting?.ftp_folder || "",
     host : ""
   })
-  console.log("first.....................", props?.apiData?.inbound_setting?.ftp_folder)
+  useEffect(() => {
+    setInputValue({
+      inbound_format : props?.apiData?.inbound_setting?.inbound_format || "",
+    api_ddep_api:props?.apiData?.inbound_setting?.api_ddep_api || "",
+    ftp_server_link:  props?.apiData?.inbound_setting?.ftp_server_link || "",
+    ftp_port: props?.apiData?.inbound_setting?.ftp_port || "",
+    ftp_login_name: props?.apiData?.inbound_setting?.ftp_login_name || "",
+    ftp_password:  props?.apiData?.inbound_setting?.ftp_password || "",
+    is_password_encrypted: props?.apiData?.inbound_setting?.is_password_encrypted || "",
+    ftp_folder: props?.apiData?.inbound_setting?.ftp_folder || "",
+    host : ""
+    })
+    console.log("props?.apiData?", inputValue)
+   }, [props?.apiData])
+  console.log("first......", props?.apiData?.inbound_setting?.api_ddep_api)
   const options = [
    
     { value: 'json', label: 'JSON' },

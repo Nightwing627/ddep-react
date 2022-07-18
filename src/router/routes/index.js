@@ -4,16 +4,16 @@ import { lazy } from 'react'
 const TemplateTitle = '%s - Vuexy React Admin Template'
 
 // ** Default Route
-const DefaultRoute = '/home'
+const DefaultRoute = '/projects/project-list'
 
 // ** Merge Routes
 const Routes = [
+  // {
+  //   path: '/home',
+  //   component: lazy(() => import('../../views/Home'))
+  // },
   {
-    path: '/home',
-    component: lazy(() => import('../../views/Home'))
-  },
-  {
-    path: '/secondpage/Add',
+    path: '/projects/add',
     component: lazy(() => import('../../views/componets/add'))
   },
   // {
@@ -29,15 +29,15 @@ const Routes = [
     component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
   },
   {
-    path: '/projects/add',
+    path: '/projects/item/add',
+    component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
+  },
+  {
+    path: '/projects/item/edit/:id',
     component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
   },
   {
     path: '/projects/edit/:id',
-    component: lazy(() => import('../../views/componets/CreateNewProject.js/index'))   
-  },
-  {
-    path: '/Edit',
     component: lazy(() => import('../../views/componets/wizard/EditStepper'))
   },
   {

@@ -1,4 +1,4 @@
-import { React, Fragment, useState, useEffect  } from "react"
+import { React, Fragment, useState, useEffect   } from "react"
 import {
   Card,
   CardHeader,
@@ -15,8 +15,9 @@ import { FormHelperText, Grid, Box, Divider, Typography } from "@material-ui/cor
 import Select from 'react-select'
 import { selectThemeColors } from '@utils'
 import '../../../assets/scss/EditProject.scss'
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import axios from "../../../utility/axios"
+import SweetAlert from "react-bootstrap-sweetalert"
 const options = [
   { value: 'BGRS', label: 'BGRS' },
   { value: 'I-RMS', label: 'I-RMS' },
@@ -32,9 +33,11 @@ const theme = theme => ({
 })
 const EditProject = ({ stepper, type }) => {
   const urls = window.location.href
-  const [has, paramss] = urls?.split("edit")[1]?.split("?") 
+  const [has, paramss] = urls?.split("projects")[1]?.split("?") 
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
   const history = useHistory()
+  const params = useParams()
+
     const [editApidata, seteditApidata] = useState({
     projectCode: "",
     projectName: "",
@@ -42,7 +45,11 @@ const EditProject = ({ stepper, type }) => {
     group:"",
     pj_ID:""
   })
-
+  const [alertDetail, setAlertDetails] = useState({
+    show: false,
+    msg: "",
+    success: false
+  })
   const [errors, setErrors] = useState({}) 
   const [input, setinput] = useState({
     pname:"",
@@ -53,13 +60,20 @@ const EditProject = ({ stepper, type }) => {
   })
   const [pnameError, setPnameError] = useState("")
   const [pcodeError, setpcodeError] = useState("")
-  const [desError, setDesError] = useState("")
-  const [Sequence, setSequence] = useState("")
+  // const [desError, setDesError] = useState("")
+  // const [Sequence, setSequence] = useState("")
   const [optionError, setoptionError] = useState("")
- 
+
+  const handleConfirm = () => {
+    if (alertDetail?.show === true) {
+      window.location.href = `/projects/project-list` 
+    }
+    setAlertDetails({ show: false, msg: "", success: false})
+  }
+
   const getdata = () => {
     axios
-      .get(`/project/detail/${paramsObj?.pId}`)
+      .get(`/project/detail/${params?.id}`)
       .then((res) => {
         if (res.status === 200) {
           const sortedData = res?.data
@@ -110,20 +124,20 @@ const EditProject = ({ stepper, type }) => {
       setpcodeError('')
     }
 
-    //pdescription
-    if (input.pdescription.trim() === "") {
-      flag = false
-      setDesError('project descrition is required')
-    } else {
-      setDesError('')
-    }
+    // //pdescription
+    // if (input.pdescription.trim() === "") {
+    //   flag = false
+    //   setDesError('project descrition is required')
+    // } else {
+    //   setDesError('')
+    // }
     //Sequence
-    if (input.Sequence.trim() === "") {
-      flag = false
-      setSequence('Sequence is required')
-    } else {
-      setSequence('')
-    }
+    // if (input.Sequence.trim() === "") {
+    //   flag = false
+    //   setSequence('Sequence is required')
+    // } else {
+    //   setSequence('')
+    // }
     //grp
     if (input.options === "") {
       flag = false
@@ -148,13 +162,19 @@ const EditProject = ({ stepper, type }) => {
       
       console.log("payload", payload)
       axios
-      .post(`/project/modify/${paramsObj?.pId}`, payload)
+      .post(`/project/modify/${params?.id}`, payload)
       .then((res) => {
         if (res.status === 200) {
           // const sortedData = res
           // const newData = { data: [] }
           // setApiDate(sortedData)
           console.log("cz,", res)
+       
+          setAlertDetails({
+            show: true,
+            msg: "Data Edit Sucessfully",
+            success: true
+          })
         }
       })
       .catch((error) => { console.log("error", error) })
@@ -162,16 +182,25 @@ const EditProject = ({ stepper, type }) => {
       console.log("validate project code is  empty")
     }
   }
-  function handleSubmit() {
+  // function handleSubmit() {
    
-    if  (validate.projectCode !== "" && validate.projectName !== "") {
-      history.push("/projects/project-list")
+  //   if  (validate.projectCode !== "" && validate.projectName !== "") {
+  //     history.push("/projects/project-list")
      
-  }
+  // }
   
-  }
+  // }
   return (
     <>
+    <SweetAlert
+        error={!alertDetail.success}
+        success={alertDetail.success}
+        show={alertDetail.show}
+        
+        onConfirm={() => handleConfirm()}
+      >
+        {alertDetail.msg}
+      </SweetAlert>
        <Box className='input-feild'>
           <div>
             <Grid item xs={12} md={12} className="project-text">
@@ -205,16 +234,16 @@ const EditProject = ({ stepper, type }) => {
             <Grid item xs={12} md={12}   className="project-text">
                 <Label className="form-text">
                 Project Description
-                   
+                  
                 </Label>
                 <Input type="textarea"
                 fullWidth
                 multiple
                 value={input.pdescription}
                 name='pdescription'
-                onChange={(e) => { handleChange(e); setDesError("") }}
+                onChange={(e) => { handleChange(e) }}
                 variant="outlined"/>
-                <span className='text-danger'>{desError}</span>
+                {/* <span className='text-danger'>{desError}</span> */}
             </Grid>
             <Grid item xs={12} md={12}  className="project-text">
                 <Label className="form-text">
@@ -224,9 +253,9 @@ const EditProject = ({ stepper, type }) => {
                 fullWidth
                 name='Sequence'
                 value={input.Sequence}
-                onChange={(e) => { handleChange(e); setSequence("") }}
+                onChange={(e) => { handleChange(e) }}
                 variant="outlined"/>
-                <span className='text-danger'>{Sequence}</span>
+                {/* <span className='text-danger'>{Sequence}</span> */}
             </Grid>
             <Grid item xs={12} md={12}  className="project-text grp-text">
                 

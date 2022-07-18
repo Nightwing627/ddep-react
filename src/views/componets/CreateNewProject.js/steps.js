@@ -44,7 +44,7 @@ export default function Steps() {
     },
     {
       id: "outbound",
-      title: "outbound",
+      title: "Outbound",
       subtitle: "",
       icon: 3,
       // content: "Create New Item"
@@ -66,11 +66,10 @@ export default function Steps() {
       content: <Schedule stepper={stepper} apiData={apiData} isDisable={paramsObj?.isView}/>
     }
   ]
-  console.log("janki", paramsObj?.isView)
 
   const getda2ta = () => {
     axios
-      .get("/project/item/detail/62592d4a5c4b8a9d970b56aa")
+      .get(`/project/item/detail/${params.id}`)
       .then((res) => {
         if (res.status === 200) {
           const sortedData = res?.data?.data

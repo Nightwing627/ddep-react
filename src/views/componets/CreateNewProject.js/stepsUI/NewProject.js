@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   Container,
   Col,
@@ -26,36 +26,49 @@ const NewProject = (props) => {
   const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
   const params = useParams()
   const [input, setinput] = useState({
-    Exchangename:"",
+    ItemCode : props?.apiData?.basic?.ItemCode || "",
+    ExchangeName : props?.apiData?.basic?.ItemName || "",
     ExchangeDescription:"",
+    CompanyName: props?.apiData?.basic?.CompanyName || "",
     Version:""
   })
+ useEffect(() => {
+  setinput({
+    ItemCode : props?.apiData?.basic?.ItemCode || "",
+    ExchangeName : props?.apiData?.basic?.ItemName || "",
+    ExchangeDescription:"",
+    CompanyName: props?.apiData?.basic?.CompanyName || "",
+    Version:""
+  })
+  console.log("props?.apiData?", input)
+ }, [props?.apiData])
   const [ExchangenameError, setExchangenameError] = useState("")
+  const [CompanyNameError, setCompanyNameError] = useState("")
   const [ExchangeDescriptionError, setExchangeDescriptionError] = useState("")
   const [VersionError, setVersionError] = useState("")
   const [errors, setErrors] = useState({}) 
-
+ 
   const handlesave = () => {
-    localStorage.setItem("key", "input")
+    localStorage.setItem("key", "input") 
     console.log("input", input)
   }
   const validation = () => {
     const val = input
     let flag = true
-
+console.log("input", input)
     // Exchangename
-    if (input.Exchangename.trim() === "") {
+    if (input.ExchangeName.trim() === "") {
       flag = false
       setExchangenameError('Exchange Name is required')
     }  else {
       setExchangenameError('')
     }
-    // Exchange Description
-    if (input.ExchangeDescription.trim() === "") {
+    // Company Name
+    if (input.CompanyName.trim() === "") {
       flag = false
-      setExchangeDescriptionError('Exchange Description  is required')
+      setCompanyNameError('Company Name is required')
     } else {
-      setExchangeDescriptionError('')
+      setCompanyNameError('')
     }
 
     // Version
@@ -83,12 +96,29 @@ const NewProject = (props) => {
     const { name, value } = e.target
     setinput({...input, [name]: value})
   }
-  console.log("errors", props?.itemDetailsData)
+  // console.log("errors", props?.itemDetailsData)
   return (
     <div>
       <Container>
       <h5 className='font-item item-wrap'>{params?.id ?  "Edit item" : "Create New item"}</h5>
         <Row className="mb-2">
+        <Col xs="4" className="project-text">
+            <Label className="form-text font-item input-wrap">
+             Item Code 
+              <span className="valid_star">*</span>
+            </Label>
+            <Input
+              fullWidth
+              // value={apiData?}
+              name=" Item Code "
+              // helperText={errors.pname}
+              value={input.ItemCode}
+              onChange={(e) => { handleChange(e); setExchangenameError("") }}
+              variant="outlined"
+              disabled={props?.isDisable} 
+            />
+            <span className='text-danger'>{ExchangenameError}</span>
+          </Col>
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
              Exchange Name 
@@ -99,7 +129,7 @@ const NewProject = (props) => {
               // value={apiData?}
               name="Exchangename"
               // helperText={errors.pname}
-              value={input.Exchangename}
+              value={input.ExchangeName}
               onChange={(e) => { handleChange(e); setExchangenameError("") }}
               variant="outlined"
               disabled={props?.isDisable} 
@@ -109,7 +139,7 @@ const NewProject = (props) => {
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
             Exchange Description
-              <span className="valid_star">*</span>
+              {/* <span className="valid_star">*</span> */}
             </Label>
             <Input
               fullWidth
@@ -117,12 +147,31 @@ const NewProject = (props) => {
               disabled={props?.isDisable} 
                 // helperText={errors.pname}
               value={input.ExchangeDescription}
-              onChange={(e) => { handleChange(e);  setExchangeDescriptionError("") }}
+              onChange={(e) => { handleChange(e) }}
               variant="outlined"
             />
-            <span className='text-danger'>{ExchangeDescriptionError}</span>
+            {/* <span className='text-danger'>{ExchangeDescriptionError}</span> */}
           </Col>
-          <Col xs="4" className="project-text">
+          
+        </Row> 
+        <Row className="mb-2">
+        <Col xs="4" className="project-text">
+            <Label className="form-text font-item input-wrap">
+            Company Name
+              <span className="valid_star">*</span>
+            </Label>
+            <Input
+              fullWidth
+              name="Company Name"
+              // helperText={errors.pname}
+              value={input.CompanyName}
+              disabled={props?.isDisable} 
+              onChange={(e) => { handleChange(e); setCompanyNameError("") }}
+              variant="outlined"
+            />
+            <span className='text-danger'>{setCompanyNameError}</span>
+          </Col>
+        <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
             Version
               <span className="valid_star">*</span>
@@ -138,69 +187,8 @@ const NewProject = (props) => {
             />
             <span className='text-danger'>{VersionError}</span>
           </Col>
-        </Row>
-      
-        
-        {/* <h5 className='font-item alerts'>Alerts</h5> */}
-        {/* <FormGroup className=''>
-          <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-        </FormGroup> */}
-        {/* <Form>
-          <CustomInput
-            inline
-            type="checkbox"
-            id="Inbound Successful"
-            label="Inbound Successful"
-            defaultChecked
-            color="primary"
-          />
-          <CustomInput
-            inline
-            type="checkbox"
-            id="Inbound Fail"
-            label="Inbound Fail"
-            color="primary"
-          />         
-          <CustomInput
-            inline
-            type="checkbox"
-            id="Outbound Successful"
- 
-            label="Outbound Successful "
-            defaultChecked
-            color="primary"
-          />        
-          <CustomInput
-            inline
-            type="checkbox"
-            id="Outbound Fail"
-            label="Outbound Fail"
-            color="primary"
-          />
-          
-        </Form> */}
-        {/* <br />
-        <Row>
-          <Col xs="1" className="project-text item-wrap">
-            <Label className="form-text font-item">
-             Send Email To
-             
-              <span className="valid_star">*</span>
-            </Label>
-            </Col>
-             <Col xs="4">
-            <Input
-              fullWidth
-              name="pname"
-              // helperText={errors.pname}
-              // value={input.pname}
-              onChange={(e) => handleChange(e)}
-              variant="outlined"
-              placeholder="xxxx@xxx.com"
-            />
-            {/* {validation.pname && <p>{validation.pname}</p>} */}
-          {/* </Col>
-        </Row> */} 
+          <Col xs="4"></Col>
+        </Row>     
         {props?.isDisable ?  "" :  <Button className="btn-relief " color="primary" onClick={() => handlesave()}>
             Save
        </Button>}

@@ -1,12 +1,12 @@
 import { Mail, Home, Circle, FileText, Settings} from 'react-feather'
 
 export default [
-  {
-    id: 'home',
-    title: 'Home',
-    icon: <Home size={20} />,
-    navLink: '/home'
-  },
+  // {
+  //   id: 'home',
+  //   title: 'Home',
+  //   icon: <Home size={20} />,
+  //   navLink: '/home'
+  // },
   {
     id: 'secondPage',
     title: 'Project',
@@ -26,11 +26,11 @@ export default [
       },
       {
         id: "secondPage",
-        title: "add",
+        title: "Add",
         // type: "item",
         icon: <Circle size={12} />,
         // permissions: ["admin", "editor"],
-        navLink: "/secondPage/Add"
+        navLink: "/projects/add"
       }
     ]
   }

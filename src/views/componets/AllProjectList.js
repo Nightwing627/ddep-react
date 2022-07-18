@@ -170,10 +170,10 @@ class AllProjectList extends React.Component {
       e.rowElement.css({ height: 70, alignItems: "center"})
     }
     editBtn = (e) => {
-      window.location.href = `/edit?pId=${e.row?.data?.pj_ID}` 
+      window.location.href = `/projects/edit/${e.row?.data?.pj_ID}` 
     }
     Handleadd = () => {
-      window.location.href = "/projects/add"
+      window.location.href = "/projects/item/add"
     }  
  
      componentDidMount ()  {
@@ -232,7 +232,7 @@ class AllProjectList extends React.Component {
 
     }    
     handleopen() {
-              this.props.history.push("/secondpage/Add")
+              this.props.history.push("/projects/add")
             }
       render() {
       
