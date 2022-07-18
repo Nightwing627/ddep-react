@@ -34,11 +34,12 @@ class CustomItem extends React.Component {
   onRowPreparedFunction (e) {
     e.rowElement.css({ height: 70, alignItems: "center"})
   }
-  editBtn = () => {
-    window.location.href = "/projects/edit/62aa1710be609e225d411275"
+  editBtn = (e) => {
+    console.log("ee", e?.row?.data?.item_ID)
+     window.location.href = `/projects/item/edit/${e?.row?.data?.item_ID}`
   }
   viewbtn = () => {
-    window.location.href = "/projects/edit/62aa1710be609e225d411275=1?isView=true"
+    window.location.href = "/projects/item/edit/62aa1710be609e225d411275=1?isView=true"
     console.log("first")
   }
   handleopen  ()  {
@@ -95,7 +96,7 @@ class CustomItem extends React.Component {
                 <Button  className="btn-Action" onClick={this.viewbtn}><span className='btn-Edit' style={{cursor:"pointer"}}> <Disc size={25}/></span></Button>
                 <Button   className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}>  <Copy size={25}/></span></Button>
                 <Button  className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}  onClick={this.handleopen}>  <BookOpen size={25}/></span></Button>
-                <Button  className="btn-Action" onClick={this.editBtn}><span style={{cursor:"pointer"}} className='btn-Edit'>  <Edit size={25}/></span></Button>
+                <Button  className="btn-Action" onClick={(e) => this.editBtn(e)}><span style={{cursor:"pointer"}} className='btn-Edit'>  <Edit size={25}/></span></Button>
           
                 </Column>
         </DataGrid>

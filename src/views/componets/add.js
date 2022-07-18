@@ -8,7 +8,7 @@ import { Button, Card, CardBody, Input, Label, FormGroup } from 'reactstrap'
 import { FormHelperText, Grid, Box, Divider, Typography } from "@material-ui/core"
 import Select from "react-select"
 import HorizontalNonLinearStepper from "./UI/HorizontalNonLinearStepper"
-
+import SweetAlert from "react-bootstrap-sweetalert"
 import axios from "../../utility/axios"
 const theme = theme => ({
   ...theme,
@@ -39,14 +39,14 @@ const Add = () => {
   // const [ ]
   const [pnameError, setPnameError] = useState("")
   const [pcodeError, setpcodeError] = useState("")
-  const [desError, setDesError] = useState("")
-  const [Sequence, setSequence] = useState("")
+  // const [desError, setDesError] = useState("")
+  // const [Sequence, setSequence] = useState("")
   const [optionError, setoptionError] = useState("")
-  // const [validation, setvalidation] = useState({
-  //   pname:"",
-  //   pcode:"",
-  //   Sequence:""
-  // })
+  const [alertDetail, setAlertDetails] = useState({
+    show: false,
+    msg: "",
+    success: false
+  })
   const [errors, setErrors] = useState({}) 
   const handleChange = (e, type) => {
     console.log("e", e)
@@ -105,20 +105,20 @@ const Add = () => {
       setpcodeError('')
     }
 
-    //pdescription
-    if (input.pdescription.trim() === "") {
-      flag = false
-      setDesError('project descrition is required')
-    } else {
-      setDesError('')
-    }
-    //Sequence
-    if (input.Sequence.trim() === "") {
-      flag = false
-      setSequence('Sequence is required')
-    } else {
-      setSequence('')
-    }
+    // //pdescription
+    // if (input.pdescription.trim() === "") {
+    //   flag = false
+    //   setDesError('project descrition is required')
+    // } else {
+    //   setDesError('')
+    // }
+    // //Sequence
+    // if (input.Sequence.trim() === "") {
+    //   flag = false
+    //   setSequence('Sequence is required')
+    // } else {
+    //   setSequence('')
+    // }
     //grp
     if (input.options === "") {
       flag = false
@@ -149,6 +149,9 @@ const Add = () => {
   //   setErrors(error)
   //   return flag
   // }
+  const handleConfirm = () => {
+    setAlertDetails({ show: false, msg: "", success: false })
+  }
   const handleSubmit = () => {
     // e.preventDefault()
 
@@ -160,7 +163,11 @@ const Add = () => {
           group:  input?.options?.value,
           isActive: "1"
       }
-      
+      setAlertDetails({
+        show: true,
+        msg: "fg",
+        success: true
+      })
       console.log("PAYLOAD", payload)
       axios
       .post("/project/add", payload)
@@ -192,6 +199,15 @@ const Add = () => {
       ]
       console.log("errors", errors)
   return (
+    <><SweetAlert
+    error={!alertDetail.success}
+    success={alertDetail.success}
+    show={alertDetail.show}
+    timeout= "155000"
+    onConfirm={() => handleConfirm()}
+  >
+    {alertDetail.msg}
+  </SweetAlert>
   <div>
        <Stack spacing={2} className="breadcrumb-Top mb-2">
       <Breadcrumbs
@@ -242,9 +258,9 @@ const Add = () => {
                 multiple
                 value={input.pdescription}
                 name='pdescription'
-                onChange={(e) => { handleChange(e); setDesError("") }}
+                onChange={(e) => { handleChange(e) }}
                 variant="outlined"/>
-                <span className='text-danger'>{desError}</span>
+                {/* <span className='text-danger'>{desError}</span> */}
             </Grid>
             <Grid item xs={12} md={12}  className="project-text">
                 <Label className="form-text">
@@ -254,9 +270,9 @@ const Add = () => {
                 fullWidth
                 name='Sequence'
                 value={input.Sequence}
-                onChange={(e) => { handleChange(e); setSequence("") }}
+                onChange={(e) => { handleChange(e) }}
                 variant="outlined"/>
-                <span className='text-danger'>{Sequence}</span>
+                {/* <span className='text-danger'>{Sequence}</span> */}
             </Grid>
             <Grid item xs={12} md={12}  className="project-text grp-text">
                 
@@ -284,6 +300,7 @@ const Add = () => {
     </Card>
 
   </div>
+  </>
   )
 }
 

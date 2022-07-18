@@ -111,9 +111,14 @@ const [showModal, setShowModal] = useState(false)
 const [collapseID, setcollapseID] = useState(1)
 const [optionError, setoptionError] = useState("")
 const [APIError, setAPIError] = useState("")
-// useEffect(() => {
-//   setInputValue({ api_url: props?.apiData?.outbound_setting?.api_url})
-// }, [props])
+useEffect(() => {
+  setInputValue({
+    outbound_format : props?.apiData?.outbound_setting?.outbound_format || "",
+    api_url: props?.apiData?.outbound_setting?.api_url || ""
+  })
+  console.log("props?.apiData?", inputValue)
+ }, [props?.apiData])
+
 const validation = () => {
   let flag = true
   // console.log("inputValue.inbound_format", inputValue.outbound_format)

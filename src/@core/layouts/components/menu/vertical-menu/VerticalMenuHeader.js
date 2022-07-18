@@ -41,6 +41,12 @@ const VerticalMenuHeader = props => {
   }
 
   return (
+    <>
+    <div>
+      <h2 className='ml-1'>
+      <img src={themeConfig.app.appLogoImage} alt='logo' />
+      </h2>
+    </div>
     <div className='navbar-header'>
       <ul className='nav navbar-nav flex-row'>
         <li className='nav-item mr-auto'>
@@ -59,6 +65,7 @@ const VerticalMenuHeader = props => {
         </li>
       </ul>
     </div>
+    </>
   )
 }
 
