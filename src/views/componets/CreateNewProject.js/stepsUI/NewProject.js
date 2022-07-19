@@ -35,17 +35,18 @@ const NewProject = (props) => {
  useEffect(() => {
   setinput({
     ItemCode : props?.apiData?.basic?.ItemCode || "",
-    ExchangeName : props?.apiData?.basic?.ItemName || "",
+    ItemName : props?.apiData?.basic?.ItemName || "",
     ExchangeDescription:"",
-    CompanyName: props?.apiData?.basic?.CompanyName || "",
-    Version:""
+    CompanyName: props?.apiData?.basic?.CompanyName || ""
+    // Version:""
   })
   console.log("props?.apiData?", input)
  }, [props?.apiData])
-  const [ExchangenameError, setExchangenameError] = useState("")
+  const [ItemNameError, setItemNameError] = useState("")
+  const [ItemCodeError, setItemCodeError] = useState("")
   const [CompanyNameError, setCompanyNameError] = useState("")
-  const [ExchangeDescriptionError, setExchangeDescriptionError] = useState("")
-  const [VersionError, setVersionError] = useState("")
+  // const [ExchangeDescriptionError, setExchangeDescriptionError] = useState("")
+  // const [VersionError, setVersionError] = useState("")
   const [errors, setErrors] = useState({}) 
  
   const handlesave = () => {
@@ -57,11 +58,18 @@ const NewProject = (props) => {
     let flag = true
 console.log("input", input)
     // Exchangename
-    if (input.ExchangeName.trim() === "") {
+    if (input.ItemName.trim() === "") {
       flag = false
-      setExchangenameError('Exchange Name is required')
+      setItemNameError('Item Name is required')
     }  else {
-      setExchangenameError('')
+      setItemNameError('')
+    }
+
+    if (input.ItemCode.trim() === "") {
+      flag = false
+      setItemCodeError('Item Code is required')
+    }  else {
+      setItemCodeError('')
     }
     // Company Name
     if (input.CompanyName.trim() === "") {
@@ -72,12 +80,12 @@ console.log("input", input)
     }
 
     // Version
-    if (input.Version.trim() === "") {
-      flag = false
-      setVersionError('Version  is required')
-    }  else {
-      setVersionError('')
-    }
+    // if (input.Version.trim() === "") {
+    //   flag = false
+    //   setVersionError('Version  is required')
+    // }  else {
+    //   setVersionError('')
+    // }
  
     return flag
   }
@@ -95,6 +103,7 @@ console.log("input", input)
   const handleChange = (e) => {
     const { name, value } = e.target
     setinput({...input, [name]: value})
+  console.log("sd", name)
   }
   // console.log("errors", props?.itemDetailsData)
   return (
@@ -110,36 +119,36 @@ console.log("input", input)
             <Input
               fullWidth
               // value={apiData?}
-              name=" Item Code "
+              name="ItemCode"
               // helperText={errors.pname}
               value={input.ItemCode}
-              onChange={(e) => { handleChange(e); setExchangenameError("") }}
+              onChange={(e) => { handleChange(e); setItemCodeError("") }}
               variant="outlined"
               disabled={props?.isDisable} 
             />
-            <span className='text-danger'>{ExchangenameError}</span>
+            <span className='text-danger'>{ItemCodeError}</span>
           </Col>
           <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
-             Exchange Name 
+             Item Name 
               <span className="valid_star">*</span>
             </Label>
             <Input
               fullWidth
               // value={apiData?}
-              name="Exchangename"
+              name="ItemName"
               // helperText={errors.pname}
-              value={input.ExchangeName}
-              onChange={(e) => { handleChange(e); setExchangenameError("") }}
+              value={input.ItemName}
+              onChange={(e) => { handleChange(e); setItemNameError("") }}
               variant="outlined"
               disabled={props?.isDisable} 
             />
-            <span className='text-danger'>{ExchangenameError}</span>
+            <span className='text-danger'>{ItemNameError}</span>
           </Col>
-          <Col xs="4" className="project-text">
+          {/* <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
             Exchange Description
-              {/* <span className="valid_star">*</span> */}
+              <span className="valid_star">*</span>
             </Label>
             <Input
               fullWidth
@@ -150,19 +159,16 @@ console.log("input", input)
               onChange={(e) => { handleChange(e) }}
               variant="outlined"
             />
-            {/* <span className='text-danger'>{ExchangeDescriptionError}</span> */}
-          </Col>
-          
-        </Row> 
-        <Row className="mb-2">
-        <Col xs="4" className="project-text">
+            <span className='text-danger'>{ExchangeDescriptionError}</span>
+          </Col> */}
+          <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
             Company Name
               <span className="valid_star">*</span>
             </Label>
             <Input
               fullWidth
-              name="Company Name"
+              name="CompanyName"
               // helperText={errors.pname}
               value={input.CompanyName}
               disabled={props?.isDisable} 
@@ -171,7 +177,25 @@ console.log("input", input)
             />
             <span className='text-danger'>{setCompanyNameError}</span>
           </Col>
-        <Col xs="4" className="project-text">
+        </Row> 
+        <Row className="mb-2">
+        {/* <Col xs="4" className="project-text">
+            <Label className="form-text font-item input-wrap">
+            Company Name
+              <span className="valid_star">*</span>
+            </Label>
+            <Input
+              fullWidth
+              name="CompanyName"
+              // helperText={errors.pname}
+              value={input.CompanyName}
+              disabled={props?.isDisable} 
+              onChange={(e) => { handleChange(e); setCompanyNameError("") }}
+              variant="outlined"
+            />
+            <span className='text-danger'>{setCompanyNameError}</span>
+          </Col> */}
+        {/* <Col xs="4" className="project-text">
             <Label className="form-text font-item input-wrap">
             Version
               <span className="valid_star">*</span>
@@ -186,8 +210,8 @@ console.log("input", input)
               variant="outlined"
             />
             <span className='text-danger'>{VersionError}</span>
-          </Col>
-          <Col xs="4"></Col>
+          </Col> */}
+          {/* <Col xs="4"></Col> */}
         </Row>     
         {props?.isDisable ?  "" :  <Button className="btn-relief " color="primary" onClick={() => handlesave()}>
             Save

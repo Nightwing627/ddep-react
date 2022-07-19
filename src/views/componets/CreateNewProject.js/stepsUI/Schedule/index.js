@@ -145,7 +145,7 @@ const Schedule = (props) => {
   // const [startingTime, setStartingTime]  = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_end_inbound)
   const [endingTime, setEndingTime] = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_start_inbound)
   const [endValue, setendValue] = useState("")
-  const [radioValue, setradioValue] = useState("")
+  const [radioValue, setradioValue] = useState("schedule")
   const [recurValue, setrecurValue] = useState("")
   const [ocurValue, setocurValue] = useState("")
   const [collapseID, setcollapseID] = useState(1) 
@@ -191,9 +191,9 @@ const handlesubmit = () => {
         {
             type:"basic",
             ProjectId:"",
-            ItemCode:"",
+            ItemCode:newData?.basic?.ItemCode,
             ItemName: newData?.basic?.ExchangeName,
-            CompanyName:"", 
+            CompanyName:newData?.basic?.CompanyName, 
             isActive:"1",
             ExchangeDescription: newData?.basic?.ExchangeDescription,
             Version: newData?.basic?.Version
@@ -267,7 +267,7 @@ const handlesubmit = () => {
             next_date_outbound: "NaN"
         }
     ]
-    console.log("add api", payload) 
+    console.log("addapi", payload) 
     
         axios
         .post("/project/item/add", payload)
@@ -303,12 +303,13 @@ const handlesubmit = () => {
         label="Schedule"
         color="primary" 
         id="schedule"
-        defaultChecked={false}
         name="user_type"
         className="ml-1"
         value="schedule"
+        defaultChecked={radioValue === "schedule"}
         onClick={(e) => {
             setradioValue("schedule")
+          
         }}
        
       />  
@@ -317,7 +318,7 @@ const handlesubmit = () => {
         label="Click By User"
         color="primary" 
         id="Click By User"
-        defaultChecked={false}
+        defaultChecked={radioValue === "Onetime"}
         name="user_type"
         className="ml-1"
         value="Onetime"

@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Breadcrumbs from '@mui/material/Breadcrumbs'
-import Link from '@mui/material/Link'
-import Stack from '@mui/material/Stack'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import "../../@core/scss/newprojectadd.scss"
-import { Button, Card, CardBody, Input, Label, FormGroup } from 'reactstrap'
+import { Button, Card, CardBody, Input, Label, FormGroup, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { FormHelperText, Grid, Box, Divider, Typography } from "@material-ui/core"
 import Select from "react-select"
 import HorizontalNonLinearStepper from "./UI/HorizontalNonLinearStepper"
@@ -19,10 +15,6 @@ const theme = theme => ({
   }
 })
 
-function handleClick(event) {
-    event.preventDefault()
-    console.info('You clicked a breadcrumb.')
-  }
   const options = [
     { value: 'BGRS', label: 'BGRS' },
     { value: 'I-RMS', label: 'I-RMS' },
@@ -104,21 +96,6 @@ const Add = () => {
     } else {
       setpcodeError('')
     }
-
-    // //pdescription
-    // if (input.pdescription.trim() === "") {
-    //   flag = false
-    //   setDesError('project descrition is required')
-    // } else {
-    //   setDesError('')
-    // }
-    // //Sequence
-    // if (input.Sequence.trim() === "") {
-    //   flag = false
-    //   setSequence('Sequence is required')
-    // } else {
-    //   setSequence('')
-    // }
     //grp
     if (input.options === "") {
       flag = false
@@ -165,7 +142,7 @@ const Add = () => {
       }
       setAlertDetails({
         show: true,
-        msg: "fg",
+        msg: "Save Successful",
         success: true
       })
       console.log("PAYLOAD", payload)
@@ -183,23 +160,12 @@ const Add = () => {
    }
     
   }
-    const breadcrumbs = [
-        <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
-          Project
-        </Link>,
-        <Link
-          underline="hover"
-          key="2"
-          color="inherit"
-          onClick={(e) => handleClick(e)}
-        >
-         Add
-        </Link>
-       
-      ]
+  
       console.log("errors", errors)
   return (
-    <><SweetAlert
+    <>
+    
+    <SweetAlert
     error={!alertDetail.success}
     success={alertDetail.success}
     show={alertDetail.show}
@@ -209,13 +175,12 @@ const Add = () => {
     {alertDetail.msg}
   </SweetAlert>
   <div>
-       <Stack spacing={2} className="breadcrumb-Top mb-2">
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb">
-        {breadcrumbs}
-      </Breadcrumbs> 
-    </Stack>
+  <div className='mb-1'>
+      <Breadcrumb>
+        <BreadcrumbItem><a href="/projects/project-list">Projects</a></BreadcrumbItem>
+        <BreadcrumbItem active>Add</BreadcrumbItem>
+      </Breadcrumb>
+    </div>
     <Card >
       <CardBody>
           <HorizontalNonLinearStepper />
