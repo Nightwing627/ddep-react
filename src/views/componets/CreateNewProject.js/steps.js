@@ -91,7 +91,7 @@ export default function Steps() {
   <div className="box-stepper">
       <Stepper
         type="modern-horizontal"
-        options={{ linear: true }}
+        options={{ linear: !params.id  }}
         instance={(el) => setStepper(el)}
         ref={myRef}
         steps={step}

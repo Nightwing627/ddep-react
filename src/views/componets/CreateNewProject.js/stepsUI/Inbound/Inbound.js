@@ -300,7 +300,7 @@ decorators.Header = Header
               label="DDEP API"
               color="primary"
               id="DDEPAPI"
-              defaultChecked={radioValue === "DDEPAPI"}
+              defaultChecked={radioValue === "DDEPAPI" }
               name="user_type"
               className="ml-1"
               value="DDEPAPI"

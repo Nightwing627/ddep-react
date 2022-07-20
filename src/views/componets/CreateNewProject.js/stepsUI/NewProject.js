@@ -18,6 +18,7 @@ import "../Newitem.scss"
 import { connect, useDispatch } from "react-redux"
 import { itemsDetailsDataStore } from "@store/actions/itemDetails"
 import { useParams } from 'react-router-dom'
+import axios from "../../../../utility/axios"
 const NewProject = (props) => {
   const dispatch = useDispatch()
   const urls = window.location.href
@@ -92,14 +93,39 @@ console.log("input", input)
  const saveAndNext = (isTrue) => {
    console.log("isTrue", isTrue)
    if (isTrue) {
-    props.stepper.next()
+    // props.stepper.next()
+    
    } else if (validation()) {
-    props.stepper.next()
-    const passData = { basic : input }
-    dispatch(itemsDetailsDataStore(passData))
-
-  }
- }
+     const bodyFormData = new FormData()
+    bodyFormData.append('ProjectCode', input?.ItemCode)
+    if (params?.id) {
+      props.stepper.next()
+      const passData = { basic : input }
+      dispatch(itemsDetailsDataStore(passData))
+    }  else {
+      axios
+      .post("/projects/checkcodeexist", bodyFormData)
+      .then((res) => {
+        if (res.status === 200) {
+          // const sortedData = res
+          // const newData = { data: [] }
+          // setApiDate(sortedData)
+          console.log("c,", res?.data)
+          if (res?.data === true) {
+            props.stepper.next()
+            const passData = { basic : input }
+            dispatch(itemsDetailsDataStore(passData))
+          } else {
+            setItemCodeError('Item Code already exist')
+          }
+        }
+      })
+      .catch((error) => { console.log("error", error) })
+    }
+    }  
+   }
+  
+ 
   const handleChange = (e) => {
     const { name, value } = e.target
     setinput({...input, [name]: value})
@@ -124,7 +150,7 @@ console.log("input", input)
               value={input.ItemCode}
               onChange={(e) => { handleChange(e); setItemCodeError("") }}
               variant="outlined"
-              disabled={props?.isDisable} 
+              disabled={props?.isDisable || params?.id} 
             />
             <span className='text-danger'>{ItemCodeError}</span>
           </Col>
