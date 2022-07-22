@@ -25,7 +25,7 @@ const Occursevery = (props) => {
     const [endDate, setEndDate] = useState(props?.Occursevery?.schedule_setting?.duration_inbound_is_end_date)
     const [startingTime, setStartingTime]  = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_end_inbound)
     const [endingTime, setEndingTime] = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_start_inbound)
-    const [radioValue, setradioValue] = useState("")
+    const [radioValue, setradioValue] = useState("schedule")
  
     return ( 
         <>
@@ -381,7 +381,7 @@ const Schedule = (props) => {
                     <div className='d-flex mt-1'>
                      <CustomInput
                         type="radio"
-                        label="Recurring "
+                        label="Recurring"
                         color="primary" 
                         id="Recurring"
                         defaultChecked={false}
@@ -451,26 +451,27 @@ const Inboundformate = (props) => {
         label="Schedule"
         color="primary" 
         id="schedule"
-        defaultChecked={false}
         name="user_type"
         className="ml-1"
         value="schedule"
         onClick={(e) => {
             setradioValue("schedule")
         }}
-       
+        defaultChecked={radioValue === "schedule" }
+        checked={radioValue === "schedule" }
       />  
         <CustomInput
         type="radio"
         label="Click By User"
         color="primary" 
         id="Click By User"
-        defaultChecked={false}
+        defaultChecked={radioValue === "Click By User" }
+        checked={radioValue === "Click By User" }
         name="user_type"
         className="ml-1"
         value="Onetime"
         onClick={(e) => {
-            setradioValue("One Time")
+            setradioValue("Click By User")
         }}
        
       /> 

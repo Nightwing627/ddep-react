@@ -108,7 +108,7 @@ const [inputValue, setInputValue] = useState({
   api_url: props?.apiData?.outbound_setting?.api_url || ""
 })
 const [showModal, setShowModal] = useState(false)
-const [collapseID, setcollapseID] = useState(1)
+const [collapseID, setcollapseID] = useState([1, 2])
 const [optionError, setoptionError] = useState("")
 const [APIError, setAPIError] = useState("")
 useEffect(() => {
@@ -131,11 +131,10 @@ const validation = () => {
 // API
   if (inputValue.api_url.trim() === "") {
     flag = false
-    setAPIError('API  is required')
+    setAPIError('This field is required.')
   } else {
     setAPIError('')
   }
-
   return flag
 }
 const saveAndNext = (isTrue) => {
@@ -160,6 +159,17 @@ const handleChange = (e, type) => {
     setInputValue({...inputValue, [name]: value})
   }  
 }
+const handleClick = (id) => {
+  const itHas = collapseID.filter((data) => data === id)
+  if (itHas.length > 0) {
+    const removeData = collapseID.filter((data) => data !== id)
+    setcollapseID(removeData)
+  } else {
+    const addData = [...collapseID]
+    addData.push(id)
+    setcollapseID(addData)
+  }
+}
 console.log("first", props)
   return (
     <>
@@ -180,25 +190,33 @@ console.log("first", props)
           active={0}
         />  */}
         <Card className='app-collapse' >
-          <CardHeader className='align-items-center' onClick={() => { setcollapseID(1) }}>
+          <CardHeader className='align-items-center' onClick={() => { handleClick(1) }}>
             <CardTitle className='collapse-title' style={{color:"blue"}}>{"Outbound Format"}</CardTitle>
           </CardHeader>
-          <Collapse isOpen={collapseID === 1}>
+          <Collapse isOpen={collapseID?.includes(1)}>
               <CardBody>
+              <Row>
+                  <Col md="7">
+                  <Label>
+                        Format
+                        <span className="valid_star">*</span>
+                     </Label>
               <Select  isDisabled={props?.isDisable} onChange={(e) => { handleChange(e, "selectBox"); setoptionError("") }}  options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === inputValue?.outbound_format }) }/> 
               <span className="text-danger">{optionError}</span>
+              </Col>
+              </Row>
               </CardBody>
           </Collapse>
-          <CardHeader className='align-items-center' onClick={() => { setcollapseID(2) }}>
+          <CardHeader className='align-items-center' onClick={() => { handleClick(2) }}>
             <CardTitle className='collapse-title' style={{color:"blue"}}>{"Synchronize Configure"}</CardTitle>
           </CardHeader>
-          <Collapse isOpen={collapseID === 2}>
+          <Collapse isOpen={collapseID?.includes(2)}>
               <CardBody>
                 <Container>
     <Row className="mb-4">
           <Col xs="2">
             <Label className="form-text font-item input-wrap mt-1">
-              Api
+              API URL
             <span className="valid_star">*</span>
             </Label>
             </Col>

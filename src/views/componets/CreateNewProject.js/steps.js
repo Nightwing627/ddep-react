@@ -43,7 +43,7 @@ export default function Steps() {
       content: <Inbound stepper={stepper} apiData={apiData}  isDisable={paramsObj?.isView}/>
     },
     {
-      id: "outbound",
+      id: "Outbound",
       title: "Outbound",
       subtitle: "",
       icon: 3,
@@ -91,7 +91,7 @@ export default function Steps() {
   <div className="box-stepper">
       <Stepper
         type="modern-horizontal"
-        options={{ linear: true }}
+        options={{ linear: !params.id  }}
         instance={(el) => setStepper(el)}
         ref={myRef}
         steps={step}

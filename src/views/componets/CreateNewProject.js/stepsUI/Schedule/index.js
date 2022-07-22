@@ -145,12 +145,13 @@ const Schedule = (props) => {
   // const [startingTime, setStartingTime]  = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_end_inbound)
   const [endingTime, setEndingTime] = useState(props?.Occursevery?.schedule_setting?.daily_frequency_every_time_count_start_inbound)
   const [endValue, setendValue] = useState("")
-  const [radioValue, setradioValue] = useState("")
+  const [radioValue, setradioValue] = useState("schedule")
   const [recurValue, setrecurValue] = useState("")
   const [ocurValue, setocurValue] = useState("")
   const [collapseID, setcollapseID] = useState(1) 
   const [inValue, setInValue] = useState({ 
     option : ""  })
+    console.log("setradioValue", radioValue)
 const handleChange = (e, type) => {
   console.log("e", e)
   if (type === "selectBox") {
@@ -191,9 +192,9 @@ const handlesubmit = () => {
         {
             type:"basic",
             ProjectId:"",
-            ItemCode:"",
+            ItemCode:newData?.basic?.ItemCode,
             ItemName: newData?.basic?.ExchangeName,
-            CompanyName:"", 
+            CompanyName:newData?.basic?.CompanyName, 
             isActive:"1",
             ExchangeDescription: newData?.basic?.ExchangeDescription,
             Version: newData?.basic?.Version
@@ -267,7 +268,7 @@ const handlesubmit = () => {
             next_date_outbound: "NaN"
         }
     ]
-    console.log("add api", payload) 
+    console.log("addapi", payload) 
     
         axios
         .post("/project/item/add", payload)
@@ -303,13 +304,14 @@ const handlesubmit = () => {
         label="Schedule"
         color="primary" 
         id="schedule"
-        defaultChecked={false}
         name="user_type"
         className="ml-1"
         value="schedule"
+        defaultChecked={radioValue === "schedule"}
+        checked={radioValue === "schedule" }
         onClick={(e) => {
             setradioValue("schedule")
-        }}
+                  }}
        
       />  
         <CustomInput
@@ -317,10 +319,11 @@ const handlesubmit = () => {
         label="Click By User"
         color="primary" 
         id="Click By User"
-        defaultChecked={false}
+        defaultChecked={radioValue === "One Time"}
+        checked={radioValue === "One Time" }
         name="user_type"
         className="ml-1"
-        value="Onetime"
+        value="One Time"
         onClick={(e) => {
             setradioValue("One Time")
         }}
@@ -368,7 +371,7 @@ const handlesubmit = () => {
                         color="primary" 
                         id="Recurring"
                         defaultChecked={false}
-                        name="user_type"
+                        name="user_type1"
                         className="ml-1"
                         value="recurring"
                         style={{  zIndex: '-1' }}
@@ -382,7 +385,7 @@ const handlesubmit = () => {
                         color="primary" 
                         id="One Time"
                         defaultChecked={false}
-                        name="user_type"
+                        name="user_type1"
                         className="ml-1"
                         zindex={-1}
                         value="onetime"
@@ -449,7 +452,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id="Occurs once at"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type2"
                             className="ml-1 mb-1"
                             value="Occursonceat"
                             onClick={(e) => {
@@ -463,7 +466,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id="Occurs every"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type2"
                             className="ml-1"
                             value="Occursevery"
                             onClick={(e) => {
@@ -546,7 +549,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id="End Date"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type3"
                             className="ml-1 mb-1"
                             value="Enddate"
                             onClick={(e) => {
@@ -560,7 +563,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id=" No end date"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type3"
                             className="ml-1"
                             value="Noenddate"
                             onClick={(e) => {

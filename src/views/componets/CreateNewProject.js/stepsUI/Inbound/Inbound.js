@@ -17,21 +17,21 @@ const theme = theme => ({
     primary: "#8DC454"
   }
 })
-const dummyData = [
-  { 
-  name: 'Document'
-  // toggled: true
-},
-{ 
-  name: 'Img'
-  // toggled: true  
-},
-{ 
-  name: 'PDF'
-  // toggled: true
+// const dummyData = [
+//   { 
+//   name: 'Document'
+//   // toggled: true
+// },
+// { 
+//   name: 'Img'
+//   // toggled: true  
+// },
+// { 
+//   name: 'PDF'
+//   // toggled: true
   
-}
-]
+// }
+// ]
 
 // const InboundFormat = (props) => {
 //   const [input, setinput] = useState({
@@ -106,16 +106,16 @@ const Inbound = (props) => {
     ftp_folder: props?.apiData?.inbound_setting?.ftp_folder || "",
     host : ""
     })
-    console.log("props?.apiData?", inputValue)
+    console.log("props?.apiData?", props?.apiData)
    }, [props?.apiData])
-  console.log("first......", props?.apiData?.inbound_setting?.api_ddep_api)
+  console.log("first......", props?.apiData)
   const options = [
    
     { value: 'json', label: 'JSON' },
     { value: 'xml', label: 'XMl'}
   ] 
   const [folderError, setfolderError] = useState("")
-  const [data, setData] = useState(dummyData)
+  // const [data, setData] = useState(dummyData)
   const [passwordError, setpasswordError] = useState("")
   const [optionError, setoptionError] = useState("")
   const [loginError, setloginError] = useState("")
@@ -123,8 +123,9 @@ const Inbound = (props) => {
   const [serverError, setserverError] = useState("")
   const [portError, setportError] = useState("")
   const [apierror, setapierror] = useState("")
-  const [collapseID, setcollapseID] = useState(1)
-  const [radioValue, setradioValue] = useState("")
+  const [collapseID, setcollapseID] = useState([1, 2])
+  const [radioValue, setradioValue] = useState("DDEPAPI")
+  console.log("radioValue", radioValue)
   // const collapseItems = [
   //   {
   //     id: 1,
@@ -141,12 +142,12 @@ const Inbound = (props) => {
   //     disabled={props?.isDisable} />
   //   }
   // ]
-  const handleopen = () => {
-    setIsOpenModal(true)
-  }
-  const handleClose = () => {
-    setIsOpenModal(false)
-  }
+  // const handleopen = () => {
+  //   setIsOpenModal(true)
+  // }
+  // const handleClose = () => {
+  //   setIsOpenModal(false)
+  // }
   const handleChange = (e, type) => {
     // console.log("e", e)
     if (type === "selectBox") {
@@ -161,35 +162,35 @@ const Inbound = (props) => {
     // console.log("inputValue.inbound_format", inputValue.inbound_format)
     if (inputValue.inbound_format  === "") {
       flag = false
-      setoptionError('select  is required')
+      setoptionError('This field is required.')
     } else {
       setoptionError('')
     }
 // DDEPAPI
     if (inputValue.api_ddep_api.trim() === "") {
       flag = false
-      setapierror('API  is required')
+      setapierror('This field is required.')
     } else {
       setapierror('')
     }
     // server
     if (inputValue.ftp_server_link.trim() === "") {
       flag = false
-      setserverError('Server Link Description  is required')
+      setserverError('This field is required.')
     } else {
       setserverError('')
     }
     // host
     if (inputValue.host.trim() === "") {
       flag = false
-      sethostError('Host  is required')
+      sethostError('This field is required.')
     } else {
       sethostError('')
     }
     // port
     if (inputValue.ftp_port.trim() === "") {
       flag = false
-      setportError('port is required')
+      setportError('This field is required.')
     } else {
       setportError('')
     }
@@ -197,7 +198,7 @@ const Inbound = (props) => {
     // login
     if (inputValue.ftp_login_name.trim() === "") {
       flag = false
-      setloginError('Login name  is required')
+      setloginError('This field is required.')
     } else {
       setloginError('')
     }
@@ -205,7 +206,7 @@ const Inbound = (props) => {
     // ftp_password
     if (inputValue.ftp_password.trim() === "") {
       flag = false
-      setpasswordError('Password  is required')
+      setpasswordError('This field is required.')
     } else {
       setpasswordError('')
     }
@@ -213,7 +214,7 @@ const Inbound = (props) => {
     // Folder
     if (inputValue.ftp_folder.trim() === "") {
       flag = false
-      setfolderError('folder  is required')
+      setfolderError('This field is required.')
     } else {
       setfolderError('')
     }
@@ -246,6 +247,17 @@ const Header = (props) => {
     </span>
   )
 }  
+const handleClick = (id) => {
+  const itHas = collapseID.filter((data) => data === id)
+  if (itHas.length > 0) {
+    const removeData = collapseID.filter((data) => data !== id)
+    setcollapseID(removeData)
+  } else {
+    const addData = [...collapseID]
+    addData.push(id)
+    setcollapseID(addData)
+  }
+}
 decorators.Header = Header
   return (
     <>
@@ -268,28 +280,40 @@ decorators.Header = Header
         />  */}
         {/* </Card> */}
         <Card className='app-collapse' >
-          <CardHeader className='align-items-center' onClick={() => { setcollapseID(1) }}>
+          <CardHeader className='align-items-center' onClick={() => { handleClick(1) }}>
             <CardTitle className='collapse-title' style={{color:"blue"}}>{"Inbound Format"}</CardTitle>
           </CardHeader>
-          <Collapse isOpen={collapseID === 1}>
+          <Collapse isOpen={collapseID?.includes(1)}>
               <CardBody>
+                <Row>
+                  <Col md="7">  
+                  <Label>
+                        Format
+                        <span className="valid_star">*</span>
+                     </Label>                
               <Select  isDisabled={props?.isDisable} onChange={(e) => { handleChange(e, "selectBox"); setoptionError("") }}  options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === inputValue?.inbound_format }) }/> 
               <span className="text-danger">{optionError}</span>
+              </Col>
+                </Row>
               </CardBody>
           </Collapse>
-          <CardHeader className='align-items-center' onClick={() => { setcollapseID(2) }}>
+          <CardHeader className='align-items-center' onClick={() => { handleClick(2) }}>
             <CardTitle className='collapse-title' style={{color:"blue"}}>{"Synchronize Configure"}</CardTitle>
           </CardHeader>
-          <Collapse isOpen={collapseID === 2}>
+          <Collapse isOpen={collapseID?.includes(2)}>
               <CardBody>
               <>
+              <Label className="ml-2 mb-1">
+              Synchronize Configure 
+                        <span className="valid_star">*</span>
+                     </Label> 
                 <div className='d-flex'>
             <CustomInput inline
               type="radio"
               label="DDEP API"
               color="primary"
               id="DDEPAPI"
-              defaultChecked={true}
+              defaultChecked={radioValue === "DDEPAPI" }
               name="user_type"
               className="ml-1"
               value="DDEPAPI"
@@ -297,6 +321,7 @@ decorators.Header = Header
               onClick={(e) => {
                 setradioValue("DDEPAPI")
             }} 
+            checked={radioValue === "DDEPAPI" }
             />   
             <CustomInput
             type="radio"
@@ -304,13 +329,14 @@ decorators.Header = Header
             color="primary" 
             // disabled={props?.disabled}
             id="SFTP"
-            defaultChecked={false}
+            defaultChecked={radioValue === "FTP/SFTP"}
             name="user_type"
             className="ml-1"
             value="FTP/SFTP"
             onClick={(e) => {
                 setradioValue("FTP/SFTP")
             }}
+            checked={radioValue === "FTP/SFTP"}
           /> 
             </div>
             <div>
@@ -358,7 +384,7 @@ decorators.Header = Header
               
             </Container>
             </div> : radioValue === "FTP/SFTP" ?  <>
-      <div>
+      <div className="mt-3">
           <Container>
               <Row className="mb-4">
                   <Col xs="2">
@@ -503,7 +529,7 @@ decorators.Header = Header
                   </Col>
                   <span className='text-danger'>{folderError}</span>
                   <Col xs="2">
-                  <Button
+                  {/* <Button
                     color="primary"
                     outline
                     disabled={props?.isDisable}
@@ -511,19 +537,19 @@ decorators.Header = Header
                 >
                     <File size={15} />
                     Select Folder
-                </Button>
+                </Button> */}
                   </Col>
               </Row> 
               <Row>
                   <Col xs="12">
-                      <Button>
+                      <Button color="primary">
                       Connection test
                       </Button>
                   </Col>
               </Row>
           </Container>
      </div>   
-     <Modal isOpen={isOpenModal}> 
+     {/* <Modal isOpen={isOpenModal}> 
     <ModalHeader 
      toggle={() => handleClose()}
     >
@@ -535,7 +561,7 @@ decorators.Header = Header
      />
     </ModalBody>
     
-   </Modal> 
+   </Modal>  */}
     </> : ""  }
             </div>
       
