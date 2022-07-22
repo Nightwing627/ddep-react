@@ -125,6 +125,7 @@ const Inbound = (props) => {
   const [apierror, setapierror] = useState("")
   const [collapseID, setcollapseID] = useState([1, 2])
   const [radioValue, setradioValue] = useState("DDEPAPI")
+  console.log("radioValue", radioValue)
   // const collapseItems = [
   //   {
   //     id: 1,
@@ -284,8 +285,16 @@ decorators.Header = Header
           </CardHeader>
           <Collapse isOpen={collapseID?.includes(1)}>
               <CardBody>
+                <Row>
+                  <Col md="7">  
+                  <Label>
+                        Format
+                        <span className="valid_star">*</span>
+                     </Label>                
               <Select  isDisabled={props?.isDisable} onChange={(e) => { handleChange(e, "selectBox"); setoptionError("") }}  options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === inputValue?.inbound_format }) }/> 
               <span className="text-danger">{optionError}</span>
+              </Col>
+                </Row>
               </CardBody>
           </Collapse>
           <CardHeader className='align-items-center' onClick={() => { handleClick(2) }}>
@@ -294,6 +303,10 @@ decorators.Header = Header
           <Collapse isOpen={collapseID?.includes(2)}>
               <CardBody>
               <>
+              <Label className="ml-2 mb-1">
+              Synchronize Configure 
+                        <span className="valid_star">*</span>
+                     </Label> 
                 <div className='d-flex'>
             <CustomInput inline
               type="radio"
@@ -308,6 +321,7 @@ decorators.Header = Header
               onClick={(e) => {
                 setradioValue("DDEPAPI")
             }} 
+            checked={radioValue === "DDEPAPI" }
             />   
             <CustomInput
             type="radio"
@@ -322,6 +336,7 @@ decorators.Header = Header
             onClick={(e) => {
                 setradioValue("FTP/SFTP")
             }}
+            checked={radioValue === "FTP/SFTP"}
           /> 
             </div>
             <div>

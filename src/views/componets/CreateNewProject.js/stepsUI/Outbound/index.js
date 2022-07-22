@@ -135,7 +135,6 @@ const validation = () => {
   } else {
     setAPIError('')
   }
-
   return flag
 }
 const saveAndNext = (isTrue) => {
@@ -196,8 +195,16 @@ console.log("first", props)
           </CardHeader>
           <Collapse isOpen={collapseID?.includes(1)}>
               <CardBody>
+              <Row>
+                  <Col md="7">
+                  <Label>
+                        Format
+                        <span className="valid_star">*</span>
+                     </Label>
               <Select  isDisabled={props?.isDisable} onChange={(e) => { handleChange(e, "selectBox"); setoptionError("") }}  options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === inputValue?.outbound_format }) }/> 
               <span className="text-danger">{optionError}</span>
+              </Col>
+              </Row>
               </CardBody>
           </Collapse>
           <CardHeader className='align-items-center' onClick={() => { handleClick(2) }}>
@@ -209,7 +216,7 @@ console.log("first", props)
     <Row className="mb-4">
           <Col xs="2">
             <Label className="form-text font-item input-wrap mt-1">
-              Api
+              API URL
             <span className="valid_star">*</span>
             </Label>
             </Col>

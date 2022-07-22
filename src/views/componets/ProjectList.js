@@ -140,7 +140,7 @@ class ProjectList extends React.Component {
             
                <ColumnChooser enabled={true} />
             <GroupPanel visible={true} />
-            <SearchPanel visible={true} highlightCaseSensitive={true} />
+            <SearchPanel visible={true} highlightCaseSensitive={true}  className="mr-3"/>
             <Grouping autoExpandAll={false} />
     
             <Column dataField="COMPANY" caption="COMPANY" groupIndex={0} />

@@ -151,6 +151,7 @@ const Schedule = (props) => {
   const [collapseID, setcollapseID] = useState(1) 
   const [inValue, setInValue] = useState({ 
     option : ""  })
+    console.log("setradioValue", radioValue)
 const handleChange = (e, type) => {
   console.log("e", e)
   if (type === "selectBox") {
@@ -307,10 +308,10 @@ const handlesubmit = () => {
         className="ml-1"
         value="schedule"
         defaultChecked={radioValue === "schedule"}
+        checked={radioValue === "schedule" }
         onClick={(e) => {
             setradioValue("schedule")
-          
-        }}
+                  }}
        
       />  
         <CustomInput
@@ -318,10 +319,11 @@ const handlesubmit = () => {
         label="Click By User"
         color="primary" 
         id="Click By User"
-        defaultChecked={radioValue === "Onetime"}
+        defaultChecked={radioValue === "One Time"}
+        checked={radioValue === "One Time" }
         name="user_type"
         className="ml-1"
-        value="Onetime"
+        value="One Time"
         onClick={(e) => {
             setradioValue("One Time")
         }}
@@ -369,7 +371,7 @@ const handlesubmit = () => {
                         color="primary" 
                         id="Recurring"
                         defaultChecked={false}
-                        name="user_type"
+                        name="user_type1"
                         className="ml-1"
                         value="recurring"
                         style={{  zIndex: '-1' }}
@@ -383,7 +385,7 @@ const handlesubmit = () => {
                         color="primary" 
                         id="One Time"
                         defaultChecked={false}
-                        name="user_type"
+                        name="user_type1"
                         className="ml-1"
                         zindex={-1}
                         value="onetime"
@@ -450,7 +452,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id="Occurs once at"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type2"
                             className="ml-1 mb-1"
                             value="Occursonceat"
                             onClick={(e) => {
@@ -464,7 +466,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id="Occurs every"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type2"
                             className="ml-1"
                             value="Occursevery"
                             onClick={(e) => {
@@ -547,7 +549,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id="End Date"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type3"
                             className="ml-1 mb-1"
                             value="Enddate"
                             onClick={(e) => {
@@ -561,7 +563,7 @@ const handlesubmit = () => {
                             color="primary" 
                             id=" No end date"
                             defaultChecked={false}
-                            name="user_type"
+                            name="user_type3"
                             className="ml-1"
                             value="Noenddate"
                             onClick={(e) => {

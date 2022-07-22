@@ -43,7 +43,7 @@ export default function Steps() {
       content: <Inbound stepper={stepper} apiData={apiData}  isDisable={paramsObj?.isView}/>
     },
     {
-      id: "outbound",
+      id: "Outbound",
       title: "Outbound",
       subtitle: "",
       icon: 3,

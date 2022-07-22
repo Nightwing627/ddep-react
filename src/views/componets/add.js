@@ -127,7 +127,11 @@ const Add = () => {
   //   return flag
   // }
   const handleConfirm = () => {
-    setAlertDetails({ show: false, msg: "", success: false })
+    if (alertDetail?.show === true) {
+      window.location.href = `/projects/project-list` 
+    }
+    setAlertDetails({ show: false, msg: "", success: false})
+  
   }
   const handleSubmit = () => {
     // e.preventDefault()

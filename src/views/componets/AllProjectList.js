@@ -305,14 +305,15 @@ class AllProjectList extends React.Component {
                       name="searchPanel">
                       </Item>
                   </Toolbar>
-                      <Paging
-                         defaultPageSize={1}
-                         defaultPageIndex={0} 
-                      />
-                </DataGrid>
+                      
+               
                 {/* ) 
               })
            }  */}
+           <Paging
+             defaultPageSize={1}
+             defaultPageIndex={0} />
+            </DataGrid>
             </div>
           </Fragment>
          

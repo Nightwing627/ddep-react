@@ -20,7 +20,6 @@ const Outboundformat = (props) => {
     { value: 'json', label: 'JSON' },
     { value: 'xml', label: 'XMl'}
   ]
-     console.log("janu", props)
   return (
     <div>
     <Select  isDisabled={props?.disable} options={options}  theme={theme}  className="React" value= {options && options?.find((op) => { return op.value === props?.apiData?.outbound_setting?.outbound_format })
