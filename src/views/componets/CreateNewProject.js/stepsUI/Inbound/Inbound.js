@@ -311,9 +311,11 @@ decorators.Header = Header
             <CustomInput inline
               type="radio"
               label="DDEP API"
+              defaultChecked={radioValue === "DDEPAPI" }
+              checked={radioValue === "DDEPAPI" }
               color="primary"
               id="DDEPAPI"
-              defaultChecked={radioValue === "DDEPAPI" }
+             
               name="user_type"
               className="ml-1"
               value="DDEPAPI"
@@ -321,7 +323,7 @@ decorators.Header = Header
               onClick={(e) => {
                 setradioValue("DDEPAPI")
             }} 
-            checked={radioValue === "DDEPAPI" }
+            
             />   
             <CustomInput
             type="radio"
