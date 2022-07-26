@@ -168,14 +168,17 @@ const Inbound = (props) => {
     } else {
       setoptionError('')
     }
-// DDEPAPI
-    if (inputValue.api_ddep_api.trim() === "") {
-      flag = false
-      setapierror('This field is required.')
+    console.log("dghjshjfgds", radioValue)
+    if (radioValue === "DDEP_API")  {
+      // DDEPAPI
+      if (inputValue.api_ddep_api.trim() === "") {
+        flag = false
+        setapierror('This field is required.')
+      } else {
+        setapierror('')
+      }
     } else {
-      setapierror('')
-    }
-    // server
+       // server
     if (inputValue.ftp_server_link.trim() === "") {
       flag = false
       setserverError('This field is required.')
@@ -220,6 +223,9 @@ const Inbound = (props) => {
     } else {
       setfolderError('')
     }
+    }
+
+   
     return flag
   }
   const saveAndNext = (isTrue) => {
