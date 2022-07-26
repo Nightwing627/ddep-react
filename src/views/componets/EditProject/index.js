@@ -55,7 +55,7 @@ const EditProject = ({ stepper, type }) => {
     pname:"",
     pcode:"",
     Sequence:"",
-    pdescription:"",
+    ProjectDescr:"",
     options:""
   })
   const [pnameError, setPnameError] = useState("")
@@ -83,7 +83,7 @@ const EditProject = ({ stepper, type }) => {
             pname: sortedData?.ProjectName,
             pcode:sortedData?.ProjectCode, 
             Sequence:"",
-            pdescription: sortedData?.CompanyName,
+            ProjectDescr: sortedData?.ProjectDescr,
             options: sortedData?.group
           })
           // window.location.href = "/second-page/List"
@@ -124,8 +124,8 @@ const EditProject = ({ stepper, type }) => {
       setpcodeError('')
     }
 
-    // //pdescription
-    // if (input.pdescription.trim() === "") {
+    // //ProjectDescr
+    // if (input.ProjectDescr.trim() === "") {
     //   flag = false
     //   setDesError('project descrition is required')
     // } else {
@@ -154,7 +154,7 @@ const EditProject = ({ stepper, type }) => {
         {
           projectCode: input?.pcode,
           projectName: input?.pname,
-          projectDescr: input?.pdescription,
+          projectDescr: input?.ProjectDescr,
           group: input?.options,
           isActive: "1"
       }
@@ -239,8 +239,8 @@ const EditProject = ({ stepper, type }) => {
                 <Input type="textarea"
                 fullWidth
                 multiple
-                value={input.pdescription}
-                name='pdescription'
+                value={input.ProjectDescr}
+                name='ProjectDescr'
                 onChange={(e) => { handleChange(e) }}
                 variant="outlined"/>
                 {/* <span className='text-danger'>{desError}</span> */}
