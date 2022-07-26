@@ -131,7 +131,6 @@ const Add = () => {
       window.location.href = `/projects/project-list` 
     }
     setAlertDetails({ show: false, msg: "", success: false})
-  
   }
   const handleSubmit = () => {
     // e.preventDefault()
@@ -173,7 +172,7 @@ const Add = () => {
     error={!alertDetail.success}
     success={alertDetail.success}
     show={alertDetail.show}
-    timeout= "155000"
+    // timeout= "155000"
     onConfirm={() => handleConfirm()}
   >
     {alertDetail.msg}

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
+import 'devextreme/dist/css/dx.light.css'
 import ODataStore from 'devextreme/data/odata/store'
-import {
+import DataGrid, {
   Column,
-  DataGrid,
   FilterRow,
   HeaderFilter,
   GroupPanel,
@@ -14,7 +14,9 @@ import {
   MasterDetail,
   Button,
   Toolbar,
-  Item, SearchPanel
+  Item, 
+  SearchPanel, 
+  Pager 
 } from 'devextreme-react/data-grid'
 import './AllProjectList.scss'
 import { allProjectList, projectDescription } from './data.js'
@@ -27,8 +29,7 @@ import { Sync } from '@mui/icons-material'
 import 'devextreme/integration/jquery'
 import axios from "../../utility/axios"
 // import baseURL from "../../utility/axios"
-const pageSizes = [2, 10, 25, 50, 100]
-
+const allowedPageSizes = [10, 20, 50]
 const dataSourceOptions = {
   store: new ODataStore({
     url: 'https://js.devexpress.com/Demos/SalesViewer/odata/DaySaleDtoes',
@@ -254,7 +255,7 @@ class AllProjectList extends React.Component {
                 <DataGrid
                   // dataSource={allProjectList}
                   dataSource={Allprojectdata}
-                  keyExpr="ID"
+                  keyExpr="pj_ID"
                   showColumnLines= {false}
                   showRowLines= {true}
                   showBorders={true}
@@ -263,17 +264,26 @@ class AllProjectList extends React.Component {
                   remoteOperations={true}
                   className="data-Grid"
                   location="center"
+                  id='gridContainer'
                   >
                     {/* {console.log('item', item)} */}
                       <MasterDetail
                         enabled={true}
                         component={CustomItem}
                       />
+                      <Pager
+                        showPageSizeSelector={true}
+                        allowedPageSizes={allowedPageSizes}
+                        visible={true}
+                        showInfo={true}
+                        showNavigationButtons={true}
+                      /> 
+                      <Paging defaultPageSize={10} />
                       <FilterRow visible={false} />
                       <HeaderFilter visible={false} />
                       <SearchPanel visible={true} highlightCaseSensitive={true} />
                       <GroupPanel visible={true} className="group-Panel" />
-                      <Scrolling mode="virtual" />
+                      {/* <Scrolling mode="virtual" /> */}
                       <Grouping autoExpandAll={false} />
                       <Column
                         dataField="projectName"
@@ -310,9 +320,6 @@ class AllProjectList extends React.Component {
                 {/* ) 
               })
            }  */}
-           <Paging
-             defaultPageSize={1}
-             defaultPageIndex={0} />
             </DataGrid>
             </div>
           </Fragment>
