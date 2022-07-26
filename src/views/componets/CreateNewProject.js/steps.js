@@ -14,7 +14,7 @@ import axios from "../../../utility/axios"
 import { useParams } from 'react-router-dom'
 
 export default function Steps() { 
-  const [stepper, setStepper] = useState(null)
+  const [stepper, setStepper] = useState("inbound")
   const myRef = React.useRef(null)  
   const [value, setValue] = useState({
     projectCode: "",
@@ -84,8 +84,10 @@ export default function Steps() {
   
   useEffect(() => {
     getda2ta()
-   
   }, [])
+
+  const defaultOptions = localStorage.getItem("redirect")
+
   return (
   <>
   <div className="box-stepper">
@@ -95,6 +97,7 @@ export default function Steps() {
         instance={(el) => setStepper(el)}
         ref={myRef}
         steps={step}
+        defaultOpen={defaultOptions ? 2 : ""}
       />
       </div> 
   </>)

@@ -13,7 +13,7 @@ import '../../../@core/scss/base/plugins/forms/form-wizard.scss'
 
 const Wizard = forwardRef((props, ref) => {
   // ** Props
-  const { type, className, steps, separator, options, instance } = props
+  const { type, className, steps, separator, options, instance, defaultOpen } = props
 
   // ** State
   const [activeIndex, setActiveIndex] = useState(0)
@@ -28,7 +28,8 @@ const Wizard = forwardRef((props, ref) => {
     ref.current.addEventListener('shown.bs-stepper', function (event) {
       setActiveIndex(event.detail.indexStep)
     })
-
+    if (defaultOpen) { stepper.to(defaultOpen) }
+    
     if (instance) {
       instance(stepper)
     }

@@ -52,6 +52,14 @@ class CustomItem extends React.Component {
   handleClose  ()  {
     this.setState({isOpenModal: false})
   }
+
+  handleRedirect (data) {
+    localStorage.setItem('redirect', true)
+    window.location.href = `/projects/item/edit/${data?.data?.item_ID}`
+  }
+  renderGridCell(data) {
+    return <div style={{cursor:"pointer"}} onClick={() => this.handleRedirect(data)}>{data?.value}</div>
+  }
   render() {
     const { isOpenModal } = this.state
     return (
@@ -78,15 +86,8 @@ class CustomItem extends React.Component {
                   // cssClass="child-Data-Grid"
                 />
                
-                <Column
-                  dataField="version"
-                 
-                  
-                />
-                <Column
-                  dataField="inboundType"
-                
-                />
+                <Column dataField="version" />
+                <Column dataField="inboundType" cellRender={(e) => this.renderGridCell(e)} />
                 <Column dataField="inboundFormat"   />
                 <Column dataField="scheduleDescr"   />
                 <Column dataField="SYNC STATUS"   />

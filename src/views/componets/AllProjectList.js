@@ -179,6 +179,7 @@ class AllProjectList extends React.Component {
  
      componentDidMount ()  {
         this.projectList()
+        localStorage.removeItem("redirect")
         }
     projectList () {
       axios
