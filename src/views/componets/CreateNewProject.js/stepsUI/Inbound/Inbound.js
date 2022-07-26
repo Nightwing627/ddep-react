@@ -94,6 +94,7 @@ const Inbound = (props) => {
     ftp_folder: props?.apiData?.inbound_setting?.ftp_folder || "",
     host : ""
   })
+  const [radioValue, setradioValue] = useState("DDEP_API")
   useEffect(() => {
     setInputValue({
       inbound_format : props?.apiData?.inbound_setting?.inbound_format || "",
@@ -107,6 +108,7 @@ const Inbound = (props) => {
     host : ""
     })
     console.log("props?.apiData?", props?.apiData)
+    setradioValue(props?.apiData?.inbound_setting?.api_type || "DDEP_API")
    }, [props?.apiData])
   console.log("first......", props?.apiData)
   const options = [
@@ -124,7 +126,7 @@ const Inbound = (props) => {
   const [portError, setportError] = useState("")
   const [apierror, setapierror] = useState("")
   const [collapseID, setcollapseID] = useState([1, 2])
-  const [radioValue, setradioValue] = useState("DDEPAPI")
+
   console.log("radioValue", radioValue)
   // const collapseItems = [
   //   {
@@ -311,17 +313,17 @@ decorators.Header = Header
             <CustomInput inline
               type="radio"
               label="DDEP API"
-              defaultChecked={radioValue === "DDEPAPI" }
-              checked={radioValue === "DDEPAPI" }
+              defaultChecked={radioValue === "DDEP_API" }
+              checked={radioValue === "DDEP_API" }
               color="primary"
-              id="DDEPAPI"
+              id="DDEP_API"
              
-              name="user_type"
+              name="synchronizeConfigure"
               className="ml-1"
-              value="DDEPAPI"
+              value="DDEP_API"
               // disabled={props?.isDisable} 
               onClick={(e) => {
-                setradioValue("DDEPAPI")
+                setradioValue("DDEP_API")
             }} 
             
             />   
@@ -332,7 +334,7 @@ decorators.Header = Header
             // disabled={props?.disabled}
             id="SFTP"
             defaultChecked={radioValue === "FTP/SFTP"}
-            name="user_type"
+            name="synchronizeConfigure"
             className="ml-1"
             value="FTP/SFTP"
             onClick={(e) => {
@@ -347,7 +349,7 @@ decorators.Header = Header
               accordion
               active={0}
             />  */}
-            {radioValue === "DDEPAPI" ? <div> 
+            {radioValue === "DDEP_API" ? <div> 
               <Container>
               <Row >
               <Col xs="3">
