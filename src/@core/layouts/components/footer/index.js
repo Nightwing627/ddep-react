@@ -18,7 +18,7 @@ const Footer = () => {
         <Heart size={14} />
       </span> */}
       <span className='float-md-right d-none d-md-block'>
-        Version 2.0.1
+        Version 2.0.4
       </span>
     </p> 
   )
