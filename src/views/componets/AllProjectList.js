@@ -173,13 +173,18 @@ class AllProjectList extends React.Component {
     editBtn = (e) => {
       window.location.href = `/projects/edit/${e.row?.data?.pj_ID}` 
     }
-    Handleadd = () => {
+    Handleadd = (e) => {
       window.location.href = "/projects/item/add"
-    }  
+      localStorage.setItem('projectid', e?.row?.data?.pj_ID)
+      console.log("dsf", e)
+    } 
+     
  
-     componentDidMount ()  {
+     componentDidMount (e)  {
+     
         this.projectList()
         localStorage.removeItem("redirect")
+        localStorage.removeItem("projectid")
         }
     projectList () {
       axios
@@ -305,7 +310,7 @@ class AllProjectList extends React.Component {
                       <Column dataField="" caption="ACTION" type="buttons" width="auto" className="text-wrap" alignment="center" >
                       
                       <Button className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}> <Disc size={25}/></span></Button>
-                      <Button  className="btn-Action" onClick={this.Handleadd} style={{cursor:"pointer"}}><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
+                      <Button  className="btn-Action" onClick={(e) => this.Handleadd(e)} style={{cursor:"pointer"}}><span className='btn-Edit'>  <FilePlus size={25}/></span></Button>
                       <Button  className="btn-Action"><span className='btn-Edit' style={{cursor:"pointer"}}>  <RefreshCw size={25}/></span></Button>
                       <Button  onClick={(e) => this.editBtn(e)} className="btn-Action"><span style={{cursor:"pointer"}} className='btn-Edit'>  <Edit size={25}/></span></Button> 
                 

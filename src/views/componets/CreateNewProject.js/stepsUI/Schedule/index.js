@@ -187,11 +187,11 @@ const handlesubmit = () => {
         ...props.itemDetailsData,
         invalue : inValue
       }
-   console.log("itemDetailsData", newData)
+      const GetprojectID = localStorage.getItem("projectid")
       const payload = [
         {
             type:"basic",
-            ProjectId:"",
+            ProjectId: GetprojectID,
             ItemCode:newData?.basic?.ItemCode,
             ItemName: newData?.basic?.ExchangeName,
             CompanyName:newData?.basic?.CompanyName, 
@@ -228,7 +228,7 @@ const handlesubmit = () => {
             item_id: "62ba9dd852964bbc1a80a515",
             Schedule_configure_inbound: "schedule",
             schedule_type_inbound: "Recurring",
-           one_time_occurrence_inbound_date: "",
+            one_time_occurrence_inbound_date: "",
             one_time_occurrence_inbound_time: "",
             occurs_inbound: "daily",
             day_frequency_inbound_count: "2",
@@ -268,7 +268,7 @@ const handlesubmit = () => {
             next_date_outbound: "NaN"
         }
     ]
-    console.log("addapi", payload) 
+    
     
         axios
         .post("/project/item/add", payload)
@@ -277,7 +277,8 @@ const handlesubmit = () => {
             // const sortedData = res
             // const newData = { data: [] }
             // setApiDate(sortedData)
-            console.log("first,", res?.data)
+            window.location.href = `/projects/project-list`
+            console.log("data,", res)
           }
         })
         .catch((error) => { console.log("error", error) })

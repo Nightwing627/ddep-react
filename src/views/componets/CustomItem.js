@@ -72,12 +72,10 @@ class CustomItem extends React.Component {
         showColumnLines={false}
        className='child-Data-Grid'
        onRowPrepared={this.onRowPreparedFunction}
-      >
-
-       
+      >      
                 <Column
                   // dataField="ITEM NAME"
-                  dataField="itemName"
+                  dataField="ItemName"
                   caption="PROJECT/ITEM NAME"
                   width="auto"
                   cssClass="col-field"
