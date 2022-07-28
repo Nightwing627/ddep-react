@@ -8,6 +8,7 @@ import DataSource from 'devextreme/data/data_source'
 import ArrayStore from 'devextreme/data/array_store'
 import { ModalFooter, Modal, ModalBody, ModalHeader, Table} from "reactstrap"
 const childArray = localStorage.getItem('projectFullData')
+console.log("childArray", JSON.parse(childArray))
 function getTasks(key) {
   return new DataSource({
     store: new ArrayStore({
@@ -31,6 +32,8 @@ class CustomItem extends React.Component {
     this.isOpenModal = this.isOpenModal.bind(this)
     this.handleopen = this.handleopen.bind(this)
   }
+
+  
   onRowPreparedFunction (e) {
     e.rowElement.css({ height: 70, alignItems: "center"})
   }
@@ -72,9 +75,7 @@ class CustomItem extends React.Component {
         showColumnLines={false}
        className='child-Data-Grid'
        onRowPrepared={this.onRowPreparedFunction}
-      >
-
-       
+      >      
                 <Column
                   // dataField="ITEM NAME"
                   dataField="itemName"
