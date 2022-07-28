@@ -158,7 +158,8 @@ class AllProjectList extends React.Component {
         super(props)
         this.state = {
           collapsed: false,
-          Allprojectdata:[]  
+          Allprojectdata:[],
+          fullListdata:[]  
         //  history: this.props
         }
         this.onContentReady = this.onContentReady.bind(this)
@@ -187,6 +188,7 @@ class AllProjectList extends React.Component {
         localStorage.removeItem("projectid")
         }
     projectList () {
+     
       axios
       .get(`/project/fulllist`)
       .then((res) => {
@@ -230,9 +232,10 @@ class AllProjectList extends React.Component {
             formattedArray = formattedArray.concat(subArray)
           })
           const finalArray = JSON.stringify(formattedArray)
-         
+          // const allfullListdata = finalArray
           localStorage.setItem('projectFullData', finalArray)
-          console.log("res", res)
+          // this.setState({fullListdata : allfullListdata})
+          // console.log("res", allfullListdata)
         }
       })
       .catch((error) => { console.log("error", error); this.setState({ isLoading: false }) }) 
@@ -275,6 +278,7 @@ class AllProjectList extends React.Component {
                     {/* {console.log('item', item)} */}
                       <MasterDetail
                         enabled={true}
+                        // component={<CustomItem allprojectdata={Allprojectdata}/>
                         component={CustomItem}
                       />
                       <Pager

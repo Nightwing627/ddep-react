@@ -28,7 +28,7 @@ const NewProject = (props) => {
   const params = useParams()
   const [input, setinput] = useState({
     ItemCode : props?.apiData?.basic?.ItemCode || "",
-    ExchangeName : props?.apiData?.basic?.ItemName || "",
+    itemName : props?.apiData?.basic?.ItemName || "",
     ExchangeDescription:"",
     CompanyName: props?.apiData?.basic?.CompanyName || "",
     Version:""
@@ -164,7 +164,7 @@ console.log("input", input)
               // value={apiData?}
               name="ItemName"
               // helperText={errors.pname}
-              value={input.ItemName}
+              value={input.itemName}
               onChange={(e) => { handleChange(e); setItemNameError("") }}
               variant="outlined"
               disabled={props?.isDisable} 

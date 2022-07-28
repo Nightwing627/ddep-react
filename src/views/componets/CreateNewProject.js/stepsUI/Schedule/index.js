@@ -7,6 +7,8 @@ import Datepickers from '@components/Time/Datepickers'
 import axios from "../../../../../utility/axios"
 import { connect, useDispatch } from "react-redux"
 import { itemsDetailsDataStore } from "@store/actions/itemDetails"
+import { useParams } from 'react-router-dom'
+import SweetAlert from "react-bootstrap-sweetalert"
 const theme = theme => ({
   ...theme,
   colors: {
@@ -151,6 +153,11 @@ const Schedule = (props) => {
   const [collapseID, setcollapseID] = useState(1) 
   const [inValue, setInValue] = useState({ 
     option : ""  })
+    const [alertDetail, setAlertDetails] = useState({
+      show: false,
+      msg: "",
+      success: false
+    })
     console.log("setradioValue", radioValue)
 const handleChange = (e, type) => {
   console.log("e", e)
@@ -165,6 +172,7 @@ const urls = window.location.href
 const [has, paramss] = urls?.split("projects")[1]?.split("?") 
 const paramsObj = Object.fromEntries(new URLSearchParams(paramss))
 const [optionError, setoptionError] = useState("")
+const params = useParams()
 const validation = () => {
   let flag = true
   // console.log("inputValue.inbound_format", inputValue.outbound_format)
@@ -178,10 +186,184 @@ const validation = () => {
 
   return flag
 }
+const handleConfirm = () => {
+  if (alertDetail?.success === true) {
+    // localStorage.removeItem('projectFullData')
+    localStorage.removeItem("redirect")
+    localStorage.removeItem("projectid")
+    window.location.href = `/projects/project-list` 
+  }
+  setAlertDetails({ show: false, msg: "", success: false})
+}
+const projectList = () => {
+  axios
+  .get(`/project/fulllist`)
+  .then((res) => {
+    if (res.status === 200) { 
+      /*eslint no-var: "error"*/
+      /*eslint-env es6*/
+      const sortedData = res?.data?.data
+      const redesignArray = []
+      sortedData?.map((item, index) => {
+        const obj = {
+          ...item,
+          ID: item?.pj_ID
+        }
+        return (
+          redesignArray[index] = obj
+        )
+      })  
+      /*eslint no-var: "error"*/ 
+      /*eslint-env es6*/
+      let formattedArray = []
+      sortedData.forEach(obj => {
+       /*eslint-env es6*/
+        const subArray = []
+        const subArr = obj?.items
+        subArr.map((subitem, j) => {
+          const object = {
+            ...subitem,
+            id: obj?.pj_ID,
+            ID: j
+          }
+          return  (
+            subArray[j] = object
+          )
+        })
+        formattedArray = formattedArray.concat(subArray)
+      })
+      const finalArray = JSON.stringify(formattedArray)
+      localStorage.setItem('projectFullData', finalArray)
+    }
+  })
+  .catch((error) => { console.log("error", error) }) 
+} 
 const handlesubmit = () => {
+  console.log("props", props)
    if (validation()) {
-     if (paramsObj?.orderCode) {
-        console.log("edit api")
+     if (params?.id) {
+      const newData = {
+        ...props.itemDetailsData,
+        invalue : inValue
+      }
+   const Edit =   [
+    {
+      type:"basic",
+      item_id: props?.apiData?.item_ID,
+      ProjectId: props?.apiData?.basic?._id,
+      ItemCode:newData?.basic?.ItemCode,
+      ItemName: newData?.basic?.ExchangeName,
+      CompanyName:newData?.basic?.CompanyName, 
+      isActive:"1",
+      ExchangeDescription: newData?.basic?.ExchangeDescription,
+      Version: newData?.basic?.Version
+  },
+  {
+    type:"inbound",
+    inbound_id: props?.apiData?.inbound_setting?._id,
+    item_id: props?.apiData?.item_ID,
+    inbound_format: newData?.inbound?.inbound_format?.value, 
+    sync_type:"API",
+    port: newData?.inbound?.ftp_port,
+    login_name: newData?.inbound?.ftp_login_name,
+    password: newData?.inbound?.ftp_password,
+    is_password_encrypted: newData?.inbound?.is_password_encrypted,
+    folder: newData?.inbound?.ftp_folder,
+    backup_folder:"",
+    api_ddep_api: newData?.inbound?.api_ddep_api,
+    api_user_api:"",
+    api_type:"DDEP_API",
+    is_active:"inactive"
+  },
+  {
+    type:"outbound",
+    outbound_id:  props?.apiData?.outbound_setting?._id,
+    item_id: props?.apiData?.item_ID,
+    api_url:"/kkc",
+    outbound_format:"json",
+    is_active:"Active"
+      
+  },
+  {
+    type: "schedule",
+    schedule_id: props?.apiData?.schedule_setting?._id,
+    item_id: props?.apiData?.item_ID,
+    Schedule_configure_inbound: "schedule",
+    schedule_type_inbound: "Recurring",
+    one_time_occurrence_inbound_date: "",
+    one_time_occurrence_inbound_time: "",
+    occurs_inbound: "daily",
+    day_frequency_inbound_count: "2",
+    day_frequency_outbound_count: "1",
+    weekly_frequency_inbound_count: "1",
+    weekly_frequency_outbound_count: "1",
+    monthly_frequency_day_inbound: "1",
+    monthly_frequency_day_inbound_count :"1",
+    monthly_frequency_day_outbound: "1",
+    monthly_frequency_day_outbound_count: "1",
+    monthly_frequency_the_inbound_count: "1",
+    monthly_frequency_the_outbound_count: "1",
+    daily_frequency_type_inbound: "Occurs Once At",
+    daily_frequency_type_outbound: "Occurs Once At",
+    daily_frequency_once_time_inbound: "",
+    daily_frequency_once_time_outbound: "",
+    daily_frequency_every_time_unit_inbound: "hour",
+    daily_frequency_every_time_unit_outbound: "hour",
+    daily_frequency_every_time_count_inbound: "1",
+    daily_frequency_every_time_count_outbound: "1",
+    daily_frequency_every_time_count_start_inbound: "",
+    daily_frequency_every_time_count_end_inbound: "",
+    daily_frequency_every_time_count_end_outbound: "",
+    daily_frequency_every_time_count_start_outbound: "",
+    Schedule_configure_outbound: "schedule",
+    schedule_type_outbound: "Recurring",
+    one_time_occurrence_outbound_date: "",
+    one_time_occurrence_outbound_time: "",
+    occurs_outbound: "daily",
+    duration_inbound_start_date: "2022-06-28",
+    duration_inbound_is_end_date: "no_end_date",
+    duration_inbound_end_date: "",
+    duration_outbound_start_date: "",
+    duration_outbound_is_end_date: "no_end_date",
+    duration_outbound_end_date: "",
+    next_date_inbound: "",
+    next_date_outbound: ""
+  },
+  {
+    type: "mapping",
+    mapping_id: props?.apiData?.mapping?._id,
+    item_id: props?.apiData?.item_ID,
+    inbound_format: "",
+    outbound_format:"",
+    mapping_list:"",
+    updateBy:""
+}
+    ]
+    // setAlertDetails({
+    //   show: true,
+    //   msg: "edit Successful",
+    //   success: true
+    // })
+    console.log("apidata", props?.apiData)
+      axios
+        .post("/project/item/modify", Edit)
+        .then((res) => {
+          if (res.status === 200) {
+            // const sortedData = res
+            // const newData = { data: [] }
+            // setApiDate(sortedData)
+            // window.location.href = `/projects/project-list`
+            console.log("data,", res)
+            projectList()
+            setAlertDetails({
+              show: true,
+              msg: "Edit Successful",
+              success: true
+            })
+          }
+        })
+        .catch((error) => { console.log("error", error) })
+        console.log("edit api", Edit)
      } else {
       const newData = {
         ...props.itemDetailsData,
@@ -268,7 +450,7 @@ const handlesubmit = () => {
             next_date_outbound: "NaN"
         }
     ]
-    
+
     
         axios
         .post("/project/item/add", payload)
@@ -277,7 +459,13 @@ const handlesubmit = () => {
             // const sortedData = res
             // const newData = { data: [] }
             // setApiDate(sortedData)
-            window.location.href = `/projects/project-list`
+            // window.location.href = `/projects/project-list`
+            projectList() 
+            setAlertDetails({
+              show: true,
+              msg: "Add Successful",
+              success: true
+            })
             console.log("data,", res)
           }
         })
@@ -291,6 +479,15 @@ const handlesubmit = () => {
   console.log("first", props)
   return (
       <>
+      <SweetAlert
+    error={!alertDetail.success}
+    success={alertDetail.success}
+    show={alertDetail.show}
+    timeout= "15000"
+    onConfirm={() => handleConfirm()}
+  >
+    {alertDetail.msg}
+  </SweetAlert>
       <div>
         <span>Schedule</span>
         <Card className='app-collapse' >
